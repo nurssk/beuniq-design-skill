@@ -1,0 +1,35 @@
+{
+  "name": "beuniq-design-skill",
+  "version": "0.1.0",
+  "description": "Rule-based Codex skill for deterministic frontend AI-slop and landing-copy audits.",
+  "private": false,
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "codex-skill",
+    "frontend",
+    "design-audit",
+    "tailwind",
+    "static-analysis",
+    "ai-slop"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "beuniq:check": "tsx skills/beuniq-design/scripts/beuniq-check.ts",
+    "beuniq:report": "tsx skills/beuniq-design/scripts/beuniq-report.ts",
+    "test": "tsx tests/beuniq-check.test.ts",
+    "validate:skill": "python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/beuniq-design"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.0",
+    "tsx": "^4.20.6",
+    "typescript": "^6.0.3"
+  }
+}

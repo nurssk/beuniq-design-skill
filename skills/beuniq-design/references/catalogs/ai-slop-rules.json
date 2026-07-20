@@ -1,0 +1,2281 @@
+{
+  "source": "SwipeUI extension/src/analysis/aiSlopCatalog.ts",
+  "count": 325,
+  "rules": [
+    {
+      "id": "LAY-001",
+      "category": "layout",
+      "name": "Generic split-screen hero",
+      "weight": 3,
+      "description": "Hero has two primary columns; left contains heading, paragraph and CTA; right contains product image or device mockup."
+    },
+    {
+      "id": "LAY-002",
+      "category": "layout",
+      "name": "Centered SaaS hero",
+      "weight": 3,
+      "description": "Hero contains centered badge, H1, paragraph and one or two CTA buttons."
+    },
+    {
+      "id": "LAY-003",
+      "category": "layout",
+      "name": "Excessively symmetrical layout",
+      "weight": 2,
+      "description": "More than 75% of primary sections use centered or perfectly balanced alignment."
+    },
+    {
+      "id": "LAY-004",
+      "category": "layout",
+      "name": "Repeated section template",
+      "weight": 4,
+      "description": "Three or more sections follow eyebrow then heading then paragraph then cards."
+    },
+    {
+      "id": "LAY-005",
+      "category": "layout",
+      "name": "Identical section spacing",
+      "weight": 2,
+      "description": "More than 80% of sections use the same vertical padding value."
+    },
+    {
+      "id": "LAY-006",
+      "category": "layout",
+      "name": "Large empty hero area",
+      "weight": 3,
+      "description": "Hero height exceeds 75vh while visible content occupies less than 55% of its bounding box."
+    },
+    {
+      "id": "LAY-007",
+      "category": "layout",
+      "name": "Excessive max-width container use",
+      "weight": 2,
+      "description": "More than 80% of top-level sections use the same max-width container."
+    },
+    {
+      "id": "LAY-008",
+      "category": "layout",
+      "name": "Standard 12-column appearance",
+      "weight": 1,
+      "description": "Main content widths repeatedly approximate common 4/8, 5/7 or 6/6 grid splits."
+    },
+    {
+      "id": "LAY-009",
+      "category": "layout",
+      "name": "Alternating feature sections",
+      "weight": 3,
+      "description": "Three or more image/text sections alternate left and right."
+    },
+    {
+      "id": "LAY-010",
+      "category": "layout",
+      "name": "Three-card feature row",
+      "weight": 3,
+      "description": "Exactly three similarly sized feature cards appear below a centered heading."
+    },
+    {
+      "id": "LAY-011",
+      "category": "layout",
+      "name": "Four-step process row",
+      "weight": 2,
+      "description": "Section contains exactly four numbered or icon-based process items."
+    },
+    {
+      "id": "LAY-012",
+      "category": "layout",
+      "name": "Logo-cloud strip",
+      "weight": 2,
+      "description": "Repeated logos appear between hero and features with generic trust copy."
+    },
+    {
+      "id": "LAY-013",
+      "category": "layout",
+      "name": "Bento-grid section",
+      "weight": 3,
+      "description": "Unequal rounded cards are arranged in a fashionable bento layout without clear content necessity."
+    },
+    {
+      "id": "LAY-014",
+      "category": "layout",
+      "name": "Pricing-table cliche",
+      "weight": 4,
+      "description": "Pricing section contains three cards with the middle card emphasized."
+    },
+    {
+      "id": "LAY-015",
+      "category": "layout",
+      "name": "FAQ near page end",
+      "weight": 2,
+      "description": "Accordion FAQ appears immediately before final CTA or footer."
+    },
+    {
+      "id": "LAY-016",
+      "category": "layout",
+      "name": "Final CTA banner",
+      "weight": 3,
+      "description": "Last content section is a centered rounded rectangle with heading, paragraph and CTA."
+    },
+    {
+      "id": "LAY-017",
+      "category": "layout",
+      "name": "Floating decorative objects",
+      "weight": 3,
+      "description": "Absolutely positioned circles, stars, blobs or gradients exist outside meaningful content."
+    },
+    {
+      "id": "LAY-018",
+      "category": "layout",
+      "name": "Content vertically centered everywhere",
+      "weight": 2,
+      "description": "More than 60% of viewport-height sections use flex centering."
+    },
+    {
+      "id": "LAY-019",
+      "category": "layout",
+      "name": "Repeated section heading width",
+      "weight": 2,
+      "description": "Most section headings use an identical max-width such as 600-800px."
+    },
+    {
+      "id": "LAY-020",
+      "category": "layout",
+      "name": "Excessive viewport-height sections",
+      "weight": 3,
+      "description": "Three or more sections use min-height: 100vh without functional need."
+    },
+    {
+      "id": "CRD-001",
+      "category": "cards",
+      "name": "Excessive cardification",
+      "weight": 4,
+      "description": "More than 60% of meaningful content groups are inside bordered or shadowed containers."
+    },
+    {
+      "id": "CRD-002",
+      "category": "cards",
+      "name": "Universal rounded cards",
+      "weight": 4,
+      "description": "More than 70% of content containers have border-radius >= 16px."
+    },
+    {
+      "id": "CRD-003",
+      "category": "cards",
+      "name": "Same radius everywhere",
+      "weight": 3,
+      "description": "One border-radius value is used by more than 70% of rounded elements."
+    },
+    {
+      "id": "CRD-004",
+      "category": "cards",
+      "name": "Large fashionable radius",
+      "weight": 3,
+      "description": "More than ten elements use radii between 20px and 32px."
+    },
+    {
+      "id": "CRD-005",
+      "category": "cards",
+      "name": "Pill overuse",
+      "weight": 3,
+      "description": "More than six non-tag elements use border-radius: 9999px or equivalent."
+    },
+    {
+      "id": "CRD-006",
+      "category": "cards",
+      "name": "Nested rounded containers",
+      "weight": 3,
+      "description": "Rounded cards contain additional rounded cards at least three times."
+    },
+    {
+      "id": "CRD-007",
+      "category": "cards",
+      "name": "Identical feature cards",
+      "weight": 3,
+      "description": "Three or more sibling cards have nearly identical structure and text length."
+    },
+    {
+      "id": "CRD-008",
+      "category": "cards",
+      "name": "Icon-heading-paragraph cards",
+      "weight": 3,
+      "description": "Repeated cards follow exactly icon then heading then paragraph."
+    },
+    {
+      "id": "CRD-009",
+      "category": "cards",
+      "name": "Card title and tiny description",
+      "weight": 2,
+      "description": "Cards repeatedly use one bold line followed by one muted line."
+    },
+    {
+      "id": "CRD-010",
+      "category": "cards",
+      "name": "Decorative card gradients",
+      "weight": 3,
+      "description": "Card backgrounds use gradients that do not encode state or information."
+    },
+    {
+      "id": "CRD-011",
+      "category": "cards",
+      "name": "Soft-border card style",
+      "weight": 3,
+      "description": "Many cards use a 1px low-opacity neutral border plus subtle shadow."
+    },
+    {
+      "id": "CRD-012",
+      "category": "cards",
+      "name": "Floating white cards",
+      "weight": 3,
+      "description": "White cards float over a tinted or gradient page background."
+    },
+    {
+      "id": "CRD-013",
+      "category": "cards",
+      "name": "Fake dashboard card stack",
+      "weight": 4,
+      "description": "Decorative analytics cards overlap without functional controls."
+    },
+    {
+      "id": "CRD-014",
+      "category": "cards",
+      "name": "Statistic card row",
+      "weight": 2,
+      "description": "Three or four cards show oversized numbers with tiny labels."
+    },
+    {
+      "id": "CRD-015",
+      "category": "cards",
+      "name": "Card hover lift everywhere",
+      "weight": 3,
+      "description": "Most cards translate upward and increase shadow on hover."
+    },
+    {
+      "id": "CRD-016",
+      "category": "cards",
+      "name": "Equal-height content forcing",
+      "weight": 2,
+      "description": "Cards use fixed/min heights primarily to create visual uniformity."
+    },
+    {
+      "id": "CRD-017",
+      "category": "cards",
+      "name": "Empty card padding",
+      "weight": 2,
+      "description": "Card padding exceeds 32px while actual content is fewer than three lines."
+    },
+    {
+      "id": "CRD-018",
+      "category": "cards",
+      "name": "Unnecessary card wrappers",
+      "weight": 3,
+      "description": "Semantic sections are wrapped in cards although no grouping distinction exists."
+    },
+    {
+      "id": "CRD-019",
+      "category": "cards",
+      "name": "Card-with-badge pattern",
+      "weight": 2,
+      "description": "Multiple cards contain an absolute-positioned pill in the top corner."
+    },
+    {
+      "id": "CRD-020",
+      "category": "cards",
+      "name": "Overlapping testimonial cards",
+      "weight": 3,
+      "description": "Testimonial cards are displayed as floating, rotated or layered decorative objects."
+    },
+    {
+      "id": "CLR-001",
+      "category": "color",
+      "name": "Purple-blue AI gradient",
+      "weight": 3,
+      "description": "Large background gradient combines violet, indigo, blue or cyan."
+    },
+    {
+      "id": "CLR-002",
+      "category": "color",
+      "name": "Orange-pink AI gradient",
+      "weight": 2,
+      "description": "Large decorative gradient combines orange, coral, pink or purple."
+    },
+    {
+      "id": "CLR-003",
+      "category": "color",
+      "name": "Radial glow behind mockup",
+      "weight": 4,
+      "description": "Radial gradient or blurred pseudo-element appears behind product image."
+    },
+    {
+      "id": "CLR-004",
+      "category": "color",
+      "name": "Multiple blurred blobs",
+      "weight": 4,
+      "description": "Three or more large blurred gradient shapes are absolutely positioned."
+    },
+    {
+      "id": "CLR-005",
+      "category": "color",
+      "name": "Low-contrast pastel palette",
+      "weight": 2,
+      "description": "Most surfaces differ only slightly in luminance and saturation."
+    },
+    {
+      "id": "CLR-006",
+      "category": "color",
+      "name": "Single accent applied everywhere",
+      "weight": 2,
+      "description": "One accent color is used for CTAs, badges, icons, links, highlights and decorations."
+    },
+    {
+      "id": "CLR-007",
+      "category": "color",
+      "name": "Neutral background plus neon accent",
+      "weight": 2,
+      "description": "Off-white or near-black page uses a single highly saturated accent."
+    },
+    {
+      "id": "CLR-008",
+      "category": "color",
+      "name": "Gradient text headline",
+      "weight": 4,
+      "description": "Main H1 uses background-clip: text with a gradient."
+    },
+    {
+      "id": "CLR-009",
+      "category": "color",
+      "name": "Gradient borders",
+      "weight": 3,
+      "description": "Border effect is created with nested gradient wrappers or mask composition."
+    },
+    {
+      "id": "CLR-010",
+      "category": "color",
+      "name": "Background tint per section",
+      "weight": 2,
+      "description": "Consecutive sections alternate between slightly different neutral tints."
+    },
+    {
+      "id": "CLR-011",
+      "category": "color",
+      "name": "Dark navy instead of black",
+      "weight": 1,
+      "description": "Primary text and dark surfaces consistently use blue-black values."
+    },
+    {
+      "id": "CLR-012",
+      "category": "color",
+      "name": "Excessive transparency",
+      "weight": 3,
+      "description": "Many colors use alpha values between 0.05 and 0.2."
+    },
+    {
+      "id": "CLR-013",
+      "category": "color",
+      "name": "Decorative color without semantics",
+      "weight": 2,
+      "description": "Multiple accent colors appear but do not correspond to categories or states."
+    },
+    {
+      "id": "CLR-014",
+      "category": "color",
+      "name": "Perfectly generated palette scale",
+      "weight": 2,
+      "description": "CSS contains mechanically complete 50-950 shade scales while only a few are used."
+    },
+    {
+      "id": "CLR-015",
+      "category": "color",
+      "name": "Near-duplicate color tokens",
+      "weight": 3,
+      "description": "Stylesheet defines several almost identical neutral or accent colors."
+    },
+    {
+      "id": "CLR-016",
+      "category": "color",
+      "name": "Hard-coded color repetition",
+      "weight": 2,
+      "description": "The same hex value appears more than 15 times instead of using a variable."
+    },
+    {
+      "id": "CLR-017",
+      "category": "color",
+      "name": "Excessive CSS gradients",
+      "weight": 4,
+      "description": "More than eight non-functional gradients exist on one page."
+    },
+    {
+      "id": "CLR-018",
+      "category": "color",
+      "name": "Hero-only glow",
+      "weight": 3,
+      "description": "Main hero has strong glow effects that disappear from the rest of the design."
+    },
+    {
+      "id": "CLR-019",
+      "category": "color",
+      "name": "Artificial spotlight background",
+      "weight": 4,
+      "description": "Hero background combines several radial gradients to imitate studio lighting."
+    },
+    {
+      "id": "CLR-020",
+      "category": "color",
+      "name": "Default framework palette",
+      "weight": 2,
+      "description": "Colors strongly match unchanged Tailwind, shadcn or template defaults."
+    },
+    {
+      "id": "CLR-021",
+      "category": "color",
+      "name": "Inconsistent inline text colors",
+      "weight": 3,
+      "description": "A single text block (heading, paragraph, button) uses two or more distinct foreground colors, as if one word was recolored mid-sentence."
+    },
+    {
+      "id": "TYP-001",
+      "category": "typography",
+      "name": "Oversized generic H1",
+      "weight": 2,
+      "description": "H1 is at least 64px desktop and contains fewer than 12 words."
+    },
+    {
+      "id": "TYP-002",
+      "category": "typography",
+      "name": "Extreme hero headline",
+      "weight": 3,
+      "description": "H1 exceeds 80px without editorial or display-design justification."
+    },
+    {
+      "id": "TYP-003",
+      "category": "typography",
+      "name": "Predictable typography hierarchy",
+      "weight": 1,
+      "description": "H1, H2, H3 and body sizes map exactly to a conventional modular scale."
+    },
+    {
+      "id": "TYP-004",
+      "category": "typography",
+      "name": "Same font weight everywhere",
+      "weight": 2,
+      "description": "More than 70% of headings use weight 700 or 800."
+    },
+    {
+      "id": "TYP-005",
+      "category": "typography",
+      "name": "Excessively bold headline",
+      "weight": 3,
+      "description": "Main H1 uses weight 800-900 with tight letter spacing."
+    },
+    {
+      "id": "TYP-006",
+      "category": "typography",
+      "name": "Muted gray body copy",
+      "weight": 2,
+      "description": "Most paragraphs use low-contrast gray rather than primary text color."
+    },
+    {
+      "id": "TYP-007",
+      "category": "typography",
+      "name": "Centered text overuse",
+      "weight": 3,
+      "description": "More than 60% of headings and paragraphs are center-aligned."
+    },
+    {
+      "id": "TYP-008",
+      "category": "typography",
+      "name": "Narrow centered paragraphs",
+      "weight": 2,
+      "description": "Repeated paragraphs use max-width: 600-700px and auto margins."
+    },
+    {
+      "id": "TYP-009",
+      "category": "typography",
+      "name": "Uppercase eyebrow labels",
+      "weight": 3,
+      "description": "Three or more sections begin with small uppercase, tracked text."
+    },
+    {
+      "id": "TYP-010",
+      "category": "typography",
+      "name": "Badge as section eyebrow",
+      "weight": 3,
+      "description": "Rounded pill labels repeatedly replace normal section labels."
+    },
+    {
+      "id": "TYP-011",
+      "category": "typography",
+      "name": "Generic sans-serif stack",
+      "weight": 1,
+      "description": "Entire page uses Inter, Manrope, Geist, DM Sans or similar without customization."
+    },
+    {
+      "id": "TYP-012",
+      "category": "typography",
+      "name": "Single font family only",
+      "weight": 1,
+      "description": "Brand, heading, body, labels and data all use one default sans-serif."
+    },
+    {
+      "id": "TYP-013",
+      "category": "typography",
+      "name": "Artificial line breaks",
+      "weight": 2,
+      "description": "<br> tags are inserted into major headings to force a fashionable composition."
+    },
+    {
+      "id": "TYP-014",
+      "category": "typography",
+      "name": "Short slogan fragments",
+      "weight": 2,
+      "description": "H1 contains short imperative fragments separated by commas or line breaks."
+    },
+    {
+      "id": "TYP-015",
+      "category": "typography",
+      "name": "Gradient emphasis word",
+      "weight": 3,
+      "description": "One word in the H1 uses gradient or accent color styling."
+    },
+    {
+      "id": "TYP-016",
+      "category": "typography",
+      "name": "Highlighted phrase spans",
+      "weight": 2,
+      "description": "Multiple headings wrap a short phrase in an accent-colored <span>."
+    },
+    {
+      "id": "TYP-017",
+      "category": "typography",
+      "name": "Tiny labels",
+      "weight": 2,
+      "description": "Many labels use 10-12px text with high tracking."
+    },
+    {
+      "id": "TYP-018",
+      "category": "typography",
+      "name": "Uniform line-height",
+      "weight": 1,
+      "description": "Headings of different sizes use nearly identical line-height ratios."
+    },
+    {
+      "id": "TYP-019",
+      "category": "typography",
+      "name": "Excessive text balancing",
+      "weight": 2,
+      "description": "text-wrap: balance or equivalent is applied to nearly every heading."
+    },
+    {
+      "id": "TYP-020",
+      "category": "typography",
+      "name": "Template-like font pairing",
+      "weight": 1,
+      "description": "Common fashionable font pairing appears without brand-specific adjustments."
+    },
+    {
+      "id": "TYP-021",
+      "category": "typography",
+      "name": "Inconsistent inline fonts in one block",
+      "weight": 3,
+      "description": "A single text block mixes two or more font families, as if one fragment was set in a different face."
+    },
+    {
+      "id": "TYP-022",
+      "category": "typography",
+      "name": "Excessive page font variety",
+      "weight": 3,
+      "description": "The page uses three or more distinct font families, which reads as an uncurated generated type system."
+    },
+    {
+      "id": "TYP-023",
+      "category": "typography",
+      "name": "Tiny text beneath headings or buttons",
+      "weight": 3,
+      "description": "A heading or button is immediately followed by very small, barely readable supporting text."
+    },
+    {
+      "id": "FX-001",
+      "category": "effects",
+      "name": "Soft shadow everywhere",
+      "weight": 3,
+      "description": "More than ten elements use subtle diffuse shadows."
+    },
+    {
+      "id": "FX-002",
+      "category": "effects",
+      "name": "Same shadow token everywhere",
+      "weight": 2,
+      "description": "One shadow declaration is reused for cards, buttons, nav and mockups."
+    },
+    {
+      "id": "FX-003",
+      "category": "effects",
+      "name": "Multi-layer luxury shadow",
+      "weight": 3,
+      "description": "Elements use three or more shadow layers for a soft floating effect."
+    },
+    {
+      "id": "FX-004",
+      "category": "effects",
+      "name": "Colored glow shadow",
+      "weight": 3,
+      "description": "Box shadows use accent-colored alpha values."
+    },
+    {
+      "id": "FX-005",
+      "category": "effects",
+      "name": "Excessive backdrop blur",
+      "weight": 4,
+      "description": "More than three elements use backdrop-filter: blur(...)."
+    },
+    {
+      "id": "FX-006",
+      "category": "effects",
+      "name": "Glassmorphism navigation",
+      "weight": 4,
+      "description": "Fixed nav has translucent background, border and backdrop blur."
+    },
+    {
+      "id": "FX-007",
+      "category": "effects",
+      "name": "Glass cards",
+      "weight": 4,
+      "description": "Cards combine transparency, backdrop blur, light border and shadow."
+    },
+    {
+      "id": "FX-008",
+      "category": "effects",
+      "name": "Hairline borders everywhere",
+      "weight": 3,
+      "description": "Most containers use a 1px low-contrast border."
+    },
+    {
+      "id": "FX-009",
+      "category": "effects",
+      "name": "Inner highlight border",
+      "weight": 3,
+      "description": "Cards use inset white shadows or pseudo-element highlights."
+    },
+    {
+      "id": "FX-010",
+      "category": "effects",
+      "name": "Hover glow effect",
+      "weight": 2,
+      "description": "Buttons or cards gain accent glow on hover."
+    },
+    {
+      "id": "FX-011",
+      "category": "effects",
+      "name": "Excessive blur values",
+      "weight": 3,
+      "description": "Stylesheet contains multiple blur values above 40px."
+    },
+    {
+      "id": "FX-012",
+      "category": "effects",
+      "name": "Decorative noise overlay",
+      "weight": 2,
+      "description": "Global pseudo-element adds generated noise or grain to mimic premium design."
+    },
+    {
+      "id": "FX-013",
+      "category": "effects",
+      "name": "Border-gradient animation",
+      "weight": 4,
+      "description": "Borders rotate or animate through gradients."
+    },
+    {
+      "id": "FX-014",
+      "category": "effects",
+      "name": "Spotlight cursor effect",
+      "weight": 4,
+      "description": "Radial gradient follows pointer position over cards or hero."
+    },
+    {
+      "id": "FX-015",
+      "category": "effects",
+      "name": "Masked fade edges",
+      "weight": 2,
+      "description": "Carousels or marquees use gradient masks on both edges."
+    },
+    {
+      "id": "FX-016",
+      "category": "effects",
+      "name": "Scroll-based fade-in everywhere",
+      "weight": 3,
+      "description": "Nearly every section starts hidden and fades upward into view."
+    },
+    {
+      "id": "FX-017",
+      "category": "effects",
+      "name": "Repeated transform scale hover",
+      "weight": 2,
+      "description": "Most interactive elements use transform: scale(1.02-1.05)."
+    },
+    {
+      "id": "FX-018",
+      "category": "effects",
+      "name": "Excessive drop shadows on images",
+      "weight": 3,
+      "description": "Product screenshots and device mockups use large diffuse shadows."
+    },
+    {
+      "id": "FX-019",
+      "category": "effects",
+      "name": "Pseudo-element decoration density",
+      "weight": 3,
+      "description": "Many components use ::before or ::after solely for glow or decoration."
+    },
+    {
+      "id": "FX-020",
+      "category": "effects",
+      "name": "Premium sheen animation",
+      "weight": 3,
+      "description": "Button or card contains an animated diagonal highlight sweep."
+    },
+    {
+      "id": "UI-001",
+      "category": "ui",
+      "name": "Two-button hero CTA",
+      "weight": 2,
+      "description": "Hero has one primary and one secondary CTA side by side."
+    },
+    {
+      "id": "UI-002",
+      "category": "ui",
+      "name": "Primary CTA with arrow icon",
+      "weight": 2,
+      "description": "Main CTA contains text followed by right arrow."
+    },
+    {
+      "id": "UI-003",
+      "category": "ui",
+      "name": "Excessively rounded buttons",
+      "weight": 3,
+      "description": "Most buttons use radius above 12px or full pill radius."
+    },
+    {
+      "id": "UI-004",
+      "category": "ui",
+      "name": "Large padded CTA",
+      "weight": 2,
+      "description": "Primary button has horizontal padding above 28px and height above 48px."
+    },
+    {
+      "id": "UI-005",
+      "category": "ui",
+      "name": "Icon inside rounded square",
+      "weight": 3,
+      "description": "Repeated icons sit inside 40-56px rounded containers."
+    },
+    {
+      "id": "UI-006",
+      "category": "ui",
+      "name": "Navbar with logo and one CTA",
+      "weight": 3,
+      "description": "Header contains logo left and a single high-emphasis CTA right."
+    },
+    {
+      "id": "UI-007",
+      "category": "ui",
+      "name": "Floating pill navbar",
+      "weight": 4,
+      "description": "Navbar is centered, rounded, detached from viewport edges and shadowed."
+    },
+    {
+      "id": "UI-008",
+      "category": "ui",
+      "name": "Sticky blurred navbar",
+      "weight": 3,
+      "description": "Header becomes translucent and blurred on scroll."
+    },
+    {
+      "id": "UI-009",
+      "category": "ui",
+      "name": "Generic hamburger implementation",
+      "weight": 1,
+      "description": "Mobile nav uses standard three-line icon and full-screen overlay with no product-specific behavior."
+    },
+    {
+      "id": "UI-010",
+      "category": "ui",
+      "name": "Input-plus-button waitlist",
+      "weight": 3,
+      "description": "Hero contains email field and adjacent Join waitlist style CTA."
+    },
+    {
+      "id": "UI-011",
+      "category": "ui",
+      "name": "App-store button pair",
+      "weight": 2,
+      "description": "Apple App Store and Google Play buttons appear side by side."
+    },
+    {
+      "id": "UI-012",
+      "category": "ui",
+      "name": "Generic social login row",
+      "weight": 2,
+      "description": "Login form shows Google, GitHub or Apple buttons above an or continue with separator."
+    },
+    {
+      "id": "UI-013",
+      "category": "ui",
+      "name": "Decorative button animation",
+      "weight": 3,
+      "description": "Primary CTA has glow, shimmer, magnetic or animated-border behavior."
+    },
+    {
+      "id": "UI-014",
+      "category": "ui",
+      "name": "Button icon duplication",
+      "weight": 2,
+      "description": "Nearly every button includes a leading or trailing icon."
+    },
+    {
+      "id": "UI-015",
+      "category": "ui",
+      "name": "Generic pricing toggle",
+      "weight": 3,
+      "description": "Monthly/annual segmented control appears above pricing cards."
+    },
+    {
+      "id": "UI-016",
+      "category": "ui",
+      "name": "Most popular plan badge",
+      "weight": 3,
+      "description": "Middle or recommended pricing card has an absolute pill label."
+    },
+    {
+      "id": "UI-017",
+      "category": "ui",
+      "name": "Form field uniformity",
+      "weight": 2,
+      "description": "Every input uses identical oversized radius, border and padding."
+    },
+    {
+      "id": "UI-018",
+      "category": "ui",
+      "name": "Generic command palette",
+      "weight": 2,
+      "description": "Search or action control imitates a command palette with shortcut badge."
+    },
+    {
+      "id": "UI-019",
+      "category": "ui",
+      "name": "Floating support bubble",
+      "weight": 2,
+      "description": "Bottom-right circular support/chat button exists without contextual integration."
+    },
+    {
+      "id": "UI-020",
+      "category": "ui",
+      "name": "Scroll-down indicator",
+      "weight": 2,
+      "description": "Hero includes decorative mouse, arrow or bouncing chevron."
+    },
+    {
+      "id": "UI-021",
+      "category": "ui",
+      "name": "Decorative information / announcement bubble",
+      "weight": 3,
+      "description": "A pastel pill or rounded badge carries a short availability, status or announcement label (Coming soon, Beta, New, live dot) as decoration rather than real state."
+    },
+    {
+      "id": "AST-001",
+      "category": "assets",
+      "name": "Device mockup hero",
+      "weight": 3,
+      "description": "Hero prominently displays a phone, laptop or browser-window frame."
+    },
+    {
+      "id": "AST-002",
+      "category": "assets",
+      "name": "Floating UI fragments",
+      "weight": 4,
+      "description": "Cropped interface cards float around the main product screenshot."
+    },
+    {
+      "id": "AST-003",
+      "category": "assets",
+      "name": "Generic dashboard screenshot",
+      "weight": 3,
+      "description": "Product image contains standard charts, cards and side navigation with placeholder-like data."
+    },
+    {
+      "id": "AST-004",
+      "category": "assets",
+      "name": "Decorative browser chrome",
+      "weight": 3,
+      "description": "Screenshot is wrapped in a fake browser frame with three traffic-light dots."
+    },
+    {
+      "id": "AST-005",
+      "category": "assets",
+      "name": "Excessive Lucide-style icons",
+      "weight": 2,
+      "description": "Large number of icons share identical stroke width and size."
+    },
+    {
+      "id": "AST-006",
+      "category": "assets",
+      "name": "One icon library only",
+      "weight": 1,
+      "description": "Every icon originates from the same generic outline library."
+    },
+    {
+      "id": "AST-007",
+      "category": "assets",
+      "name": "Icon-semantic mismatch",
+      "weight": 3,
+      "description": "Icons are decorative and only loosely related to associated text."
+    },
+    {
+      "id": "AST-008",
+      "category": "assets",
+      "name": "Sparkles icon overuse",
+      "weight": 4,
+      "description": "Sparkles, wand, stars or magic icons appear repeatedly."
+    },
+    {
+      "id": "AST-009",
+      "category": "assets",
+      "name": "Abstract 3D object",
+      "weight": 4,
+      "description": "Hero contains floating sphere, torus, crystal, blob or abstract 3D shape."
+    },
+    {
+      "id": "AST-010",
+      "category": "assets",
+      "name": "AI-generated illustration style",
+      "weight": 4,
+      "description": "Multiple images have inconsistent fine details, lighting or visual grammar."
+    },
+    {
+      "id": "AST-011",
+      "category": "assets",
+      "name": "Inconsistent illustration families",
+      "weight": 3,
+      "description": "Assets use different line weights, perspectives or rendering styles."
+    },
+    {
+      "id": "AST-012",
+      "category": "assets",
+      "name": "Stock-photo tokenism",
+      "weight": 2,
+      "description": "People images appear only as generic diversity or collaboration decoration."
+    },
+    {
+      "id": "AST-013",
+      "category": "assets",
+      "name": "Circular avatar pile",
+      "weight": 3,
+      "description": "Three or more overlapping circular avatars appear near social proof."
+    },
+    {
+      "id": "AST-014",
+      "category": "assets",
+      "name": "Fake product logos",
+      "weight": 4,
+      "description": "Logos or partner marks appear as invented generic symbols."
+    },
+    {
+      "id": "AST-015",
+      "category": "assets",
+      "name": "Placeholder avatars",
+      "weight": 3,
+      "description": "Avatar sources use random-user, DiceBear or generic generated portrait services."
+    },
+    {
+      "id": "AST-016",
+      "category": "assets",
+      "name": "Repeated SVG dimensions",
+      "weight": 2,
+      "description": "Many unrelated SVG icons share identical viewBox, dimensions and stroke attributes."
+    },
+    {
+      "id": "AST-017",
+      "category": "assets",
+      "name": "Oversized decorative illustration",
+      "weight": 3,
+      "description": "Illustration occupies a major section but communicates little product information."
+    },
+    {
+      "id": "AST-018",
+      "category": "assets",
+      "name": "Generic empty-state artwork",
+      "weight": 2,
+      "description": "Empty state uses abstract pastel illustration and generic message."
+    },
+    {
+      "id": "AST-019",
+      "category": "assets",
+      "name": "Screenshot with impossible data",
+      "weight": 5,
+      "description": "Product screenshot contains inconsistent dates, totals, charts or currency."
+    },
+    {
+      "id": "AST-020",
+      "category": "assets",
+      "name": "Asset filename fingerprints",
+      "weight": 2,
+      "description": "Files use names such as hero-image, dashboard-mockup, feature-1, generated-image."
+    },
+    {
+      "id": "MOT-001",
+      "category": "motion",
+      "name": "Universal fade-up",
+      "weight": 3,
+      "description": "Three or more sections animate from opacity 0 and translateY 20-40px."
+    },
+    {
+      "id": "MOT-002",
+      "category": "motion",
+      "name": "Staggered card reveal",
+      "weight": 2,
+      "description": "Sibling cards reveal with incremental delay."
+    },
+    {
+      "id": "MOT-003",
+      "category": "motion",
+      "name": "Infinite logo marquee",
+      "weight": 3,
+      "description": "Logo row continuously scrolls horizontally."
+    },
+    {
+      "id": "MOT-004",
+      "category": "motion",
+      "name": "Infinite testimonial marquee",
+      "weight": 3,
+      "description": "Testimonials move continuously without user control."
+    },
+    {
+      "id": "MOT-005",
+      "category": "motion",
+      "name": "Floating animation",
+      "weight": 3,
+      "description": "Decorative elements oscillate vertically with infinite animation."
+    },
+    {
+      "id": "MOT-006",
+      "category": "motion",
+      "name": "Pulse glow CTA",
+      "weight": 3,
+      "description": "Main CTA repeatedly pulses, glows or scales."
+    },
+    {
+      "id": "MOT-007",
+      "category": "motion",
+      "name": "Rotating gradient",
+      "weight": 4,
+      "description": "Background or border gradient animates continuously."
+    },
+    {
+      "id": "MOT-008",
+      "category": "motion",
+      "name": "Cursor-following glow",
+      "weight": 4,
+      "description": "CSS variables updated from pointer coordinates control radial highlights."
+    },
+    {
+      "id": "MOT-009",
+      "category": "motion",
+      "name": "Parallax without narrative purpose",
+      "weight": 3,
+      "description": "Hero image, blobs or cards move at different scroll speeds."
+    },
+    {
+      "id": "MOT-010",
+      "category": "motion",
+      "name": "Magnetic button",
+      "weight": 3,
+      "description": "Button position subtly follows pointer movement."
+    },
+    {
+      "id": "MOT-011",
+      "category": "motion",
+      "name": "Number count-up",
+      "weight": 2,
+      "description": "Statistics animate from zero when entering viewport."
+    },
+    {
+      "id": "MOT-012",
+      "category": "motion",
+      "name": "Typewriter headline",
+      "weight": 3,
+      "description": "Main headline simulates typing or rotates generic keywords."
+    },
+    {
+      "id": "MOT-013",
+      "category": "motion",
+      "name": "Auto-rotating words",
+      "weight": 3,
+      "description": "H1 contains periodically replaced words or phrases."
+    },
+    {
+      "id": "MOT-014",
+      "category": "motion",
+      "name": "Animated gradient text",
+      "weight": 4,
+      "description": "Text gradient shifts continuously."
+    },
+    {
+      "id": "MOT-015",
+      "category": "motion",
+      "name": "Excessive easing sophistication",
+      "weight": 2,
+      "description": "Many ordinary transitions use custom spring or cubic-bezier curves."
+    },
+    {
+      "id": "MOT-016",
+      "category": "motion",
+      "name": "Every element transitions",
+      "weight": 3,
+      "description": "Global styles apply transitions to all properties or all components."
+    },
+    {
+      "id": "MOT-017",
+      "category": "motion",
+      "name": "Scroll progress decoration",
+      "weight": 2,
+      "description": "Decorative progress line appears without long-form content need."
+    },
+    {
+      "id": "MOT-018",
+      "category": "motion",
+      "name": "Hover tilt card",
+      "weight": 3,
+      "description": "Cards rotate in 3D based on cursor position."
+    },
+    {
+      "id": "MOT-019",
+      "category": "motion",
+      "name": "Fake live activity",
+      "weight": 4,
+      "description": "Interface indicators pulse or update although data is static."
+    },
+    {
+      "id": "MOT-020",
+      "category": "motion",
+      "name": "Reduced-motion omission",
+      "weight": 2,
+      "description": "Many animations exist without prefers-reduced-motion support."
+    },
+    {
+      "id": "TXT-001",
+      "category": "text",
+      "name": "Generic transformative headline",
+      "weight": 2,
+      "description": "Regex concepts: transform, reimagine, revolutionize, unlock, elevate."
+    },
+    {
+      "id": "TXT-002",
+      "category": "text",
+      "name": "Built for pattern",
+      "weight": 2,
+      "description": "Repeated copy such as Built for teams that."
+    },
+    {
+      "id": "TXT-003",
+      "category": "text",
+      "name": "Everything you need",
+      "weight": 3,
+      "description": "Exact or semantically similar generic value proposition."
+    },
+    {
+      "id": "TXT-004",
+      "category": "text",
+      "name": "All-in-one platform",
+      "weight": 3,
+      "description": "Product described as an all-in-one solution without precise scope."
+    },
+    {
+      "id": "TXT-005",
+      "category": "text",
+      "name": "Power of AI phrase",
+      "weight": 3,
+      "description": "Copy contains Harness/Unlock the power of AI."
+    },
+    {
+      "id": "TXT-006",
+      "category": "text",
+      "name": "Supercharge language",
+      "weight": 3,
+      "description": "supercharge your workflow/productivity/business."
+    },
+    {
+      "id": "TXT-007",
+      "category": "text",
+      "name": "Seamless overuse",
+      "weight": 2,
+      "description": "Word seamless/seamlessly appears more than once."
+    },
+    {
+      "id": "TXT-008",
+      "category": "text",
+      "name": "Effortless overuse",
+      "weight": 2,
+      "description": "effortless, effortlessly, with ease used repeatedly."
+    },
+    {
+      "id": "TXT-009",
+      "category": "text",
+      "name": "Next-level language",
+      "weight": 2,
+      "description": "next-level, next generation, future of."
+    },
+    {
+      "id": "TXT-010",
+      "category": "text",
+      "name": "Vague efficiency promise",
+      "weight": 3,
+      "description": "Save time and focus on what matters without measurable detail."
+    },
+    {
+      "id": "TXT-011",
+      "category": "text",
+      "name": "Three-adjective sentence",
+      "weight": 2,
+      "description": "Copy repeatedly lists three positive adjectives, such as fast, secure and scalable."
+    },
+    {
+      "id": "TXT-012",
+      "category": "text",
+      "name": "Em-dash marketing sentence",
+      "weight": 1,
+      "description": "Many paragraphs use a short claim followed by an em dash explanation."
+    },
+    {
+      "id": "TXT-013",
+      "category": "text",
+      "name": "Generic feature titles",
+      "weight": 3,
+      "description": "Titles such as Lightning Fast, Secure by Design, Built to Scale."
+    },
+    {
+      "id": "TXT-014",
+      "category": "text",
+      "name": "Repeated Whether you",
+      "weight": 2,
+      "description": "Multiple sections begin with Whether you're."
+    },
+    {
+      "id": "TXT-015",
+      "category": "text",
+      "name": "Unverifiable social proof",
+      "weight": 4,
+      "description": "Trusted by thousands without source, number or link."
+    },
+    {
+      "id": "TXT-016",
+      "category": "text",
+      "name": "Fake precision",
+      "weight": 4,
+      "description": "Claims such as 10x faster, 300% growth without methodology."
+    },
+    {
+      "id": "TXT-017",
+      "category": "text",
+      "name": "Placeholder metrics",
+      "weight": 3,
+      "description": "Statistics use round numbers such as 10K+, 99.9%, 50+."
+    },
+    {
+      "id": "TXT-018",
+      "category": "text",
+      "name": "Generic testimonials",
+      "weight": 4,
+      "description": "Testimonials contain only broad praise and no product-specific detail."
+    },
+    {
+      "id": "TXT-019",
+      "category": "text",
+      "name": "Repetitive testimonial tone",
+      "weight": 4,
+      "description": "Multiple quotes use similar sentence length, punctuation and vocabulary."
+    },
+    {
+      "id": "TXT-020",
+      "category": "text",
+      "name": "Suspicious customer identities",
+      "weight": 4,
+      "description": "Testimonials use generic names, roles and company names."
+    },
+    {
+      "id": "TXT-021",
+      "category": "text",
+      "name": "Generic CTA labels",
+      "weight": 2,
+      "description": "Excessive use of Get Started, Learn More, Try Now, Explore."
+    },
+    {
+      "id": "TXT-022",
+      "category": "text",
+      "name": "CTA inconsistency",
+      "weight": 2,
+      "description": "Same destination is labeled differently across the page."
+    },
+    {
+      "id": "TXT-023",
+      "category": "text",
+      "name": "Headline without product noun",
+      "weight": 3,
+      "description": "H1 promises an outcome but does not say what the product is."
+    },
+    {
+      "id": "TXT-024",
+      "category": "text",
+      "name": "Vague product description",
+      "weight": 4,
+      "description": "First paragraph does not identify target user, mechanism or concrete output."
+    },
+    {
+      "id": "TXT-025",
+      "category": "text",
+      "name": "Repeated sentence templates",
+      "weight": 3,
+      "description": "Multiple paragraphs share the same grammatical structure."
+    },
+    {
+      "id": "TXT-026",
+      "category": "text",
+      "name": "Excessive positive adjectives",
+      "weight": 3,
+      "description": "High ratio of promotional adjectives to concrete nouns."
+    },
+    {
+      "id": "TXT-027",
+      "category": "text",
+      "name": "Low information density",
+      "weight": 4,
+      "description": "Copy contains many claims but few domain-specific entities or actions."
+    },
+    {
+      "id": "TXT-028",
+      "category": "text",
+      "name": "Fake urgency",
+      "weight": 3,
+      "description": "Limited spots, Join before it's too late, or countdown with no basis."
+    },
+    {
+      "id": "TXT-029",
+      "category": "text",
+      "name": "Generic FAQ questions",
+      "weight": 3,
+      "description": "FAQ contains standard objections unrelated to the specific product."
+    },
+    {
+      "id": "TXT-030",
+      "category": "text",
+      "name": "Placeholder legal copy",
+      "weight": 3,
+      "description": "Privacy, terms or copyright text contains generic or incomplete company information."
+    },
+    {
+      "id": "DOM-001",
+      "category": "html",
+      "name": "Excessive generic div usage",
+      "weight": 3,
+      "description": "More than 85% of structural elements are <div>."
+    },
+    {
+      "id": "DOM-002",
+      "category": "html",
+      "name": "Weak semantic structure",
+      "weight": 3,
+      "description": "Page lacks <main>, <section>, <nav>, <header> or <footer>."
+    },
+    {
+      "id": "DOM-003",
+      "category": "html",
+      "name": "Repeated component skeleton",
+      "weight": 4,
+      "description": "Multiple DOM subtrees have nearly identical tag and class structure."
+    },
+    {
+      "id": "DOM-004",
+      "category": "html",
+      "name": "Deep wrapper nesting",
+      "weight": 3,
+      "description": "Median component nesting depth exceeds six levels."
+    },
+    {
+      "id": "DOM-005",
+      "category": "html",
+      "name": "Single-child wrapper chains",
+      "weight": 3,
+      "description": "Three or more consecutive elements each contain only one child."
+    },
+    {
+      "id": "DOM-006",
+      "category": "html",
+      "name": "Decorative empty elements",
+      "weight": 3,
+      "description": "Empty <div> or <span> elements exist only for blobs, glows or shapes."
+    },
+    {
+      "id": "DOM-007",
+      "category": "html",
+      "name": "Excessive span wrapping",
+      "weight": 2,
+      "description": "Headings contain many spans solely for color or animation control."
+    },
+    {
+      "id": "DOM-008",
+      "category": "html",
+      "name": "Unnecessary duplicated markup",
+      "weight": 3,
+      "description": "Desktop and mobile variants duplicate substantial content."
+    },
+    {
+      "id": "DOM-009",
+      "category": "html",
+      "name": "Generic section IDs",
+      "weight": 2,
+      "description": "IDs such as features, benefits, how-it-works, testimonials, pricing, faq all appear."
+    },
+    {
+      "id": "DOM-010",
+      "category": "html",
+      "name": "Template section order",
+      "weight": 4,
+      "description": "Page sequence exactly follows hero then logos then features then testimonials then pricing then FAQ then CTA."
+    },
+    {
+      "id": "DOM-011",
+      "category": "html",
+      "name": "Empty anchor links",
+      "weight": 4,
+      "description": "Links use href=#, empty href or placeholder JavaScript."
+    },
+    {
+      "id": "DOM-012",
+      "category": "html",
+      "name": "Fake button links",
+      "weight": 3,
+      "description": "<a> elements styled as buttons lead nowhere or to generic anchors."
+    },
+    {
+      "id": "DOM-013",
+      "category": "html",
+      "name": "Missing real navigation",
+      "weight": 2,
+      "description": "Navigation links only scroll to landing-page sections."
+    },
+    {
+      "id": "DOM-014",
+      "category": "html",
+      "name": "Duplicate CTA destinations",
+      "weight": 2,
+      "description": "Many visually distinct CTAs point to the same placeholder URL."
+    },
+    {
+      "id": "DOM-015",
+      "category": "html",
+      "name": "Excessive ARIA patching",
+      "weight": 2,
+      "description": "Non-semantic divs use ARIA roles to imitate native controls."
+    },
+    {
+      "id": "DOM-016",
+      "category": "html",
+      "name": "Generated class naming",
+      "weight": 2,
+      "description": "Repetitive names such as section-container, feature-card, badge-wrapper dominate."
+    },
+    {
+      "id": "DOM-017",
+      "category": "html",
+      "name": "Numbered feature data",
+      "weight": 2,
+      "description": "Repeated components are hard-coded with names like feature1, feature2, feature3."
+    },
+    {
+      "id": "DOM-018",
+      "category": "html",
+      "name": "Placeholder alt text",
+      "weight": 3,
+      "description": "Images use alt values like Hero image, Dashboard, Feature image."
+    },
+    {
+      "id": "DOM-019",
+      "category": "html",
+      "name": "Identical alt and filename",
+      "weight": 2,
+      "description": "Alt text is derived directly from generic asset filename."
+    },
+    {
+      "id": "DOM-020",
+      "category": "html",
+      "name": "Missing content hierarchy",
+      "weight": 3,
+      "description": "Multiple H1 elements or skipped heading levels occur."
+    },
+    {
+      "id": "CSS-001",
+      "category": "css",
+      "name": "Arbitrary-value overload",
+      "weight": 3,
+      "description": "High number of Tailwind arbitrary classes such as w-[...], top-[...], shadow-[...]."
+    },
+    {
+      "id": "CSS-002",
+      "category": "css",
+      "name": "Utility-class wall",
+      "weight": 3,
+      "description": "Elements contain more than 15 utility classes on average."
+    },
+    {
+      "id": "CSS-003",
+      "category": "css",
+      "name": "Repeated long class strings",
+      "weight": 3,
+      "description": "Similar long utility-class sequences appear across components."
+    },
+    {
+      "id": "CSS-004",
+      "category": "css",
+      "name": "Contradictory utilities",
+      "weight": 4,
+      "description": "Same element contains conflicting responsive, spacing or display classes."
+    },
+    {
+      "id": "CSS-005",
+      "category": "css",
+      "name": "Unused generated CSS",
+      "weight": 3,
+      "description": "More than 40% of selectors are never matched by the DOM."
+    },
+    {
+      "id": "CSS-006",
+      "category": "css",
+      "name": "Duplicate declarations",
+      "weight": 4,
+      "description": "Near-identical rule blocks occur under different selectors."
+    },
+    {
+      "id": "CSS-007",
+      "category": "css",
+      "name": "Excessive !important",
+      "weight": 3,
+      "description": "More than five declarations use !important."
+    },
+    {
+      "id": "CSS-008",
+      "category": "css",
+      "name": "Global transition abuse",
+      "weight": 3,
+      "description": "transition: all appears more than three times."
+    },
+    {
+      "id": "CSS-009",
+      "category": "css",
+      "name": "Magic-number positioning",
+      "weight": 3,
+      "description": "Many absolute offsets use unrelated pixel values."
+    },
+    {
+      "id": "CSS-010",
+      "category": "css",
+      "name": "Mechanical spacing scale",
+      "weight": 1,
+      "description": "Nearly all spacing values are exact multiples of 4 or 8."
+    },
+    {
+      "id": "CSS-011",
+      "category": "css",
+      "name": "Excessive one-off values",
+      "weight": 3,
+      "description": "More than 20 unique spacing values occur on a single page."
+    },
+    {
+      "id": "CSS-012",
+      "category": "css",
+      "name": "Mixed unit systems",
+      "weight": 3,
+      "description": "px, rem, em, vw and percentages are used inconsistently for similar properties."
+    },
+    {
+      "id": "CSS-013",
+      "category": "css",
+      "name": "Repeated media queries",
+      "weight": 2,
+      "description": "Same breakpoint is declared in many disconnected locations."
+    },
+    {
+      "id": "CSS-014",
+      "category": "css",
+      "name": "Desktop-first patching",
+      "weight": 3,
+      "description": "Mobile rules mostly override fixed desktop sizes rather than define fluid layout."
+    },
+    {
+      "id": "CSS-015",
+      "category": "css",
+      "name": "Fixed component dimensions",
+      "weight": 4,
+      "description": "Cards, mockups or sections use rigid widths and heights that break with content."
+    },
+    {
+      "id": "CSS-016",
+      "category": "css",
+      "name": "Excessive absolute positioning",
+      "weight": 4,
+      "description": "More than 15 meaningful elements use absolute positioning."
+    },
+    {
+      "id": "CSS-017",
+      "category": "css",
+      "name": "Negative-margin composition",
+      "weight": 3,
+      "description": "Multiple sections rely on large negative margins for overlap effects."
+    },
+    {
+      "id": "CSS-018",
+      "category": "css",
+      "name": "Excessive z-index values",
+      "weight": 3,
+      "description": "Many unique z-index values or values above 1000 exist."
+    },
+    {
+      "id": "CSS-019",
+      "category": "css",
+      "name": "Random z-index escalation",
+      "weight": 3,
+      "description": "Values such as 10, 20, 50, 100, 999, 9999 appear together."
+    },
+    {
+      "id": "CSS-020",
+      "category": "css",
+      "name": "Unnecessary GPU promotion",
+      "weight": 2,
+      "description": "Many elements use translateZ(0), will-change or transform without animation need."
+    },
+    {
+      "id": "CSS-021",
+      "category": "css",
+      "name": "Generated custom-property names",
+      "weight": 1,
+      "description": "Variables use generic names such as --primary, --secondary, --muted, --card only."
+    },
+    {
+      "id": "CSS-022",
+      "category": "css",
+      "name": "Large token set with low usage",
+      "weight": 3,
+      "description": "Many design tokens are defined but most are referenced zero or one time."
+    },
+    {
+      "id": "CSS-023",
+      "category": "css",
+      "name": "Inline-style density",
+      "weight": 3,
+      "description": "More than 15% of elements contain inline style attributes."
+    },
+    {
+      "id": "CSS-024",
+      "category": "css",
+      "name": "CSS-in-JS duplication",
+      "weight": 3,
+      "description": "Repeated static styles are embedded in multiple generated components."
+    },
+    {
+      "id": "CSS-025",
+      "category": "css",
+      "name": "Excessive calc expressions",
+      "weight": 2,
+      "description": "Many simple dimensions are expressed using unnecessary calc()."
+    },
+    {
+      "id": "CSS-026",
+      "category": "css",
+      "name": "Unnecessary clamp use",
+      "weight": 2,
+      "description": "clamp() is applied mechanically to many unrelated font and spacing values."
+    },
+    {
+      "id": "CSS-027",
+      "category": "css",
+      "name": "Over-specific selectors",
+      "weight": 3,
+      "description": "Generated selectors contain long chains or unnecessary specificity."
+    },
+    {
+      "id": "CSS-028",
+      "category": "css",
+      "name": "Dead hover states",
+      "weight": 3,
+      "description": "Hover styles are declared for hidden, disabled or non-interactive elements."
+    },
+    {
+      "id": "CSS-029",
+      "category": "css",
+      "name": "Duplicate keyframes",
+      "weight": 4,
+      "description": "Similar fade, float or pulse animations exist under different names."
+    },
+    {
+      "id": "CSS-030",
+      "category": "css",
+      "name": "Framework-default tokens",
+      "weight": 2,
+      "description": "Default shadcn/Tailwind CSS variables remain unchanged."
+    },
+    {
+      "id": "RSP-001",
+      "category": "responsive",
+      "name": "Hero simply stacks on mobile",
+      "weight": 2,
+      "description": "Two-column hero changes directly to one column without rethinking hierarchy."
+    },
+    {
+      "id": "RSP-002",
+      "category": "responsive",
+      "name": "Hidden decorative overflow",
+      "weight": 3,
+      "description": "Mobile CSS hides overflowing mockups instead of adapting them."
+    },
+    {
+      "id": "RSP-003",
+      "category": "responsive",
+      "name": "Desktop mockup remains oversized",
+      "weight": 4,
+      "description": "Device or dashboard image exceeds viewport width on small screens."
+    },
+    {
+      "id": "RSP-004",
+      "category": "responsive",
+      "name": "Fixed heading size failure",
+      "weight": 4,
+      "description": "H1 remains above 56px on narrow screens."
+    },
+    {
+      "id": "RSP-005",
+      "category": "responsive",
+      "name": "Buttons overflow",
+      "weight": 4,
+      "description": "CTA row does not wrap or switch to vertical layout below 400px."
+    },
+    {
+      "id": "RSP-006",
+      "category": "responsive",
+      "name": "Arbitrary breakpoint accumulation",
+      "weight": 3,
+      "description": "Similar layout changes occur at many near-duplicate breakpoints."
+    },
+    {
+      "id": "RSP-007",
+      "category": "responsive",
+      "name": "Mobile content disappearance",
+      "weight": 4,
+      "description": "Important content is hidden on mobile for layout convenience."
+    },
+    {
+      "id": "RSP-008",
+      "category": "responsive",
+      "name": "Horizontal carousel fallback",
+      "weight": 3,
+      "description": "Card grid becomes an uncontrolled horizontal overflow strip."
+    },
+    {
+      "id": "RSP-009",
+      "category": "responsive",
+      "name": "Fixed-height clipping",
+      "weight": 4,
+      "description": "Sections with fixed height clip translated or wrapped content."
+    },
+    {
+      "id": "RSP-010",
+      "category": "responsive",
+      "name": "Text overflow masking",
+      "weight": 4,
+      "description": "overflow: hidden is used to conceal responsive text problems."
+    },
+    {
+      "id": "RSP-011",
+      "category": "responsive",
+      "name": "No intermediate tablet design",
+      "weight": 2,
+      "description": "Layout jumps directly from wide desktop to narrow mobile."
+    },
+    {
+      "id": "RSP-012",
+      "category": "responsive",
+      "name": "Identical mobile card style",
+      "weight": 3,
+      "description": "Every section becomes the same full-width rounded card stack."
+    },
+    {
+      "id": "RSP-013",
+      "category": "responsive",
+      "name": "Mobile nav content mismatch",
+      "weight": 3,
+      "description": "Mobile menu contains different or missing navigation destinations."
+    },
+    {
+      "id": "RSP-014",
+      "category": "responsive",
+      "name": "Touch target weakness",
+      "weight": 3,
+      "description": "Interactive targets are smaller than 44x44 CSS pixels."
+    },
+    {
+      "id": "RSP-015",
+      "category": "responsive",
+      "name": "Hover-dependent information",
+      "weight": 4,
+      "description": "Important information appears only on hover."
+    },
+    {
+      "id": "RSP-016",
+      "category": "responsive",
+      "name": "Viewport-unit mobile bugs",
+      "weight": 2,
+      "description": "100vh is used without dynamic viewport handling."
+    },
+    {
+      "id": "RSP-017",
+      "category": "responsive",
+      "name": "Absolute decorations cause overflow",
+      "weight": 3,
+      "description": "Decorative elements extend page width on small screens."
+    },
+    {
+      "id": "RSP-018",
+      "category": "responsive",
+      "name": "Excessive mobile overrides",
+      "weight": 3,
+      "description": "Mobile stylesheet changes dozens of individual values rather than component rules."
+    },
+    {
+      "id": "RSP-019",
+      "category": "responsive",
+      "name": "Forced line breaks survive mobile",
+      "weight": 3,
+      "description": "Heading <br> elements create awkward mobile wrapping."
+    },
+    {
+      "id": "RSP-020",
+      "category": "responsive",
+      "name": "Screenshot text becomes unreadable",
+      "weight": 3,
+      "description": "Product screenshot is scaled until embedded text is illegible."
+    },
+    {
+      "id": "A11Y-001",
+      "category": "accessibility",
+      "name": "Low text contrast",
+      "weight": 4,
+      "description": "Text/background contrast fails WCAG AA."
+    },
+    {
+      "id": "A11Y-002",
+      "category": "accessibility",
+      "name": "Muted text too light",
+      "weight": 3,
+      "description": "Secondary copy consistently falls below 4.5:1 contrast."
+    },
+    {
+      "id": "A11Y-003",
+      "category": "accessibility",
+      "name": "Missing image alt",
+      "weight": 4,
+      "description": "Meaningful images have empty or missing alt attributes."
+    },
+    {
+      "id": "A11Y-004",
+      "category": "accessibility",
+      "name": "Decorative image mislabeling",
+      "weight": 2,
+      "description": "Decorative images contain verbose generic alt text."
+    },
+    {
+      "id": "A11Y-005",
+      "category": "accessibility",
+      "name": "Missing form labels",
+      "weight": 4,
+      "description": "Inputs use placeholder text as their only label."
+    },
+    {
+      "id": "A11Y-006",
+      "category": "accessibility",
+      "name": "Missing focus styles",
+      "weight": 5,
+      "description": "Buttons and links remove outline without an alternative."
+    },
+    {
+      "id": "A11Y-007",
+      "category": "accessibility",
+      "name": "Inaccessible custom controls",
+      "weight": 5,
+      "description": "Div-based accordions, tabs or toggles lack keyboard support."
+    },
+    {
+      "id": "A11Y-008",
+      "category": "accessibility",
+      "name": "Incorrect button semantics",
+      "weight": 4,
+      "description": "Clickable divs or spans are used instead of buttons."
+    },
+    {
+      "id": "A11Y-009",
+      "category": "accessibility",
+      "name": "Color-only state",
+      "weight": 4,
+      "description": "Selected, error or success state is expressed only through color."
+    },
+    {
+      "id": "A11Y-010",
+      "category": "accessibility",
+      "name": "Auto-playing motion",
+      "weight": 3,
+      "description": "Infinite animation starts automatically without pause controls."
+    },
+    {
+      "id": "A11Y-011",
+      "category": "accessibility",
+      "name": "No reduced-motion handling",
+      "weight": 3,
+      "description": "Animated page lacks prefers-reduced-motion."
+    },
+    {
+      "id": "A11Y-012",
+      "category": "accessibility",
+      "name": "Invalid heading hierarchy",
+      "weight": 3,
+      "description": "H1-H6 order is inconsistent or headings are chosen for size only."
+    },
+    {
+      "id": "A11Y-013",
+      "category": "accessibility",
+      "name": "Empty links",
+      "weight": 4,
+      "description": "Links have no accessible name."
+    },
+    {
+      "id": "A11Y-014",
+      "category": "accessibility",
+      "name": "Icon-only controls unlabeled",
+      "weight": 4,
+      "description": "Icon buttons lack aria-label or visible text."
+    },
+    {
+      "id": "A11Y-015",
+      "category": "accessibility",
+      "name": "Generic aria labels",
+      "weight": 3,
+      "description": "Labels such as button, icon, or click here are used."
+    },
+    {
+      "id": "A11Y-016",
+      "category": "accessibility",
+      "name": "Language missing",
+      "weight": 2,
+      "description": "<html lang> is absent or incorrect."
+    },
+    {
+      "id": "A11Y-017",
+      "category": "accessibility",
+      "name": "Form errors not associated",
+      "weight": 3,
+      "description": "Error text is not connected through ARIA attributes."
+    },
+    {
+      "id": "A11Y-018",
+      "category": "accessibility",
+      "name": "Autocomplete omitted",
+      "weight": 2,
+      "description": "Common identity and payment fields lack autocomplete attributes."
+    },
+    {
+      "id": "A11Y-019",
+      "category": "accessibility",
+      "name": "Modal focus not trapped",
+      "weight": 4,
+      "description": "Modal exists without dialog semantics and focus management."
+    },
+    {
+      "id": "A11Y-020",
+      "category": "accessibility",
+      "name": "Content order mismatch",
+      "weight": 4,
+      "description": "Visual order differs substantially from DOM or keyboard order."
+    },
+    {
+      "id": "AUT-001",
+      "category": "authenticity",
+      "name": "Fake product interface",
+      "weight": 5,
+      "description": "Hero shows a polished product UI, but no functional product route exists."
+    },
+    {
+      "id": "AUT-002",
+      "category": "authenticity",
+      "name": "Screenshot-only product",
+      "weight": 3,
+      "description": "Product is represented only through static images."
+    },
+    {
+      "id": "AUT-003",
+      "category": "authenticity",
+      "name": "No concrete workflow",
+      "weight": 4,
+      "description": "Features describe benefits but no real input-process-output sequence."
+    },
+    {
+      "id": "AUT-004",
+      "category": "authenticity",
+      "name": "Placeholder navigation",
+      "weight": 5,
+      "description": "Dashboard links and controls point nowhere."
+    },
+    {
+      "id": "AUT-005",
+      "category": "authenticity",
+      "name": "Fake notifications",
+      "weight": 3,
+      "description": "Product mockup displays static notification counters or activity."
+    },
+    {
+      "id": "AUT-006",
+      "category": "authenticity",
+      "name": "Impossible user data",
+      "weight": 5,
+      "description": "Different sections show inconsistent usernames, totals or account states."
+    },
+    {
+      "id": "AUT-007",
+      "category": "authenticity",
+      "name": "Fake integrations",
+      "weight": 4,
+      "description": "Integration logos exist without integration pages, links or documentation."
+    },
+    {
+      "id": "AUT-008",
+      "category": "authenticity",
+      "name": "Generic API claim",
+      "weight": 4,
+      "description": "Page claims API availability but provides no documentation link."
+    },
+    {
+      "id": "AUT-009",
+      "category": "authenticity",
+      "name": "Fake security claims",
+      "weight": 4,
+      "description": "Enterprise-grade security appears without details, policy or certification."
+    },
+    {
+      "id": "AUT-010",
+      "category": "authenticity",
+      "name": "Empty trust pages",
+      "weight": 5,
+      "description": "Security, privacy or compliance links lead to thin placeholder pages."
+    },
+    {
+      "id": "AUT-011",
+      "category": "authenticity",
+      "name": "Fake partner logos",
+      "weight": 4,
+      "description": "Partner logos are unlinked and unsupported by case studies."
+    },
+    {
+      "id": "AUT-012",
+      "category": "authenticity",
+      "name": "No company identity",
+      "weight": 3,
+      "description": "Footer lacks legal entity, address, team or verifiable contact information."
+    },
+    {
+      "id": "AUT-013",
+      "category": "authenticity",
+      "name": "Inconsistent product naming",
+      "weight": 4,
+      "description": "Product name differs between title, logo, metadata and page copy."
+    },
+    {
+      "id": "AUT-014",
+      "category": "authenticity",
+      "name": "Inconsistent prices",
+      "weight": 5,
+      "description": "Pricing values differ between cards, FAQ, structured data or checkout links."
+    },
+    {
+      "id": "AUT-015",
+      "category": "authenticity",
+      "name": "Invalid app-store buttons",
+      "weight": 5,
+      "description": "Store buttons are present but have placeholder or nonexistent URLs."
+    },
+    {
+      "id": "AUT-016",
+      "category": "authenticity",
+      "name": "Coming-soon contradiction",
+      "weight": 5,
+      "description": "Page says coming soon while showing mature usage statistics or testimonials."
+    },
+    {
+      "id": "AUT-017",
+      "category": "authenticity",
+      "name": "Fake live demo",
+      "weight": 4,
+      "description": "Demo UI is pre-scripted but presented as interactive or real-time."
+    },
+    {
+      "id": "AUT-018",
+      "category": "authenticity",
+      "name": "Placeholder contact data",
+      "weight": 5,
+      "description": "Email uses example domains or generic fake values."
+    },
+    {
+      "id": "AUT-019",
+      "category": "authenticity",
+      "name": "Missing error states",
+      "weight": 2,
+      "description": "Product preview shows only perfect success states."
+    },
+    {
+      "id": "AUT-020",
+      "category": "authenticity",
+      "name": "Unrealistically complete feature set",
+      "weight": 3,
+      "description": "Early product claims many unrelated advanced capabilities."
+    },
+    {
+      "id": "MET-001",
+      "category": "metadata",
+      "name": "Default page title",
+      "weight": 5,
+      "description": "Title remains Vite App, Next App, Landing Page or similar."
+    },
+    {
+      "id": "MET-002",
+      "category": "metadata",
+      "name": "Generic meta description",
+      "weight": 3,
+      "description": "Metadata contains vague AI-style marketing copy."
+    },
+    {
+      "id": "MET-003",
+      "category": "metadata",
+      "name": "Missing canonical URL",
+      "weight": 2,
+      "description": "Public production page has no canonical link."
+    },
+    {
+      "id": "MET-004",
+      "category": "metadata",
+      "name": "Missing Open Graph data",
+      "weight": 2,
+      "description": "Product page lacks basic social metadata."
+    },
+    {
+      "id": "MET-005",
+      "category": "metadata",
+      "name": "Placeholder favicon",
+      "weight": 5,
+      "description": "Default framework favicon remains."
+    },
+    {
+      "id": "MET-006",
+      "category": "metadata",
+      "name": "Framework asset leftovers",
+      "weight": 5,
+      "description": "Default Vite, React, Next or Astro assets are still included."
+    },
+    {
+      "id": "MET-007",
+      "category": "metadata",
+      "name": "AI builder identifiers",
+      "weight": 5,
+      "description": "Source contains comments or metadata mentioning v0, Lovable, Bolt or generated output."
+    },
+    {
+      "id": "MET-008",
+      "category": "metadata",
+      "name": "Generated component comments",
+      "weight": 5,
+      "description": "Comments such as Generated by AI, Replace with your content or TODO placeholders."
+    },
+    {
+      "id": "MET-009",
+      "category": "metadata",
+      "name": "Placeholder structured data",
+      "weight": 5,
+      "description": "JSON-LD contains generic organization or example values."
+    },
+    {
+      "id": "MET-010",
+      "category": "metadata",
+      "name": "Inconsistent locale",
+      "weight": 3,
+      "description": "Page language, metadata locale and visible copy do not match."
+    },
+    {
+      "id": "MET-011",
+      "category": "metadata",
+      "name": "Incorrect copyright year",
+      "weight": 1,
+      "description": "Footer year is stale or inconsistent with current deployment metadata."
+    },
+    {
+      "id": "MET-012",
+      "category": "metadata",
+      "name": "Broken internal references",
+      "weight": 4,
+      "description": "IDs, anchors, files or component references do not exist."
+    },
+    {
+      "id": "MET-013",
+      "category": "metadata",
+      "name": "Development URLs",
+      "weight": 5,
+      "description": "Localhost or preview deployment URLs remain in production source."
+    },
+    {
+      "id": "MET-014",
+      "category": "metadata",
+      "name": "Exposed environment placeholders",
+      "weight": 5,
+      "description": "Values such as YOUR_API_KEY, YOUR_DOMAIN or ${SITE_URL} appear."
+    },
+    {
+      "id": "MET-015",
+      "category": "metadata",
+      "name": "Duplicate metadata",
+      "weight": 3,
+      "description": "Multiple title, viewport or description tags exist."
+    },
+    {
+      "id": "MET-016",
+      "category": "metadata",
+      "name": "Generic image metadata",
+      "weight": 3,
+      "description": "Social image uses a default template or unrelated placeholder."
+    },
+    {
+      "id": "MET-017",
+      "category": "metadata",
+      "name": "Missing asset optimization",
+      "weight": 2,
+      "description": "Hero images are oversized and lack responsive source sets."
+    },
+    {
+      "id": "MET-018",
+      "category": "metadata",
+      "name": "Random generated asset hashes",
+      "weight": 1,
+      "description": "Many one-off images have opaque generated names without organization."
+    },
+    {
+      "id": "MET-019",
+      "category": "metadata",
+      "name": "Empty manifest fields",
+      "weight": 4,
+      "description": "PWA manifest exists but contains template names or colors."
+    },
+    {
+      "id": "MET-020",
+      "category": "metadata",
+      "name": "Template robots/sitemap",
+      "weight": 5,
+      "description": "Sitemap or robots configuration references a template domain."
+    }
+  ]
+}

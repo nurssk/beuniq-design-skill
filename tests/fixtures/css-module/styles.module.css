@@ -1,0 +1,11 @@
+.panel {
+  border-radius: 10px;
+  border: 1px solid #d8dee4;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.title {
+  font-size: 28px;
+  line-height: 1.2;
+}
