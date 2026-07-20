@@ -1,6 +1,6 @@
 # BeUniq Design Skill
 
-BeUniq is a rule-based Codex skill for detecting and reducing generic AI-generated UI patterns in frontend code. It does not call AI APIs, vision models, browser automation, telemetry endpoints, or external services.
+BeUniq is a rule-based Codex/Claude skill for detecting and reducing generic AI-generated UI patterns in frontend code. It does not call AI APIs, vision models, browser automation, telemetry endpoints, or external services.
 
 The skill is designed for React, Next.js, Vite, static HTML, CSS, SCSS, and Tailwind-heavy projects. It statically inspects source code, visible copy, class names, inline styles, and CSS declarations, then scores design AI slop and landing-copy slop from `0` to `100`. A project passes when both `AI slop <= 20` and `Copy slop <= 20`.
 
