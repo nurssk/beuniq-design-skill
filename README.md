@@ -14,7 +14,7 @@ Because v1 is code-only, the checker hard-fails only rules that can be detected 
 
 ## Install
 
-From Codex:
+### Codex
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py --repo <owner>/beuniq-design-skill --path skills/beuniq-design --name beuniq-design
@@ -27,6 +27,23 @@ npx --yes tsx ~/.codex/skills/beuniq-design/scripts/beuniq-check.ts --root /path
 ```
 
 `npx --yes tsx` may download the TypeScript runner if it is not already available. The BeUniq checker itself is deterministic and makes no network, telemetry, browser, or AI API calls.
+
+### Claude Code
+
+Use the bundled project skill directly from this repository, or copy it into your personal Claude skills folder:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R .claude/skills/beuniq-design ~/.claude/skills/beuniq-design
+```
+
+Then invoke it in Claude Code with:
+
+```text
+/beuniq-design
+```
+
+The Claude skill is self-contained under `.claude/skills/beuniq-design/` and uses `${CLAUDE_SKILL_DIR}` so its scripts resolve from project, personal, or plugin skill locations.
 
 For local development in this repository:
 

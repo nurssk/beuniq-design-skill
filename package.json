@@ -18,6 +18,7 @@
   },
   "files": [
     "skills",
+    ".claude/skills",
     "README.md",
     "LICENSE"
   ],

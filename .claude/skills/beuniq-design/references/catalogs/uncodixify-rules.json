@@ -1,0 +1,672 @@
+{
+  "source": "SwipeUI extension/src/analysis/uncodixifyRules.ts",
+  "count": 74,
+  "rules": [
+    {
+      "id": "oversized-radius",
+      "category": "radius",
+      "title": "Oversized rounded corners",
+      "severity": "medium",
+      "codexPattern": "Cards, buttons, and panels use 20–32px radius everywhere.",
+      "recommendation": "Reduce most radii to 8–12px. Use larger radius only for intentionally large containers.",
+      "betterDirection": "Use 8–10px for buttons and 8–12px for cards."
+    },
+    {
+      "id": "pill-overload",
+      "category": "buttons",
+      "title": "Pill button and chip overload",
+      "severity": "medium",
+      "codexPattern": "Most buttons and chips are fully rounded pills (border-radius 999px).",
+      "recommendation": "Use 8–10px radius for buttons. Reserve pills for a small number of genuine tag/filter chips.",
+      "betterDirection": "Solid or bordered buttons with consistent 8–10px radius, not pills."
+    },
+    {
+      "id": "gradient-overuse",
+      "category": "color",
+      "title": "Unnecessary gradients",
+      "severity": "medium",
+      "codexPattern": "Backgrounds, buttons, and text use soft corporate gradients to fake taste.",
+      "recommendation": "Replace decorative gradients with solid surfaces. Keep contrast and hierarchy doing the work.",
+      "betterDirection": "Flat, calm surfaces. Gradients only when they carry real meaning."
+    },
+    {
+      "id": "gradient-text",
+      "category": "color",
+      "title": "Gradient text",
+      "severity": "medium",
+      "codexPattern": "Headings, metrics, or CTA labels use gradient-filled text via `background-clip: text`.",
+      "recommendation": "Replace gradient text with a solid color. Use scale, weight, spacing, or one meaningful accent color for emphasis.",
+      "betterDirection": "Solid, legible text with hierarchy earned by typography rather than effects."
+    },
+    {
+      "id": "cream-beige-default-surface",
+      "category": "color",
+      "title": "Default cream / beige surface",
+      "severity": "low",
+      "codexPattern": "The main page background defaults to warm cream, sand, beige, parchment, or ivory.",
+      "recommendation": "Choose the surface from a concrete brand scene and color strategy. Use a true neutral, brand-tinted neutral, saturated brand field, or darker surface only when the product context supports it.",
+      "betterDirection": "A committed surface palette chosen from brand context, not default warm paper."
+    },
+    {
+      "id": "glow-heavy-ui",
+      "category": "shadow",
+      "title": "Glow-heavy UI",
+      "severity": "medium",
+      "codexPattern": "Cards and buttons use colored glow shadows instead of hierarchy.",
+      "recommendation": "Remove glows. Use subtle neutral shadows (max 0 2px 8px rgba(0,0,0,0.1)) and spacing for hierarchy.",
+      "betterDirection": "Replace glow with simple borders, spacing, and typography hierarchy."
+    },
+    {
+      "id": "glassmorphism-default",
+      "category": "panels",
+      "title": "Glassmorphism as the default",
+      "severity": "medium",
+      "codexPattern": "Floating frosted-glass panels with backdrop blur are the default visual language.",
+      "recommendation": "Use solid panel backgrounds with subtle borders. Drop the blur unless there is a real overlay reason.",
+      "betterDirection": "Solid surfaces with 1px borders, no glass effect."
+    },
+    {
+      "id": "dramatic-shadows",
+      "category": "shadow",
+      "title": "Excessive / dramatic shadows",
+      "severity": "medium",
+      "codexPattern": "Large dramatic drop shadows (e.g. 0 24px 60px rgba(0,0,0,0.35)) on everything.",
+      "recommendation": "Cap shadows at a subtle 0 2px 8px rgba(0,0,0,0.1). Avoid floating-everything elevation.",
+      "betterDirection": "Subtle, consistent shadows; let borders and spacing define edges."
+    },
+    {
+      "id": "ghost-card-border-shadow",
+      "category": "shadow",
+      "title": "Hairline border plus wide shadow",
+      "severity": "medium",
+      "codexPattern": "Cards and buttons combine a 1px border with a wide, diffuse shadow blur.",
+      "recommendation": "Commit to one edge treatment: a clear border or a subtle shadow. If using shadow, keep blur tight and intentional.",
+      "betterDirection": "One defined edge language instead of border and decorative elevation stacked together."
+    },
+    {
+      "id": "decorative-eyebrows",
+      "category": "typography",
+      "title": "Decorative eyebrow labels",
+      "severity": "low",
+      "codexPattern": "Small <small>/eyebrow labels above headings ('TEAM COMMAND', 'MARCH SNAPSHOT').",
+      "recommendation": "Remove eyebrow labels. Lead with a clear heading and let hierarchy come from size and weight.",
+      "betterDirection": "Just h1/h2 with proper hierarchy, no decorative eyebrow."
+    },
+    {
+      "id": "uppercase-label-overuse",
+      "category": "typography",
+      "title": "Uppercase label overuse",
+      "severity": "low",
+      "codexPattern": "Many muted labels use uppercase + letter-spacing.",
+      "recommendation": "Use normal sentence-case labels. Reserve uppercase for rare, intentional emphasis.",
+      "betterDirection": "Readable sentence-case labels with clear hierarchy."
+    },
+    {
+      "id": "fake-premium-copy",
+      "category": "copywriting",
+      "title": "Fake premium / generic SaaS copy",
+      "severity": "low",
+      "codexPattern": "Decorative headers like 'Operational clarity without the clutter'.",
+      "recommendation": "Cut decorative copy. Use plain, specific labels that describe the actual content.",
+      "betterDirection": "Honest, functional copy from the product voice."
+    },
+    {
+      "id": "formulaic-ai-copy",
+      "category": "copywriting",
+      "title": "Formulaic AI copy patterns",
+      "severity": "medium",
+      "codexPattern": "Visible UI copy uses throat-clearing openers, rhetorical setup, binary contrast, or generic business phrasing.",
+      "recommendation": "Replace formulaic phrasing with direct, product-specific copy. State the value without setup, fake drama, or meta-commentary.",
+      "betterDirection": "Plain product copy: specific noun, specific action, concrete outcome."
+    },
+    {
+      "id": "ai-slop-phrase-tells",
+      "category": "copywriting",
+      "title": "AI-slop phrase tells",
+      "severity": "medium",
+      "codexPattern": "Visible copy uses common generated phrases, generic sentence openers, or a cluster of high-probability AI words.",
+      "recommendation": "Replace AI-slop phrasing with concrete product language: specific nouns, specific actions, and real context.",
+      "betterDirection": "Direct, grounded copy that sounds like this product and this team."
+    },
+    {
+      "id": "ai-punctuation-tells",
+      "category": "copywriting",
+      "title": "AI punctuation tells",
+      "severity": "low",
+      "codexPattern": "Copy overuses em dashes, exclamation marks, or ellipses as a generated-writing rhythm.",
+      "recommendation": "Reduce punctuation theatrics. Use commas, periods, or sentence structure, and let the words carry emphasis.",
+      "betterDirection": "Cleaner punctuation with a more natural, less generated rhythm."
+    },
+    {
+      "id": "default-font-stack-template",
+      "category": "typography",
+      "title": "Default one-font template stack",
+      "severity": "low",
+      "codexPattern": "The page relies on one familiar generated-UI font stack, usually Inter/system/Roboto, without a distinct display/body role.",
+      "recommendation": "Define a deliberate type system: keep the body font if it works, but add a distinct display/wordmark role or stronger scale where the brand needs it.",
+      "betterDirection": "Typography has named roles and hierarchy instead of one default stack everywhere."
+    },
+    {
+      "id": "emoji-iconography",
+      "category": "iconography",
+      "title": "Emoji used as UI icons",
+      "severity": "medium",
+      "codexPattern": "Feature cards, headings, buttons, or lists use emoji as decorative icons.",
+      "recommendation": "Replace decorative emoji with a real icon set, product-specific visuals, or plain text. Keep emoji only when it is part of the brand voice.",
+      "betterDirection": "Consistent icon system or no icon; content and hierarchy carry the section."
+    },
+    {
+      "id": "duplicate-cta-intent",
+      "category": "buttons",
+      "title": "Duplicate CTA intent",
+      "severity": "medium",
+      "codexPattern": "The same user action appears under several different CTA labels.",
+      "recommendation": "Pick one label per CTA intent and reuse it consistently across nav, section actions, and footer.",
+      "betterDirection": "One clear action vocabulary: one intent, one label, one visual priority."
+    },
+    {
+      "id": "cheap-section-meta-labels",
+      "category": "typography",
+      "title": "Decorative section-number labels",
+      "severity": "low",
+      "codexPattern": "Eyebrows use labels like 'SECTION 01', 'QUESTION 05', or '00 / INDEX'.",
+      "recommendation": "Remove section-number/meta labels. Use a plain topic heading, or let the headline carry the section by itself.",
+      "betterDirection": "Specific section titles instead of decorative numbering."
+    },
+    {
+      "id": "centered-stack-default",
+      "category": "layout",
+      "title": "Over-centered default composition",
+      "severity": "medium",
+      "codexPattern": "The block relies on centered text, centered containers, and symmetrical stacking by default.",
+      "recommendation": "Break the default symmetry: left-align the section header, use a split layout, or create one asymmetric focal area.",
+      "betterDirection": "Intentional alignment and asymmetry driven by the content, not automatic centering."
+    },
+    {
+      "id": "mobile-viewport-height-risk",
+      "category": "layout",
+      "title": "Mobile viewport height risk",
+      "severity": "medium",
+      "codexPattern": "Sections use `h-screen`, `min-h-screen`, or `height: 100vh` for full-height layouts.",
+      "recommendation": "Use responsive `min-height` with `100dvh`/safe-area handling and verify that key content is visible on mobile.",
+      "betterDirection": "Stable viewport sizing that works with mobile browser UI."
+    },
+    {
+      "id": "pure-black-surface",
+      "category": "color",
+      "title": "Pure black surface",
+      "severity": "low",
+      "codexPattern": "Dark sections use pure `#000`, `rgb(0,0,0)`, or `bg-black` as the main surface.",
+      "recommendation": "Replace pure black surfaces with off-black or tinted dark neutrals such as charcoal, zinc, or brand-tinted near-black.",
+      "betterDirection": "Dark surfaces are calibrated, not default black."
+    },
+    {
+      "id": "placeholder-dead-links",
+      "category": "navigation",
+      "title": "Placeholder / dead links",
+      "severity": "medium",
+      "codexPattern": "Links or CTAs point to `#`, `javascript:void(0)`, or other placeholder destinations.",
+      "recommendation": "Connect links to real destinations. If a destination is not ready, disable the control visually and explain the unavailable state.",
+      "betterDirection": "Every visible action either works or is clearly unavailable."
+    },
+    {
+      "id": "missing-image-alt",
+      "category": "accessibility",
+      "title": "Image alt text is missing or generic",
+      "severity": "high",
+      "codexPattern": "Meaningful images have no `alt`, empty `alt`, or generic labels like `alt=\\",
+      "recommendation": "Add useful alt text for meaningful images. Use empty alt only for truly decorative images.",
+      "betterDirection": "Images have intentional accessible descriptions or are explicitly decorative."
+    },
+    {
+      "id": "arbitrary-z-index",
+      "category": "layout",
+      "title": "Arbitrary z-index values",
+      "severity": "medium",
+      "codexPattern": "The UI uses `z-index: 9999`, `z-[9999]`, or other arbitrary layering values.",
+      "recommendation": "Replace arbitrary z-index values with a small layering scale for nav, popover, modal, toast, and overlay.",
+      "betterDirection": "Layering is systematic and documented, not a pile of emergency values."
+    },
+    {
+      "id": "clipped-overlay-container",
+      "category": "layout",
+      "title": "Overlay can be clipped by overflow container",
+      "severity": "high",
+      "codexPattern": "Dropdowns, tooltips, menus, popovers, or modals are positioned inside an `overflow: hidden/auto/clip` container.",
+      "recommendation": "Render overlays in a portal, use `position: fixed`, native popover/dialog primitives, or let the containing overflow be visible.",
+      "betterDirection": "Interactive layers escape clipping containers and follow a deliberate z-index scale."
+    },
+    {
+      "id": "overwide-paragraph-measure",
+      "category": "typography",
+      "title": "Paragraph measure is too wide",
+      "severity": "low",
+      "codexPattern": "Long body copy spans a very wide container instead of being constrained to a readable measure.",
+      "recommendation": "Limit long paragraphs to roughly 60-70 characters per line with `max-width: 65ch` or an equivalent layout constraint.",
+      "betterDirection": "Readable text measure with clear heading/body rhythm."
+    },
+    {
+      "id": "hero-inside-dashboard",
+      "category": "layout",
+      "title": "Hero block inside a dashboard",
+      "severity": "medium",
+      "codexPattern": "A full hero strip with decorative copy sits inside an internal/app UI.",
+      "recommendation": "Remove the hero. Start internal UIs with the actual working content and a simple header.",
+      "betterDirection": "Standard app header, then real content — no hero inside dashboards."
+    },
+    {
+      "id": "hero-missing-clear-headline",
+      "category": "copywriting",
+      "title": "Hero lacks a clear headline",
+      "severity": "high",
+      "codexPattern": "The first viewport has no readable, concise headline that explains the product or offer.",
+      "recommendation": "Lead with one concise, specific headline that communicates the product value in under two seconds.",
+      "betterDirection": "A clear H1/value proposition first, then supporting copy and CTA."
+    },
+    {
+      "id": "hero-supporting-copy-too-long",
+      "category": "copywriting",
+      "title": "Hero supporting copy is too long",
+      "severity": "medium",
+      "codexPattern": "The hero uses a long paragraph or multiple text blocks before the primary action.",
+      "recommendation": "Compress hero supporting copy to one short paragraph, ideally under 25 words.",
+      "betterDirection": "Short value clarification that points toward the CTA."
+    },
+    {
+      "id": "hero-missing-primary-cta",
+      "category": "buttons",
+      "title": "Hero has no primary CTA",
+      "severity": "high",
+      "codexPattern": "The hero introduces the product but does not provide a clear next action above the fold.",
+      "recommendation": "Add one obvious primary CTA aligned with the most predictable user action.",
+      "betterDirection": "One clear primary action above the fold, with optional subtle secondary action."
+    },
+    {
+      "id": "hero-competing-ctas",
+      "category": "buttons",
+      "title": "Hero has competing CTAs",
+      "severity": "medium",
+      "codexPattern": "The hero presents several actions with similar visual weight.",
+      "recommendation": "Keep one dominant primary CTA and at most one quieter secondary CTA.",
+      "betterDirection": "Primary CTA is visually strongest; secondary action is text/link or low-emphasis."
+    },
+    {
+      "id": "tiny-touch-targets",
+      "category": "accessibility",
+      "title": "Tiny touch targets",
+      "severity": "high",
+      "codexPattern": "Buttons, links, or icon controls are smaller than a comfortable 44x44px tap area.",
+      "recommendation": "Increase interactive controls to at least 44x44px, or wrap small icons in a larger hit area with adequate spacing.",
+      "betterDirection": "Comfortable tap targets with visible spacing between adjacent actions."
+    },
+    {
+      "id": "icon-button-missing-label",
+      "category": "accessibility",
+      "title": "Icon-only button lacks accessible name",
+      "severity": "high",
+      "codexPattern": "An icon-only button or link has no visible text, aria-label, title, or labelled-by relationship.",
+      "recommendation": "Add a concise accessible name with `aria-label`, visible text, or an associated label for every icon-only control.",
+      "betterDirection": "Every control has a clear visual purpose and a programmatic accessible name."
+    },
+    {
+      "id": "weak-primary-action",
+      "category": "buttons",
+      "title": "Weak primary action",
+      "severity": "medium",
+      "codexPattern": "The block has no dominant action, or several actions have the same visual weight.",
+      "recommendation": "Make one action visually primary and move competing actions to secondary/link treatment.",
+      "betterDirection": "One clear primary button near the decision point; secondary actions are quieter."
+    },
+    {
+      "id": "hero-missing-relevant-visual",
+      "category": "layout",
+      "title": "Hero visual is missing or not product-relevant",
+      "severity": "medium",
+      "codexPattern": "The hero has no meaningful product visual, or the visual appears decorative and disconnected.",
+      "recommendation": "Use a relevant product screenshot, demo, real image, proof panel, or remove the visual if it adds no meaning.",
+      "betterDirection": "Visual proof that reinforces the headline and clarifies the offer."
+    },
+    {
+      "id": "redrawn-ui-chrome",
+      "category": "layout",
+      "title": "Re-drawn UI chrome",
+      "severity": "medium",
+      "codexPattern": "Product previews are wrapped in fake browser bars, phone frames, code windows, traffic-light dots, or IDE chrome.",
+      "recommendation": "Remove fake chrome. Show the real product view, a real screenshot with a simple hairline border, or a plain content panel.",
+      "betterDirection": "Product content carries the preview; browser/device chrome is real or absent."
+    },
+    {
+      "id": "decorative-repeating-stripes",
+      "category": "layout",
+      "title": "Decorative repeating stripes",
+      "severity": "low",
+      "codexPattern": "Section or body backgrounds use repeating linear gradients as decorative striping.",
+      "recommendation": "Remove the stripes unless the surface is a real chart, measurement, print, map, or branded texture. Use content structure, imagery, or a plain surface instead.",
+      "betterDirection": "Surface treatment has a product or brand reason; no decorative filler stripes."
+    },
+    {
+      "id": "decorative-grid-background",
+      "category": "layout",
+      "title": "Decorative grid-line background",
+      "severity": "low",
+      "codexPattern": "A two-axis CSS grid is drawn with linear-gradient hairlines behind ordinary content.",
+      "recommendation": "Reserve grid backgrounds for actual canvases, maps, blueprints, editors, or measurement tools. Otherwise use product structure or a plain surface.",
+      "betterDirection": "Grid visuals appear only when the UI is genuinely spatial, technical, or canvas-based."
+    },
+    {
+      "id": "hero-missing-trust-support",
+      "category": "copywriting",
+      "title": "Hero lacks trust support",
+      "severity": "low",
+      "codexPattern": "The hero asks for a conversion without nearby proof, reassurance, or credibility signal.",
+      "recommendation": "Add concise trust support near the CTA only when real proof exists: logos, metrics, testimonial, or reassurance.",
+      "betterDirection": "Small proof or reassurance that supports the CTA without cluttering the hero."
+    },
+    {
+      "id": "hero-poor-scan-flow",
+      "category": "layout",
+      "title": "Hero scan flow is unclear",
+      "severity": "medium",
+      "codexPattern": "Hero elements do not form a clear headline → copy → CTA → proof/visual reading path.",
+      "recommendation": "Reorder and align the hero around a clear scan path: headline, supporting copy, primary CTA, then proof/visual.",
+      "betterDirection": "One obvious visual path from value proposition to action."
+    },
+    {
+      "id": "hero-performance-heavy-visual",
+      "category": "layout",
+      "title": "Hero visual may be performance-heavy",
+      "severity": "medium",
+      "codexPattern": "The first viewport depends on a heavy background/video/animation before core content is useful.",
+      "recommendation": "Prioritize immediate headline, supporting copy, and CTA; keep video/animation optimized and non-blocking.",
+      "betterDirection": "Core hero content loads first; media supports rather than blocks comprehension."
+    },
+    {
+      "id": "metric-card-grid-default",
+      "category": "cards",
+      "title": "Metric/KPI card grid as default",
+      "severity": "medium",
+      "codexPattern": "A 3–4 column grid of KPI metric cards is the first dashboard instinct.",
+      "recommendation": "Only use metric tiles when the numbers matter. Prioritize the primary metric and de-emphasize the rest.",
+      "betterDirection": "Lead with the metric that matters; avoid a default uniform KPI grid."
+    },
+    {
+      "id": "fake-charts",
+      "category": "charts",
+      "title": "Fake charts / metrics",
+      "severity": "medium",
+      "codexPattern": "Donut charts and canvas graphs that exist only to fill space.",
+      "recommendation": "Remove charts that carry no real data. Show real numbers or nothing.",
+      "betterDirection": "Only chart real, product-specific data."
+    },
+    {
+      "id": "placeholder-proof-copy",
+      "category": "copywriting",
+      "title": "Placeholder proof or stock metrics",
+      "severity": "medium",
+      "codexPattern": "Proof areas use placeholder names, lorem ipsum, Acme/Jane Doe examples, or stock metrics like '10x faster' and 'trusted by 50,000+ teams'.",
+      "recommendation": "Use only verified proof. Replace stock names/metrics with real data, mark metrics as pending, or remove the proof slot.",
+      "betterDirection": "Credibility content is factual, sourced, or intentionally left blank."
+    },
+    {
+      "id": "placeholder-only-form-labels",
+      "category": "forms",
+      "title": "Placeholder-only form fields",
+      "severity": "high",
+      "codexPattern": "Inputs rely on placeholder text instead of visible or programmatic labels.",
+      "recommendation": "Give every field a visible label or a clear programmatic label. Keep placeholders only as examples, not as the field name.",
+      "betterDirection": "Labeled inputs with visible error, focus, loading, and success states."
+    },
+    {
+      "id": "left-border-accent-cards",
+      "category": "cards",
+      "title": "Left-border accent cards",
+      "severity": "medium",
+      "codexPattern": "Repeated cards use a colored left border as the main visual accent.",
+      "recommendation": "Remove the decorative accent strip. Use hierarchy, grouping, background contrast, or one intentionally featured card instead.",
+      "betterDirection": "Cards have purposeful hierarchy rather than repeated colored rails."
+    },
+    {
+      "id": "blue-cyan-ai-dashboard",
+      "category": "color",
+      "title": "Random blue/cyan AI-dashboard colors",
+      "severity": "medium",
+      "codexPattern": "'Premium dark mode' = blue-black gradients plus cyan accents.",
+      "recommendation": "Use the project's real palette or a calm, dark muted scheme. Avoid defaulting to blue/cyan.",
+      "betterDirection": "Calm, dark muted colors from the project palette, not generic blue/cyan."
+    },
+    {
+      "id": "gray-text-on-colored-background",
+      "category": "color",
+      "title": "Gray text on colored background",
+      "severity": "medium",
+      "codexPattern": "Muted gray text sits on a colored, tinted, or saturated surface.",
+      "recommendation": "Use a darker shade of the background hue, a calibrated ink color, or white/near-white with enough contrast.",
+      "betterDirection": "Secondary text is color-aware and readable, not generic gray."
+    },
+    {
+      "id": "overpadded-layout",
+      "category": "spacing",
+      "title": "Overpadded layout",
+      "severity": "low",
+      "codexPattern": "Sections and cards use very large padding (48px+) to look airy/expensive.",
+      "recommendation": "Use a consistent 16/24/32px spacing scale. Reserve large padding for genuinely large containers.",
+      "betterDirection": "Standard section padding (20–30px); no dead space for effect."
+    },
+    {
+      "id": "text-heavy-block",
+      "category": "copywriting",
+      "title": "Text-heavy block",
+      "severity": "medium",
+      "codexPattern": "Large paragraphs or repeated explanatory copy carry the section instead of scannable structure.",
+      "recommendation": "Reduce copy density by grouping text into a clear heading, short body, bullets, or cards with visible hierarchy.",
+      "betterDirection": "Scannable structure: concise heading, short support, grouped details."
+    },
+    {
+      "id": "weak-hierarchy",
+      "category": "typography",
+      "title": "Weak visual hierarchy",
+      "severity": "medium",
+      "codexPattern": "Headings, labels, and body text are nearly the same size/weight.",
+      "recommendation": "Establish a clear type scale. Make the primary element noticeably larger/heavier.",
+      "betterDirection": "Strong h1 → h2 → body contrast; one clear focal point."
+    },
+    {
+      "id": "monotonous-section-rhythm",
+      "category": "layout",
+      "title": "Monotonous section rhythm",
+      "severity": "medium",
+      "codexPattern": "Everything has the same size, density, and emphasis, so the section has no focal point.",
+      "recommendation": "Introduce a clear focal point: make the most important item larger or more prominent and group supporting content around it.",
+      "betterDirection": "One dominant element, supporting groups, and intentional spacing rhythm."
+    },
+    {
+      "id": "repetitive-equal-cards",
+      "category": "cards",
+      "title": "Repetitive equal cards",
+      "severity": "medium",
+      "codexPattern": "Three or more cards share identical size and visual weight.",
+      "recommendation": "Create hierarchy: feature one card and reduce the emphasis of supporting cards.",
+      "betterDirection": "Make one card visually dominant; vary size or emphasis."
+    },
+    {
+      "id": "icon-tile-feature-cards",
+      "category": "cards",
+      "title": "Default icon-tile feature cards",
+      "severity": "medium",
+      "codexPattern": "A feature section uses three or more equal cards with a rounded icon tile above a heading and short body copy.",
+      "recommendation": "Break the feature-card template: make one feature dominant, move icons inline, group features by workflow, or switch to a bento/stacked structure.",
+      "betterDirection": "Feature hierarchy follows product value or workflow, not a cloned card pattern."
+    },
+    {
+      "id": "pricing-plan-weak-emphasis",
+      "category": "layout",
+      "title": "Pricing plans lack decision hierarchy",
+      "severity": "medium",
+      "codexPattern": "Pricing cards are presented as identical columns with no recommended plan or comparison rhythm.",
+      "recommendation": "Make one recommended plan visually dominant, keep secondary plans quieter, and align price, benefits, and CTA rows.",
+      "betterDirection": "Pricing comparison with one clear recommended option and fast horizontal scanning."
+    },
+    {
+      "id": "nested-panel-overload",
+      "category": "panels",
+      "title": "Too many nested panels",
+      "severity": "medium",
+      "codexPattern": "Multiple nested panel types (panel, panel-2, rail-panel, table-panel).",
+      "recommendation": "Flatten the structure. Use spacing and a single level of containers instead of nested shells.",
+      "betterDirection": "One level of panels; separate content with spacing, not nested boxes."
+    },
+    {
+      "id": "decorative-badges",
+      "category": "badges",
+      "title": "Decorative badges",
+      "severity": "low",
+      "codexPattern": "Badges/tags on every row and nav item that do not communicate state.",
+      "recommendation": "Keep badges only where they convey real, changing state. Remove decorative ones.",
+      "betterDirection": "Functional badges only; plain text otherwise."
+    },
+    {
+      "id": "decorative-announcement-bubble",
+      "category": "badges",
+      "title": "Decorative announcement bubble",
+      "severity": "medium",
+      "codexPattern": "A large pastel pill/bubble with a decorative dot and short availability copy like 'Coming soon' or 'Soon in Astana'.",
+      "recommendation": "Remove the oversized announcement bubble. Use plain text, a compact functional badge, or a real status row only if the availability/location state matters.",
+      "betterDirection": "Short availability copy set in normal hierarchy; no decorative dot or inflated pastel pill."
+    },
+    {
+      "id": "transform-hover-overuse",
+      "category": "motion",
+      "title": "Decorative hover transforms",
+      "severity": "low",
+      "codexPattern": "Hover effects translate/scale elements (e.g. translateX(2px) on nav links).",
+      "recommendation": "Use simple opacity/color hover changes (100–200ms). Avoid transform animations.",
+      "betterDirection": "Subtle color/opacity hover states, no transforms."
+    },
+    {
+      "id": "unbounded-sluggish-motion",
+      "category": "motion",
+      "title": "Unbounded or sluggish UI motion",
+      "severity": "medium",
+      "codexPattern": "UI transitions use `transition: all`, `ease-in`, or long durations on ordinary interface elements.",
+      "recommendation": "Specify exact animated properties, use responsive ease-out/custom curves, and keep routine UI motion under 300ms.",
+      "betterDirection": "Purposeful 125-250ms transitions on transform/opacity/color only."
+    },
+    {
+      "id": "bounce-elastic-motion",
+      "category": "motion",
+      "title": "Bounce or elastic UI motion",
+      "severity": "medium",
+      "codexPattern": "Routine UI motion uses bounce, elastic, wobble, jiggle, or springy named animations/easing.",
+      "recommendation": "Use smooth ease-out-quart/quint/expo style curves for UI motion. Reserve playful bounce only for rare, brand-appropriate moments.",
+      "betterDirection": "Confident deceleration, not novelty bounce."
+    },
+    {
+      "id": "scale-zero-entrance",
+      "category": "motion",
+      "title": "Scale-zero entrance",
+      "severity": "medium",
+      "codexPattern": "Elements enter from `scale(0)` or Tailwind `scale-0` before becoming visible.",
+      "recommendation": "Start entrances from `scale(0.9–0.97)` plus opacity instead of `scale(0)`. Keep the movement subtle and quick.",
+      "betterDirection": "Physical entrance: small scale offset, opacity, and responsive ease-out timing."
+    },
+    {
+      "id": "trigger-origin-missing",
+      "category": "motion",
+      "title": "Trigger-anchored overlay uses center origin",
+      "severity": "medium",
+      "codexPattern": "Popovers, dropdowns, menus, or tooltips scale from `transform-origin: center` instead of their trigger.",
+      "recommendation": "Use the trigger-aware transform origin from the component library, such as Radix `--radix-popover-content-transform-origin`, or an equivalent top/bottom/left/right origin. Keep modals centered.",
+      "betterDirection": "Anchored surfaces scale from the element that opened them; modals remain centered."
+    },
+    {
+      "id": "noninterruptible-rapid-keyframes",
+      "category": "motion",
+      "title": "Non-interruptible keyframes on rapid UI",
+      "severity": "medium",
+      "codexPattern": "Toasts, toggles, popovers, accordions, or similar rapidly-triggered components use keyframe animations that restart from zero.",
+      "recommendation": "Prefer interruptible CSS transitions, `@starting-style`, WAAPI, or springs that retarget from the current state.",
+      "betterDirection": "Rapid UI motion can reverse or retarget smoothly instead of replaying a canned keyframe."
+    },
+    {
+      "id": "ungated-hover-motion",
+      "category": "motion",
+      "title": "Hover motion is not pointer-gated",
+      "severity": "low",
+      "codexPattern": "Hover transform/scale/translate motion is defined globally without a fine-pointer hover media query.",
+      "recommendation": "Gate hover motion behind `@media (hover: hover) and (pointer: fine)`, and keep touch feedback explicit.",
+      "betterDirection": "Hover motion only runs on devices with real hover; touch gets stable tap states."
+    },
+    {
+      "id": "layout-property-animation",
+      "category": "motion",
+      "title": "Layout-property animation",
+      "severity": "medium",
+      "codexPattern": "Animations or transitions target width, height, margin, padding, top, left, right, or bottom.",
+      "recommendation": "Move motion to transform and opacity. Use translate/scale/clip-path for movement and reveal instead of layout properties.",
+      "betterDirection": "GPU-friendly transform/opacity motion with stable layout."
+    },
+    {
+      "id": "motion-reduced-accessibility-missing",
+      "category": "motion",
+      "title": "Motion lacks reduced-motion fallback",
+      "severity": "medium",
+      "codexPattern": "Transform/position animation is present without a `prefers-reduced-motion` fallback.",
+      "recommendation": "Add a reduced-motion path: keep helpful opacity/color transitions, but remove or shorten transform/position movement.",
+      "betterDirection": "Motion respects `prefers-reduced-motion` and keeps the interface understandable."
+    },
+    {
+      "id": "inconsistent-spacing",
+      "category": "spacing",
+      "title": "Inconsistent / poor spacing",
+      "severity": "low",
+      "codexPattern": "Random gaps and padding values that do not follow a scale.",
+      "recommendation": "Adopt a consistent 4/8/12/16/24/32px spacing scale across the section.",
+      "betterDirection": "Consistent spacing scale; predictable rhythm."
+    },
+    {
+      "id": "sidebar-floating-shell",
+      "category": "navigation",
+      "title": "Floating sidebar shell",
+      "severity": "low",
+      "codexPattern": "A detached sidebar with rounded outer corners, margin, and shadow.",
+      "recommendation": "Use a normal fixed sidebar (240–260px, solid background, simple border-right, square outer corners).",
+      "betterDirection": "Solid edge-to-edge sidebar with a border-right, not a floating card."
+    },
+    {
+      "id": "ai-nav-footer-template",
+      "category": "navigation",
+      "title": "Generic AI navigation/footer template",
+      "severity": "medium",
+      "codexPattern": "Navigation uses the default 'Features / Pricing / Docs / Blog / About' row, or footer uses Product / Company / Resources / Legal columns without real IA.",
+      "recommendation": "Rebuild navigation/footer around the actual information architecture. Keep only real destinations and choose a structure that matches the product type.",
+      "betterDirection": "Navigation/footer labels and grouping reflect this product, not a stock SaaS sitemap."
+    },
+    {
+      "id": "decorative-status-dots",
+      "category": "badges",
+      "title": "Decorative status dots",
+      "severity": "low",
+      "codexPattern": "Colored ::before dots / 'live pulse' indicators used decoratively.",
+      "recommendation": "Use status indicators only for real status. Drop decorative pulses.",
+      "betterDirection": "Plain text or one functional indicator; no decorative dots."
+    },
+    {
+      "id": "too-many-muted-labels",
+      "category": "typography",
+      "title": "Too many muted labels",
+      "severity": "low",
+      "codexPattern": "Overuse of muted gray-blue text that weakens contrast and clarity.",
+      "recommendation": "Limit muted text. Keep primary content at full contrast and readable.",
+      "betterDirection": "Strong contrast for content; muted only for true secondary info."
+    },
+    {
+      "id": "random-glass-panels",
+      "category": "panels",
+      "title": "Random glass panels",
+      "severity": "low",
+      "codexPattern": "Frosted/blur-haze panels scattered as decoration with no overlay purpose.",
+      "recommendation": "Remove decorative glass panels. Use solid surfaces and structure instead.",
+      "betterDirection": "Solid, honest panels; no decorative glass."
+    }
+  ]
+}

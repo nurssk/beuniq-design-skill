@@ -1,0 +1,2113 @@
+{
+  "source": "SwipeUI extension/src/analysis/landingCopyCatalog.ts",
+  "count": 301,
+  "rules": [
+    {
+      "id": "LP-HERO-001",
+      "category": "hero_copy",
+      "name": "Vague transformation claim",
+      "weight": 4,
+      "description": "H1 promises transformation but does not identify product type, target audience, mechanism, or output."
+    },
+    {
+      "id": "LP-HERO-002",
+      "category": "hero_copy",
+      "name": "Unlock headline",
+      "weight": 3,
+      "description": "H1 contains unlock, unleash, or semantic equivalents."
+    },
+    {
+      "id": "LP-HERO-003",
+      "category": "hero_copy",
+      "name": "Elevate headline",
+      "weight": 3,
+      "description": "H1 contains elevate your, take your ... to the next level, or similar."
+    },
+    {
+      "id": "LP-HERO-004",
+      "category": "hero_copy",
+      "name": "Reimagine headline",
+      "weight": 3,
+      "description": "H1 uses reimagine, reinvent, transform, or revolutionize without concrete detail."
+    },
+    {
+      "id": "LP-HERO-005",
+      "category": "hero_copy",
+      "name": "Future-oriented cliche",
+      "weight": 3,
+      "description": "H1 includes the future of, built for the future, or future-ready."
+    },
+    {
+      "id": "LP-HERO-006",
+      "category": "hero_copy",
+      "name": "Smarter promise",
+      "weight": 3,
+      "description": "H1 uses work smarter, build smarter, sell smarter, or similar generic comparative language."
+    },
+    {
+      "id": "LP-HERO-007",
+      "category": "hero_copy",
+      "name": "Not harder cliche",
+      "weight": 3,
+      "description": "H1 or subheadline contains not harder."
+    },
+    {
+      "id": "LP-HERO-008",
+      "category": "hero_copy",
+      "name": "Outcome without mechanism",
+      "weight": 4,
+      "description": "H1 states a desired result but gives no indication of how the product achieves it."
+    },
+    {
+      "id": "LP-HERO-009",
+      "category": "specificity",
+      "name": "Product noun missing",
+      "weight": 5,
+      "description": "H1 and first paragraph do not clearly state the product type (app, platform, service, marketplace, tool, extension, course)."
+    },
+    {
+      "id": "LP-HERO-010",
+      "category": "specificity",
+      "name": "Audience missing",
+      "weight": 4,
+      "description": "H1 and subheadline do not identify who the product is for."
+    },
+    {
+      "id": "LP-HERO-011",
+      "category": "hero_copy",
+      "name": "Generic imperative structure",
+      "weight": 2,
+      "description": "H1 begins with a broad verb such as Create, Build, Grow, Scale, Transform, Discover, or Experience."
+    },
+    {
+      "id": "LP-HERO-012",
+      "category": "hero_copy",
+      "name": "Three-part slogan",
+      "weight": 2,
+      "description": "H1 uses three short benefits separated by commas, periods, or line breaks."
+    },
+    {
+      "id": "LP-HERO-013",
+      "category": "hero_copy",
+      "name": "Contrived contrast",
+      "weight": 3,
+      "description": "H1 follows Do X, not Y; More X, less Y; or From X to Y without product-specific meaning."
+    },
+    {
+      "id": "LP-HERO-014",
+      "category": "hero_copy",
+      "name": "All-in-one claim",
+      "weight": 4,
+      "description": "H1 or subheadline describes the product as an all-in-one platform, one platform, or everything in one place."
+    },
+    {
+      "id": "LP-HERO-015",
+      "category": "hero_copy",
+      "name": "One place cliche",
+      "weight": 4,
+      "description": "Copy contains everything you need in one place or semantic equivalent."
+    },
+    {
+      "id": "LP-HERO-016",
+      "category": "hero_copy",
+      "name": "Made simple cliche",
+      "weight": 3,
+      "description": "H1 ends with made simple, simplified, or without the complexity."
+    },
+    {
+      "id": "LP-HERO-017",
+      "category": "hero_copy",
+      "name": "Effortless promise",
+      "weight": 3,
+      "description": "H1 or subheadline claims the product is effortless without explaining the reduced work."
+    },
+    {
+      "id": "LP-HERO-018",
+      "category": "hero_copy",
+      "name": "Seamless promise",
+      "weight": 2,
+      "description": "H1 or subheadline uses seamless or seamlessly without describing the workflow."
+    },
+    {
+      "id": "LP-HERO-019",
+      "category": "hero_copy",
+      "name": "Generic emotional aspiration",
+      "weight": 3,
+      "description": "H1 promises confidence, freedom, growth, or possibility without tying it to a concrete task."
+    },
+    {
+      "id": "LP-HERO-020",
+      "category": "hero_copy",
+      "name": "Undefined superlative",
+      "weight": 4,
+      "description": "H1 uses best, ultimate, most powerful, leading, or world-class without evidence."
+    },
+    {
+      "id": "LP-HERO-021",
+      "category": "hero_copy",
+      "name": "Generic AI mention",
+      "weight": 4,
+      "description": "H1 uses AI-powered, powered by AI, or with AI without naming the AI capability."
+    },
+    {
+      "id": "LP-HERO-022",
+      "category": "hero_copy",
+      "name": "Magic framing",
+      "weight": 3,
+      "description": "H1 or subheadline uses magic, magically, in seconds, or at the click of a button."
+    },
+    {
+      "id": "LP-HERO-023",
+      "category": "hero_copy",
+      "name": "Excessively short slogan",
+      "weight": 2,
+      "description": "H1 is fewer than five words and cannot independently explain the value proposition."
+    },
+    {
+      "id": "LP-HERO-024",
+      "category": "hero_copy",
+      "name": "Excessively broad scope",
+      "weight": 4,
+      "description": "H1 could plausibly describe more than five unrelated product categories."
+    },
+    {
+      "id": "LP-HERO-025",
+      "category": "hero_copy",
+      "name": "Empty brand philosophy",
+      "weight": 3,
+      "description": "H1 communicates a brand attitude but not the product value."
+    },
+    {
+      "id": "LP-HERO-026",
+      "category": "hero_copy",
+      "name": "Generic better way claim",
+      "weight": 3,
+      "description": "Copy states a better way to... without explaining what is different."
+    },
+    {
+      "id": "LP-HERO-027",
+      "category": "hero_copy",
+      "name": "Next generation wording",
+      "weight": 3,
+      "description": "H1 includes next-gen, next generation, or equivalent hype."
+    },
+    {
+      "id": "LP-HERO-028",
+      "category": "hero_copy",
+      "name": "Game-changing wording",
+      "weight": 3,
+      "description": "Hero uses game-changing, change the game, or redefine."
+    },
+    {
+      "id": "LP-HERO-029",
+      "category": "hero_copy",
+      "name": "Abstract noun density",
+      "weight": 3,
+      "description": "Hero headline contains several abstract nouns but few concrete actions or objects."
+    },
+    {
+      "id": "LP-HERO-030",
+      "category": "hero_copy",
+      "name": "Headline interchangeable across industries",
+      "weight": 5,
+      "description": "Replacing the brand name would let the H1 fit SaaS, fintech, education, or ecommerce equally well."
+    },
+    {
+      "id": "LP-SUB-001",
+      "category": "subheadline",
+      "name": "Generic supporting sentence",
+      "weight": 4,
+      "description": "Subheadline restates the headline without adding mechanism, audience, or proof."
+    },
+    {
+      "id": "LP-SUB-002",
+      "category": "subheadline",
+      "name": "Vague benefits list",
+      "weight": 3,
+      "description": "Subheadline lists benefits such as faster, easier, smarter, or better without concrete detail."
+    },
+    {
+      "id": "LP-SUB-003",
+      "category": "subheadline",
+      "name": "Three-adjective formula",
+      "weight": 2,
+      "description": "Sentence uses three positive adjectives, often in a list."
+    },
+    {
+      "id": "LP-SUB-004",
+      "category": "subheadline",
+      "name": "Save time and money cliche",
+      "weight": 3,
+      "description": "Copy uses this phrase without quantification or context."
+    },
+    {
+      "id": "LP-SUB-005",
+      "category": "subheadline",
+      "name": "Focus on what matters cliche",
+      "weight": 3,
+      "description": "Copy contains focus on what matters, focus on what you do best, or similar."
+    },
+    {
+      "id": "LP-SUB-006",
+      "category": "subheadline",
+      "name": "From X to Y range",
+      "weight": 2,
+      "description": "Subheadline lists a broad range of use cases to imply universality."
+    },
+    {
+      "id": "LP-SUB-007",
+      "category": "subheadline",
+      "name": "Whether you template",
+      "weight": 3,
+      "description": "Subheadline begins with or contains whether you are... followed by several audience types."
+    },
+    {
+      "id": "LP-SUB-008",
+      "category": "subheadline",
+      "name": "Audience overbreadth",
+      "weight": 3,
+      "description": "More than three distinct audience types are targeted in one sentence."
+    },
+    {
+      "id": "LP-SUB-009",
+      "category": "subheadline",
+      "name": "Benefit-only sentence",
+      "weight": 4,
+      "description": "Sentence contains outcomes but no product action or process."
+    },
+    {
+      "id": "LP-SUB-010",
+      "category": "subheadline",
+      "name": "Mechanism-only vagueness",
+      "weight": 4,
+      "description": "Copy says the product uses AI, automation, or data without explaining what it does."
+    },
+    {
+      "id": "LP-SUB-011",
+      "category": "subheadline",
+      "name": "Unverifiable speed claim",
+      "weight": 3,
+      "description": "Copy says in seconds, instantly, or faster than ever without baseline."
+    },
+    {
+      "id": "LP-SUB-012",
+      "category": "subheadline",
+      "name": "Unverifiable simplicity claim",
+      "weight": 3,
+      "description": "Copy says no complexity, no hassle, without the headaches, or zero friction."
+    },
+    {
+      "id": "LP-SUB-013",
+      "category": "subheadline",
+      "name": "Generic empowerment phrase",
+      "weight": 2,
+      "description": "empowers you to, helps you achieve, or enables teams to without specificity."
+    },
+    {
+      "id": "LP-SUB-014",
+      "category": "subheadline",
+      "name": "Passive abstraction",
+      "weight": 3,
+      "description": "High use of nouns such as innovation, efficiency, productivity, growth, or transformation."
+    },
+    {
+      "id": "LP-SUB-015",
+      "category": "subheadline",
+      "name": "No differentiated value",
+      "weight": 4,
+      "description": "Subheadline fails to say why the product is different from normal alternatives."
+    },
+    {
+      "id": "LP-SUB-016",
+      "category": "subheadline",
+      "name": "No concrete object",
+      "weight": 4,
+      "description": "Subheadline contains no named deliverable, output, artifact, transaction, or user action."
+    },
+    {
+      "id": "LP-SUB-017",
+      "category": "subheadline",
+      "name": "Empty trust wording",
+      "weight": 3,
+      "description": "Copy says trusted, secure, reliable, or proven without evidence."
+    },
+    {
+      "id": "LP-SUB-018",
+      "category": "subheadline",
+      "name": "Universal applicability claim",
+      "weight": 4,
+      "description": "Product is described as suitable for any team, every business, or everyone."
+    },
+    {
+      "id": "LP-SUB-019",
+      "category": "subheadline",
+      "name": "Feature pile-up",
+      "weight": 3,
+      "description": "Subheadline mentions four or more capabilities in one sentence."
+    },
+    {
+      "id": "LP-SUB-020",
+      "category": "subheadline",
+      "name": "Excessive em-dash structure",
+      "weight": 1,
+      "description": "Sentence uses an em dash to append a generic benefit explanation."
+    },
+    {
+      "id": "LP-BDG-001",
+      "category": "microcopy",
+      "name": "New badge",
+      "weight": 1,
+      "description": "Badge contains only New, Just launched, or Now available."
+    },
+    {
+      "id": "LP-BDG-002",
+      "category": "microcopy",
+      "name": "Powered by AI badge",
+      "weight": 3,
+      "description": "Small pill states AI-powered without explaining functionality."
+    },
+    {
+      "id": "LP-BDG-003",
+      "category": "microcopy",
+      "name": "Introducing badge",
+      "weight": 2,
+      "description": "Badge uses Introducing, Meet, or Say hello to."
+    },
+    {
+      "id": "LP-BDG-004",
+      "category": "microcopy",
+      "name": "Version 2.0 badge",
+      "weight": 2,
+      "description": "Version badge is used as marketing copy without meaningful release information."
+    },
+    {
+      "id": "LP-BDG-005",
+      "category": "microcopy",
+      "name": "Join thousands badge",
+      "weight": 4,
+      "description": "Eyebrow claims user volume without linked evidence."
+    },
+    {
+      "id": "LP-BDG-006",
+      "category": "microcopy",
+      "name": "Built for badge",
+      "weight": 2,
+      "description": "Badge states a broad audience category without product specificity."
+    },
+    {
+      "id": "LP-BDG-007",
+      "category": "microcopy",
+      "name": "Artificial urgency badge",
+      "weight": 3,
+      "description": "Limited access, Early access, Only X spots, or similar appears without support."
+    },
+    {
+      "id": "LP-BDG-008",
+      "category": "microcopy",
+      "name": "Generic status badge",
+      "weight": 4,
+      "description": "Coming soon, Launching soon, or Beta appears while page presents mature social proof."
+    },
+    {
+      "id": "LP-BDG-009",
+      "category": "microcopy",
+      "name": "Trend-label badge",
+      "weight": 3,
+      "description": "Badge contains Web3, AI-native, Next-gen, or another trend term as decoration."
+    },
+    {
+      "id": "LP-BDG-010",
+      "category": "microcopy",
+      "name": "Badge repeats heading",
+      "weight": 2,
+      "description": "Eyebrow text adds no information beyond the section heading."
+    },
+    {
+      "id": "LP-CTA-001",
+      "category": "cta",
+      "name": "Generic Get Started",
+      "weight": 2,
+      "description": "Primary CTA is exactly or semantically equivalent to Get Started."
+    },
+    {
+      "id": "LP-CTA-002",
+      "category": "cta",
+      "name": "Generic Learn More",
+      "weight": 2,
+      "description": "CTA uses Learn More without identifying what will be learned."
+    },
+    {
+      "id": "LP-CTA-003",
+      "category": "cta",
+      "name": "Generic Try Now",
+      "weight": 2,
+      "description": "CTA does not state the product action, cost, or next step."
+    },
+    {
+      "id": "LP-CTA-004",
+      "category": "cta",
+      "name": "Generic Explore",
+      "weight": 2,
+      "description": "CTA is Explore, Discover, or See more with no object."
+    },
+    {
+      "id": "LP-CTA-005",
+      "category": "cta",
+      "name": "Start for free without detail",
+      "weight": 2,
+      "description": "CTA does not explain trial duration, limitations, or signup requirements."
+    },
+    {
+      "id": "LP-CTA-006",
+      "category": "cta",
+      "name": "Book a demo without context",
+      "weight": 2,
+      "description": "CTA exists but page does not identify who the demo is for."
+    },
+    {
+      "id": "LP-CTA-007",
+      "category": "cta",
+      "name": "CTA destination ambiguity",
+      "weight": 4,
+      "description": "Label does not predict whether action opens signup, checkout, demo, waitlist, or contact form."
+    },
+    {
+      "id": "LP-CTA-008",
+      "category": "cta",
+      "name": "CTA label inconsistency",
+      "weight": 3,
+      "description": "Same destination uses different labels across the page."
+    },
+    {
+      "id": "LP-CTA-009",
+      "category": "cta",
+      "name": "Excessive CTA repetition",
+      "weight": 2,
+      "description": "Same CTA phrase appears three or more times."
+    },
+    {
+      "id": "LP-CTA-010",
+      "category": "cta",
+      "name": "Multiple competing primary CTAs",
+      "weight": 3,
+      "description": "Two or more actions are worded as equally primary in the hero."
+    },
+    {
+      "id": "LP-CTA-011",
+      "category": "cta",
+      "name": "Generic second CTA",
+      "weight": 2,
+      "description": "Secondary CTA uses See how it works, Watch demo, or Learn more without real content support."
+    },
+    {
+      "id": "LP-CTA-012",
+      "category": "cta",
+      "name": "Artificially low-friction phrase",
+      "weight": 2,
+      "description": "Supporting copy says No credit card required, No commitment, or Cancel anytime without relevant pricing context."
+    },
+    {
+      "id": "LP-CTA-013",
+      "category": "cta",
+      "name": "Imperative without value",
+      "weight": 2,
+      "description": "CTA is an action verb but does not communicate the immediate user benefit."
+    },
+    {
+      "id": "LP-CTA-014",
+      "category": "cta",
+      "name": "Overpromising CTA",
+      "weight": 4,
+      "description": "Button uses Transform my business, Unlock growth, or another exaggerated outcome."
+    },
+    {
+      "id": "LP-CTA-015",
+      "category": "cta",
+      "name": "Personal-pronoun manipulation",
+      "weight": 3,
+      "description": "CTA uses Start my journey, Grow my business, or similar emotional phrasing without product clarity."
+    },
+    {
+      "id": "LP-CTA-016",
+      "category": "cta",
+      "name": "Urgency CTA",
+      "weight": 3,
+      "description": "Claim your spot, Get access now, or Don't miss out appears without real scarcity."
+    },
+    {
+      "id": "LP-CTA-017",
+      "category": "cta",
+      "name": "Fake exclusivity",
+      "weight": 3,
+      "description": "CTA uses Get exclusive access when access is publicly available."
+    },
+    {
+      "id": "LP-CTA-018",
+      "category": "cta",
+      "name": "Unclear download CTA",
+      "weight": 3,
+      "description": "Button says Download now without platform, file type, or system requirements."
+    },
+    {
+      "id": "LP-CTA-019",
+      "category": "cta",
+      "name": "Generic app-store lead-in",
+      "weight": 2,
+      "description": "Copy says only Download the app without explaining what happens next."
+    },
+    {
+      "id": "LP-CTA-020",
+      "category": "cta",
+      "name": "CTA-benefit mismatch",
+      "weight": 4,
+      "description": "CTA promises a result not directly delivered by the next step."
+    },
+    {
+      "id": "LP-FTR-001",
+      "category": "feature_copy",
+      "name": "Powerful features heading",
+      "weight": 4,
+      "description": "Section heading contains Powerful features, Everything you need, or equivalent."
+    },
+    {
+      "id": "LP-FTR-002",
+      "category": "feature_copy",
+      "name": "Built to scale feature",
+      "weight": 3,
+      "description": "Feature title uses this phrase without operational detail."
+    },
+    {
+      "id": "LP-FTR-003",
+      "category": "feature_copy",
+      "name": "Lightning fast feature",
+      "weight": 3,
+      "description": "Speed claim appears without measured latency or workflow comparison."
+    },
+    {
+      "id": "LP-FTR-004",
+      "category": "feature_copy",
+      "name": "Secure by design feature",
+      "weight": 4,
+      "description": "Security claim appears without named controls, standards, or practices."
+    },
+    {
+      "id": "LP-FTR-005",
+      "category": "feature_copy",
+      "name": "Easy to use feature",
+      "weight": 3,
+      "description": "Feature title or description claims ease without identifying reduced steps or learning burden."
+    },
+    {
+      "id": "LP-FTR-006",
+      "category": "feature_copy",
+      "name": "Seamless integration feature",
+      "weight": 4,
+      "description": "Integration claim lacks named services or setup steps."
+    },
+    {
+      "id": "LP-FTR-007",
+      "category": "feature_copy",
+      "name": "Smart automation feature",
+      "weight": 4,
+      "description": "Copy does not identify what is automated, when, or under whose control."
+    },
+    {
+      "id": "LP-FTR-008",
+      "category": "feature_copy",
+      "name": "Real-time insights feature",
+      "weight": 4,
+      "description": "No data source, update interval, decision, or example is named."
+    },
+    {
+      "id": "LP-FTR-009",
+      "category": "feature_copy",
+      "name": "Advanced analytics feature",
+      "weight": 4,
+      "description": "Analytics feature is described without metrics, reports, or outputs."
+    },
+    {
+      "id": "LP-FTR-010",
+      "category": "feature_copy",
+      "name": "Personalized experience feature",
+      "weight": 4,
+      "description": "Copy does not explain what changes and based on which signals."
+    },
+    {
+      "id": "LP-FTR-011",
+      "category": "feature_copy",
+      "name": "One-click claim",
+      "weight": 3,
+      "description": "One-click language is used without identifying prerequisites or actual workflow."
+    },
+    {
+      "id": "LP-FTR-012",
+      "category": "feature_copy",
+      "name": "Feature title as adjective pair",
+      "weight": 3,
+      "description": "Repeated titles such as Simple & Powerful, Fast & Secure, Flexible & Scalable."
+    },
+    {
+      "id": "LP-FTR-013",
+      "category": "feature_copy",
+      "name": "Equal-length feature descriptions",
+      "weight": 4,
+      "description": "Three or more sibling descriptions have unusually similar word count and sentence structure."
+    },
+    {
+      "id": "LP-FTR-014",
+      "category": "feature_copy",
+      "name": "Repeated grammatical template",
+      "weight": 4,
+      "description": "Features repeatedly follow Verb your noun with... or Get X with Y."
+    },
+    {
+      "id": "LP-FTR-015",
+      "category": "feature_copy",
+      "name": "Benefit duplication",
+      "weight": 3,
+      "description": "Multiple features make essentially the same speed, simplicity, or productivity claim."
+    },
+    {
+      "id": "LP-FTR-016",
+      "category": "feature_copy",
+      "name": "No concrete feature object",
+      "weight": 4,
+      "description": "Feature title contains no identifiable function, screen, operation, or output."
+    },
+    {
+      "id": "LP-FTR-017",
+      "category": "feature_copy",
+      "name": "Benefit mistaken for feature",
+      "weight": 3,
+      "description": "Titles such as Save time, Grow faster, or Stay focused appear as features."
+    },
+    {
+      "id": "LP-FTR-018",
+      "category": "feature_copy",
+      "name": "Technology mistaken for value",
+      "weight": 3,
+      "description": "Feature title is only AI-powered, Cloud-based, or Blockchain-enabled."
+    },
+    {
+      "id": "LP-FTR-019",
+      "category": "feature_copy",
+      "name": "Undefined smart adjective",
+      "weight": 3,
+      "description": "smart, intelligent, or adaptive appears without behavior definition."
+    },
+    {
+      "id": "LP-FTR-020",
+      "category": "feature_copy",
+      "name": "Undefined powerful adjective",
+      "weight": 2,
+      "description": "powerful appears more than once in feature copy."
+    },
+    {
+      "id": "LP-FTR-021",
+      "category": "feature_copy",
+      "name": "No limitations or conditions",
+      "weight": 3,
+      "description": "Features are described as universally successful and effortless."
+    },
+    {
+      "id": "LP-FTR-022",
+      "category": "feature_copy",
+      "name": "No user action",
+      "weight": 3,
+      "description": "Feature descriptions omit what the user actually does."
+    },
+    {
+      "id": "LP-FTR-023",
+      "category": "feature_copy",
+      "name": "No system action",
+      "weight": 3,
+      "description": "Feature descriptions omit what the product actually does."
+    },
+    {
+      "id": "LP-FTR-024",
+      "category": "feature_copy",
+      "name": "No output",
+      "weight": 3,
+      "description": "Feature descriptions omit what is generated, saved, changed, or delivered."
+    },
+    {
+      "id": "LP-FTR-025",
+      "category": "feature_copy",
+      "name": "Multi-feature sentence",
+      "weight": 3,
+      "description": "One feature description includes three or more separate capabilities."
+    },
+    {
+      "id": "LP-FTR-026",
+      "category": "feature_copy",
+      "name": "Generic collaboration claim",
+      "weight": 3,
+      "description": "Collaborate effortlessly, Keep everyone aligned, or similar without mechanics."
+    },
+    {
+      "id": "LP-FTR-027",
+      "category": "feature_copy",
+      "name": "Generic workflow claim",
+      "weight": 4,
+      "description": "Streamline your workflow without naming a workflow step."
+    },
+    {
+      "id": "LP-FTR-028",
+      "category": "feature_copy",
+      "name": "Generic productivity claim",
+      "weight": 4,
+      "description": "Boost productivity without baseline, process, or example."
+    },
+    {
+      "id": "LP-FTR-029",
+      "category": "feature_copy",
+      "name": "Generic growth claim",
+      "weight": 4,
+      "description": "Drive growth, Accelerate growth, or Scale faster without mechanism."
+    },
+    {
+      "id": "LP-FTR-030",
+      "category": "feature_copy",
+      "name": "Features interchangeable across products",
+      "weight": 5,
+      "description": "Feature copy could be reused for several unrelated SaaS products."
+    },
+    {
+      "id": "LP-HOW-001",
+      "category": "process_copy",
+      "name": "Generic three-step flow",
+      "weight": 4,
+      "description": "Process consists of Sign up then Customize then Get results or semantic equivalent."
+    },
+    {
+      "id": "LP-HOW-002",
+      "category": "process_copy",
+      "name": "Registration as product step",
+      "weight": 2,
+      "description": "Create an account is counted as a core product step."
+    },
+    {
+      "id": "LP-HOW-003",
+      "category": "process_copy",
+      "name": "Vague setup step",
+      "weight": 3,
+      "description": "Step uses Set up, Customize, or Configure without specifying inputs."
+    },
+    {
+      "id": "LP-HOW-004",
+      "category": "process_copy",
+      "name": "Vague result step",
+      "weight": 4,
+      "description": "Final step says See results, Grow, Enjoy, or Succeed."
+    },
+    {
+      "id": "LP-HOW-005",
+      "category": "process_copy",
+      "name": "No meaningful system process",
+      "weight": 3,
+      "description": "Steps describe user actions but not product processing."
+    },
+    {
+      "id": "LP-HOW-006",
+      "category": "process_copy",
+      "name": "No user input detail",
+      "weight": 4,
+      "description": "Process does not specify what data, file, URL, choice, or asset the user provides."
+    },
+    {
+      "id": "LP-HOW-007",
+      "category": "process_copy",
+      "name": "No output detail",
+      "weight": 4,
+      "description": "Process does not identify the concrete result returned."
+    },
+    {
+      "id": "LP-HOW-008",
+      "category": "process_copy",
+      "name": "Unrealistically few steps",
+      "weight": 3,
+      "description": "Complex service is presented as three effortless actions with no conditions."
+    },
+    {
+      "id": "LP-HOW-009",
+      "category": "process_copy",
+      "name": "Equal-length process descriptions",
+      "weight": 3,
+      "description": "Step descriptions follow identical sentence patterns."
+    },
+    {
+      "id": "LP-HOW-010",
+      "category": "process_copy",
+      "name": "Magic happens step",
+      "weight": 4,
+      "description": "Copy uses magic or invisible automation instead of explaining the process."
+    },
+    {
+      "id": "LP-HOW-011",
+      "category": "process_copy",
+      "name": "Generic automation step",
+      "weight": 5,
+      "description": "Let AI do the rest or semantic equivalent."
+    },
+    {
+      "id": "LP-HOW-012",
+      "category": "process_copy",
+      "name": "Missing failure path",
+      "weight": 3,
+      "description": "Process implies guaranteed success with no review, correction, or user control."
+    },
+    {
+      "id": "LP-HOW-013",
+      "category": "process_copy",
+      "name": "No time expectation",
+      "weight": 2,
+      "description": "Time-sensitive process gives no realistic completion estimate."
+    },
+    {
+      "id": "LP-HOW-014",
+      "category": "process_copy",
+      "name": "No prerequisites",
+      "weight": 3,
+      "description": "Process hides required account, integration, payment, data, or permissions."
+    },
+    {
+      "id": "LP-HOW-015",
+      "category": "process_copy",
+      "name": "Process duplicates feature copy",
+      "weight": 4,
+      "description": "How it works merely repeats benefits instead of explaining steps."
+    },
+    {
+      "id": "LP-PRF-001",
+      "category": "social_proof",
+      "name": "Trusted by thousands",
+      "weight": 5,
+      "description": "Trust claim lacks exact number, source, or verification."
+    },
+    {
+      "id": "LP-PRF-002",
+      "category": "social_proof",
+      "name": "Loved by teams worldwide",
+      "weight": 4,
+      "description": "Broad affection claim without evidence."
+    },
+    {
+      "id": "LP-PRF-003",
+      "category": "social_proof",
+      "name": "Unnamed user count",
+      "weight": 4,
+      "description": "Thousands of users, teams everywhere, or equivalent."
+    },
+    {
+      "id": "LP-PRF-004",
+      "category": "social_proof",
+      "name": "Round-number metric",
+      "weight": 3,
+      "description": "Metrics use values such as 10K+, 50K+, 100+, or 99% without source."
+    },
+    {
+      "id": "LP-PRF-005",
+      "category": "social_proof",
+      "name": "Unsupported growth metric",
+      "weight": 5,
+      "description": "Growth, retention, conversion, or savings statistic lacks methodology."
+    },
+    {
+      "id": "LP-PRF-006",
+      "category": "social_proof",
+      "name": "Unsupported performance multiplier",
+      "weight": 5,
+      "description": "Claims such as 10x faster, 3x more productive, or 5x growth."
+    },
+    {
+      "id": "LP-PRF-007",
+      "category": "social_proof",
+      "name": "Unsupported customer logos",
+      "weight": 4,
+      "description": "Copy says Trusted by above unlinked logos without case studies."
+    },
+    {
+      "id": "LP-PRF-008",
+      "category": "social_proof",
+      "name": "Premature social proof",
+      "weight": 5,
+      "description": "Coming-soon or early-stage product displays large adoption claims."
+    },
+    {
+      "id": "LP-PRF-009",
+      "category": "social_proof",
+      "name": "Generic award claim",
+      "weight": 4,
+      "description": "Award-winning, industry-leading, or recognized without named award."
+    },
+    {
+      "id": "LP-PRF-010",
+      "category": "social_proof",
+      "name": "Generic press claim",
+      "weight": 4,
+      "description": "As seen in without linked coverage."
+    },
+    {
+      "id": "LP-PRF-011",
+      "category": "social_proof",
+      "name": "Perfect rating claim",
+      "weight": 4,
+      "description": "5.0 rating or five stars without platform or review count."
+    },
+    {
+      "id": "LP-PRF-012",
+      "category": "social_proof",
+      "name": "No metric labels",
+      "weight": 4,
+      "description": "Large figures appear without timeframe, unit, or definition."
+    },
+    {
+      "id": "LP-PRF-013",
+      "category": "social_proof",
+      "name": "Mixed metric granularity",
+      "weight": 3,
+      "description": "Precise percentages are shown beside vague rounded counts."
+    },
+    {
+      "id": "LP-PRF-014",
+      "category": "social_proof",
+      "name": "Vanity metrics only",
+      "weight": 3,
+      "description": "All social proof measures users, downloads, or hours saved but not outcomes."
+    },
+    {
+      "id": "LP-PRF-015",
+      "category": "social_proof",
+      "name": "No evidence destination",
+      "weight": 4,
+      "description": "Social-proof element contains no link to customer, review, report, or methodology."
+    },
+    {
+      "id": "LP-TST-001",
+      "category": "testimonial",
+      "name": "Generic praise only",
+      "weight": 5,
+      "description": "Quote could apply to any software product."
+    },
+    {
+      "id": "LP-TST-002",
+      "category": "testimonial",
+      "name": "No concrete before state",
+      "weight": 3,
+      "description": "Testimonial does not describe the previous problem."
+    },
+    {
+      "id": "LP-TST-003",
+      "category": "testimonial",
+      "name": "No concrete product action",
+      "weight": 4,
+      "description": "Quote does not identify what feature or workflow was used."
+    },
+    {
+      "id": "LP-TST-004",
+      "category": "testimonial",
+      "name": "No measurable outcome",
+      "weight": 3,
+      "description": "Quote does not contain a specific result, improvement, or changed behavior."
+    },
+    {
+      "id": "LP-TST-005",
+      "category": "testimonial",
+      "name": "Identical testimonial length",
+      "weight": 4,
+      "description": "Three or more testimonials have very similar word count."
+    },
+    {
+      "id": "LP-TST-006",
+      "category": "testimonial",
+      "name": "Identical testimonial structure",
+      "weight": 5,
+      "description": "Quotes follow We struggled with X. Product changed everything. Now Y."
+    },
+    {
+      "id": "LP-TST-007",
+      "category": "testimonial",
+      "name": "Excessive enthusiasm",
+      "weight": 3,
+      "description": "Multiple quotes contain superlatives, exclamation marks, or emotional exaggeration."
+    },
+    {
+      "id": "LP-TST-008",
+      "category": "testimonial",
+      "name": "Game changer phrase",
+      "weight": 4,
+      "description": "Quote uses game changer, changed everything, or equivalent."
+    },
+    {
+      "id": "LP-TST-009",
+      "category": "testimonial",
+      "name": "Can't imagine life without it",
+      "weight": 3,
+      "description": "Generic dependency statement appears."
+    },
+    {
+      "id": "LP-TST-010",
+      "category": "testimonial",
+      "name": "Saved us hours without number",
+      "weight": 3,
+      "description": "Time-saving claim lacks baseline or period."
+    },
+    {
+      "id": "LP-TST-011",
+      "category": "testimonial",
+      "name": "Generic role titles",
+      "weight": 3,
+      "description": "Roles such as Founder, CEO, Designer, Marketer appear without organization context."
+    },
+    {
+      "id": "LP-TST-012",
+      "category": "testimonial",
+      "name": "Suspiciously balanced identities",
+      "weight": 3,
+      "description": "Testimonials appear constructed to cover multiple ideal customer types evenly."
+    },
+    {
+      "id": "LP-TST-013",
+      "category": "testimonial",
+      "name": "Generic company names",
+      "weight": 4,
+      "description": "Names such as Acme, Nova, Horizon, Bright Labs, or similar appear."
+    },
+    {
+      "id": "LP-TST-014",
+      "category": "testimonial",
+      "name": "First-name-only identity",
+      "weight": 3,
+      "description": "Quote provides insufficient identifying information."
+    },
+    {
+      "id": "LP-TST-015",
+      "category": "testimonial",
+      "name": "No verification link",
+      "weight": 2,
+      "description": "Customer identity cannot be verified."
+    },
+    {
+      "id": "LP-TST-016",
+      "category": "testimonial",
+      "name": "Same voice across customers",
+      "weight": 5,
+      "description": "Vocabulary, punctuation and sentence rhythm are unusually consistent."
+    },
+    {
+      "id": "LP-TST-017",
+      "category": "testimonial",
+      "name": "Marketing vocabulary in customer voice",
+      "weight": 5,
+      "description": "Customers use the same phrases as the landing-page copy."
+    },
+    {
+      "id": "LP-TST-018",
+      "category": "testimonial",
+      "name": "Product name repeated unnaturally",
+      "weight": 3,
+      "description": "Each quote explicitly names the product in a promotional manner."
+    },
+    {
+      "id": "LP-TST-019",
+      "category": "testimonial",
+      "name": "No criticism or nuance",
+      "weight": 3,
+      "description": "Every quote is uniformly perfect and unconditional."
+    },
+    {
+      "id": "LP-TST-020",
+      "category": "testimonial",
+      "name": "Testimonial as feature summary",
+      "weight": 5,
+      "description": "Quote appears written to communicate a marketing feature rather than real experience."
+    },
+    {
+      "id": "LP-PRC-001",
+      "category": "pricing_copy",
+      "name": "Generic plan names",
+      "weight": 2,
+      "description": "Plans use Free, Starter, Pro, Business, or Enterprise without audience clarity."
+    },
+    {
+      "id": "LP-PRC-002",
+      "category": "pricing_copy",
+      "name": "For individuals vagueness",
+      "weight": 2,
+      "description": "Plan description targets a generic user type without usage scenario."
+    },
+    {
+      "id": "LP-PRC-003",
+      "category": "pricing_copy",
+      "name": "For growing teams cliche",
+      "weight": 3,
+      "description": "Plan targets growth stage rather than concrete needs."
+    },
+    {
+      "id": "LP-PRC-004",
+      "category": "pricing_copy",
+      "name": "Everything in wording",
+      "weight": 2,
+      "description": "Higher plan says Everything in Pro, plus... repeatedly."
+    },
+    {
+      "id": "LP-PRC-005",
+      "category": "pricing_copy",
+      "name": "Undefined credits",
+      "weight": 5,
+      "description": "Pricing uses credits, tokens, units, runs, or generations without explanation."
+    },
+    {
+      "id": "LP-PRC-006",
+      "category": "pricing_copy",
+      "name": "Undefined usage limits",
+      "weight": 4,
+      "description": "Limits are presented without examples of normal consumption."
+    },
+    {
+      "id": "LP-PRC-007",
+      "category": "pricing_copy",
+      "name": "Vague unlimited claim",
+      "weight": 5,
+      "description": "Unlimited appears with hidden or unclear restrictions."
+    },
+    {
+      "id": "LP-PRC-008",
+      "category": "pricing_copy",
+      "name": "Most popular without basis",
+      "weight": 3,
+      "description": "Recommended plan label has no explanation."
+    },
+    {
+      "id": "LP-PRC-009",
+      "category": "pricing_copy",
+      "name": "Best value claim",
+      "weight": 3,
+      "description": "Plan is labelled best value without transparent comparison."
+    },
+    {
+      "id": "LP-PRC-010",
+      "category": "pricing_copy",
+      "name": "Missing billing context",
+      "weight": 4,
+      "description": "Monthly price does not clarify annual commitment or billing frequency."
+    },
+    {
+      "id": "LP-PRC-011",
+      "category": "pricing_copy",
+      "name": "Missing tax information",
+      "weight": 2,
+      "description": "Price copy does not clarify whether tax is included where relevant."
+    },
+    {
+      "id": "LP-PRC-012",
+      "category": "pricing_copy",
+      "name": "Missing renewal information",
+      "weight": 4,
+      "description": "Trial or promotional pricing lacks renewal terms."
+    },
+    {
+      "id": "LP-PRC-013",
+      "category": "pricing_copy",
+      "name": "Missing cancellation information",
+      "weight": 3,
+      "description": "Subscription copy lacks cancellation details."
+    },
+    {
+      "id": "LP-PRC-014",
+      "category": "pricing_copy",
+      "name": "Missing overage information",
+      "weight": 5,
+      "description": "Usage-limited plan does not explain what happens after the limit."
+    },
+    {
+      "id": "LP-PRC-015",
+      "category": "pricing_copy",
+      "name": "Feature-limit mixing",
+      "weight": 3,
+      "description": "Feature names and consumption limits are mixed into one unclear list."
+    },
+    {
+      "id": "LP-PRC-016",
+      "category": "pricing_copy",
+      "name": "Artificial feature padding",
+      "weight": 3,
+      "description": "Plans include generic support or analytics items mainly to lengthen lists."
+    },
+    {
+      "id": "LP-PRC-017",
+      "category": "pricing_copy",
+      "name": "Enterprise vagueness",
+      "weight": 4,
+      "description": "Enterprise plan says custom, flexible, secure, or tailored without specifics."
+    },
+    {
+      "id": "LP-PRC-018",
+      "category": "pricing_copy",
+      "name": "Contact-sales boilerplate",
+      "weight": 3,
+      "description": "Enterprise description is interchangeable with any SaaS company."
+    },
+    {
+      "id": "LP-PRC-019",
+      "category": "pricing_copy",
+      "name": "Unsupported savings percentage",
+      "weight": 4,
+      "description": "Annual toggle advertises savings without transparent calculation."
+    },
+    {
+      "id": "LP-PRC-020",
+      "category": "pricing_copy",
+      "name": "Pricing-value mismatch",
+      "weight": 4,
+      "description": "Copy does not connect price to concrete usage or outcomes."
+    },
+    {
+      "id": "LP-FAQ-001",
+      "category": "faq_copy",
+      "name": "Generic What is question",
+      "weight": 2,
+      "description": "FAQ simply repeats the product description."
+    },
+    {
+      "id": "LP-FAQ-002",
+      "category": "faq_copy",
+      "name": "Generic How does it work",
+      "weight": 4,
+      "description": "Answer repeats marketing copy instead of workflow."
+    },
+    {
+      "id": "LP-FAQ-003",
+      "category": "faq_copy",
+      "name": "Generic Is it easy to use",
+      "weight": 3,
+      "description": "Question appears designed to repeat a simplicity claim."
+    },
+    {
+      "id": "LP-FAQ-004",
+      "category": "faq_copy",
+      "name": "Generic Is it secure",
+      "weight": 5,
+      "description": "Answer provides reassurance but no security details."
+    },
+    {
+      "id": "LP-FAQ-005",
+      "category": "faq_copy",
+      "name": "Generic Can I cancel anytime",
+      "weight": 4,
+      "description": "Answer lacks billing-cycle or refund specifics."
+    },
+    {
+      "id": "LP-FAQ-006",
+      "category": "faq_copy",
+      "name": "Generic Who is it for",
+      "weight": 3,
+      "description": "Answer lists a very broad audience."
+    },
+    {
+      "id": "LP-FAQ-007",
+      "category": "faq_copy",
+      "name": "Generic Do I need experience",
+      "weight": 3,
+      "description": "Answer uses No experience required without discussing actual learning needs."
+    },
+    {
+      "id": "LP-FAQ-008",
+      "category": "faq_copy",
+      "name": "FAQ repeats pricing cards",
+      "weight": 3,
+      "description": "Questions add no detail beyond visible plan copy."
+    },
+    {
+      "id": "LP-FAQ-009",
+      "category": "faq_copy",
+      "name": "FAQ hides essential terms",
+      "weight": 4,
+      "description": "Important pricing, privacy or limitation details appear only in FAQ."
+    },
+    {
+      "id": "LP-FAQ-010",
+      "category": "faq_copy",
+      "name": "Overly polished answer symmetry",
+      "weight": 3,
+      "description": "Answers have similar length and structure across questions."
+    },
+    {
+      "id": "LP-FAQ-011",
+      "category": "faq_copy",
+      "name": "No difficult questions",
+      "weight": 4,
+      "description": "FAQ contains only convenient questions that reinforce benefits."
+    },
+    {
+      "id": "LP-FAQ-012",
+      "category": "faq_copy",
+      "name": "No limitation questions",
+      "weight": 3,
+      "description": "No answer addresses failure, eligibility, support, compatibility, or constraints."
+    },
+    {
+      "id": "LP-FAQ-013",
+      "category": "faq_copy",
+      "name": "Vague integration answer",
+      "weight": 4,
+      "description": "We integrate with your favorite tools without naming them."
+    },
+    {
+      "id": "LP-FAQ-014",
+      "category": "faq_copy",
+      "name": "Vague support answer",
+      "weight": 4,
+      "description": "Our team is always here to help without hours, channel, or response time."
+    },
+    {
+      "id": "LP-FAQ-015",
+      "category": "faq_copy",
+      "name": "Vague refund answer",
+      "weight": 4,
+      "description": "Uses contact us without policy detail."
+    },
+    {
+      "id": "LP-FAQ-016",
+      "category": "faq_copy",
+      "name": "AI capability overstatement",
+      "weight": 5,
+      "description": "FAQ implies AI always produces correct or high-quality results."
+    },
+    {
+      "id": "LP-FAQ-017",
+      "category": "faq_copy",
+      "name": "Privacy reassurance without policy",
+      "weight": 5,
+      "description": "Answer claims data safety without linking to privacy terms."
+    },
+    {
+      "id": "LP-FAQ-018",
+      "category": "faq_copy",
+      "name": "Placeholder future answer",
+      "weight": 3,
+      "description": "More features are coming soon substitutes for current capability detail."
+    },
+    {
+      "id": "LP-FAQ-019",
+      "category": "faq_copy",
+      "name": "Duplicate wording",
+      "weight": 3,
+      "description": "FAQ repeats exact phrases from hero and feature sections."
+    },
+    {
+      "id": "LP-FAQ-020",
+      "category": "faq_copy",
+      "name": "Question-set interchangeability",
+      "weight": 5,
+      "description": "FAQ set could be reused for unrelated products."
+    },
+    {
+      "id": "LP-END-001",
+      "category": "final_cta",
+      "name": "Ready to formula",
+      "weight": 3,
+      "description": "Final section begins with Ready to transform/grow/build/start..."
+    },
+    {
+      "id": "LP-END-002",
+      "category": "final_cta",
+      "name": "Start your journey cliche",
+      "weight": 3,
+      "description": "Final CTA uses journey language."
+    },
+    {
+      "id": "LP-END-003",
+      "category": "final_cta",
+      "name": "Join thousands repetition",
+      "weight": 4,
+      "description": "Final CTA repeats unsupported social proof."
+    },
+    {
+      "id": "LP-END-004",
+      "category": "final_cta",
+      "name": "Empty urgency",
+      "weight": 3,
+      "description": "Copy says Start today, Don't wait, or Now is the time."
+    },
+    {
+      "id": "LP-END-005",
+      "category": "final_cta",
+      "name": "Hero repetition",
+      "weight": 4,
+      "description": "Final CTA repeats the same headline promise without new proof."
+    },
+    {
+      "id": "LP-END-006",
+      "category": "final_cta",
+      "name": "No risk clarification",
+      "weight": 3,
+      "description": "Final CTA pushes signup without mentioning cost, trial, requirement, or next step."
+    },
+    {
+      "id": "LP-END-007",
+      "category": "final_cta",
+      "name": "Emotional overreach",
+      "weight": 4,
+      "description": "Final CTA promises transformation disproportionate to the immediate action."
+    },
+    {
+      "id": "LP-END-008",
+      "category": "final_cta",
+      "name": "Generic confidence close",
+      "weight": 3,
+      "description": "Copy uses See the difference, Experience the future, or Take control."
+    },
+    {
+      "id": "LP-END-009",
+      "category": "final_cta",
+      "name": "Fake scarcity close",
+      "weight": 4,
+      "description": "Final CTA uses limited-access wording without real availability limits."
+    },
+    {
+      "id": "LP-END-010",
+      "category": "final_cta",
+      "name": "No concrete action outcome",
+      "weight": 4,
+      "description": "User cannot infer what happens after clicking."
+    },
+    {
+      "id": "LP-BRV-001",
+      "category": "brand_voice",
+      "name": "Uniform neutral optimism",
+      "weight": 3,
+      "description": "Nearly all text uses safe, positive, frictionless language."
+    },
+    {
+      "id": "LP-BRV-002",
+      "category": "brand_voice",
+      "name": "No distinctive vocabulary",
+      "weight": 4,
+      "description": "Copy contains no recurring product-specific words, metaphors, or verbal devices."
+    },
+    {
+      "id": "LP-BRV-003",
+      "category": "brand_voice",
+      "name": "Tone interchangeability",
+      "weight": 5,
+      "description": "Tone could belong to hundreds of modern SaaS products."
+    },
+    {
+      "id": "LP-BRV-004",
+      "category": "brand_voice",
+      "name": "Inconsistent formality",
+      "weight": 3,
+      "description": "Page switches between casual and formal language."
+    },
+    {
+      "id": "LP-BRV-005",
+      "category": "brand_voice",
+      "name": "Inconsistent person",
+      "weight": 2,
+      "description": "Copy switches between you, your team, users, and third person without reason."
+    },
+    {
+      "id": "LP-BRV-006",
+      "category": "brand_voice",
+      "name": "Inconsistent imperative style",
+      "weight": 2,
+      "description": "Some CTAs use verbs, others nouns, others emotional promises."
+    },
+    {
+      "id": "LP-BRV-007",
+      "category": "brand_voice",
+      "name": "Brand name overuse",
+      "weight": 2,
+      "description": "Product name is repeated unnaturally in several sections."
+    },
+    {
+      "id": "LP-BRV-008",
+      "category": "brand_voice",
+      "name": "Brand name underuse",
+      "weight": 2,
+      "description": "Product name and category are absent after the hero."
+    },
+    {
+      "id": "LP-BRV-009",
+      "category": "brand_voice",
+      "name": "No point of view",
+      "weight": 4,
+      "description": "Copy avoids any opinion, tradeoff, limitation, or strong position."
+    },
+    {
+      "id": "LP-BRV-010",
+      "category": "brand_voice",
+      "name": "No audience language",
+      "weight": 5,
+      "description": "Copy does not use terminology familiar to its intended users."
+    },
+    {
+      "id": "LP-BRV-011",
+      "category": "brand_voice",
+      "name": "Corporate-vague tone",
+      "weight": 4,
+      "description": "Uses solutions, capabilities, ecosystem, innovation, or excellence excessively."
+    },
+    {
+      "id": "LP-BRV-012",
+      "category": "brand_voice",
+      "name": "Startup-hype tone",
+      "weight": 4,
+      "description": "Uses disrupt, game-changing, redefine, next-gen, or revolutionary."
+    },
+    {
+      "id": "LP-BRV-013",
+      "category": "brand_voice",
+      "name": "AI-helper tone",
+      "weight": 2,
+      "description": "Frequent phrases such as help you, empower you, and enable you."
+    },
+    {
+      "id": "LP-BRV-014",
+      "category": "brand_voice",
+      "name": "No negative reality",
+      "weight": 3,
+      "description": "Copy avoids discussing difficulty, risk, cost, or user effort."
+    },
+    {
+      "id": "LP-BRV-015",
+      "category": "brand_voice",
+      "name": "Excessive reassurance",
+      "weight": 3,
+      "description": "Frequent use of simple, easy, secure, reliable, and hassle-free."
+    },
+    {
+      "id": "LP-BRV-016",
+      "category": "brand_voice",
+      "name": "Emotional sameness",
+      "weight": 2,
+      "description": "Every section has the same motivational intensity."
+    },
+    {
+      "id": "LP-BRV-017",
+      "category": "brand_voice",
+      "name": "Heading-template repetition",
+      "weight": 4,
+      "description": "Several headings follow the same grammatical construction."
+    },
+    {
+      "id": "LP-BRV-018",
+      "category": "brand_voice",
+      "name": "Repeated rhetorical contrast",
+      "weight": 3,
+      "description": "Multiple sections use not just X, but Y or equivalent."
+    },
+    {
+      "id": "LP-BRV-019",
+      "category": "brand_voice",
+      "name": "Repeated triads",
+      "weight": 3,
+      "description": "Copy repeatedly groups ideas in sets of three."
+    },
+    {
+      "id": "LP-BRV-020",
+      "category": "brand_voice",
+      "name": "No memorable sentence",
+      "weight": 3,
+      "description": "No sentence contains a distinctive, product-ownable formulation."
+    },
+    {
+      "id": "LP-SPC-001",
+      "category": "specificity",
+      "name": "No product category",
+      "weight": 5,
+      "description": "First 150 words do not identify what the product is."
+    },
+    {
+      "id": "LP-SPC-002",
+      "category": "specificity",
+      "name": "No target audience",
+      "weight": 5,
+      "description": "First 150 words do not identify who it is for."
+    },
+    {
+      "id": "LP-SPC-003",
+      "category": "specificity",
+      "name": "No user input",
+      "weight": 5,
+      "description": "Page never explains what users provide to the product."
+    },
+    {
+      "id": "LP-SPC-004",
+      "category": "specificity",
+      "name": "No system action",
+      "weight": 5,
+      "description": "Page never explains what the product does with the input."
+    },
+    {
+      "id": "LP-SPC-005",
+      "category": "specificity",
+      "name": "No concrete output",
+      "weight": 5,
+      "description": "Page never identifies what users receive."
+    },
+    {
+      "id": "LP-SPC-006",
+      "category": "specificity",
+      "name": "No usage context",
+      "weight": 4,
+      "description": "Page never describes when or why someone would use the product."
+    },
+    {
+      "id": "LP-SPC-007",
+      "category": "specificity",
+      "name": "No domain terms",
+      "weight": 5,
+      "description": "Copy has unusually low density of industry-specific nouns."
+    },
+    {
+      "id": "LP-SPC-008",
+      "category": "specificity",
+      "name": "No examples",
+      "weight": 4,
+      "description": "Page contains no concrete use case, example, or scenario."
+    },
+    {
+      "id": "LP-SPC-009",
+      "category": "specificity",
+      "name": "No numbers",
+      "weight": 3,
+      "description": "Page contains no meaningful limits, timeframes, prices, quantities, or performance data."
+    },
+    {
+      "id": "LP-SPC-010",
+      "category": "specificity",
+      "name": "Numbers without definitions",
+      "weight": 4,
+      "description": "Metrics appear without units, baselines, or timeframe."
+    },
+    {
+      "id": "LP-SPC-011",
+      "category": "specificity",
+      "name": "No named integrations",
+      "weight": 4,
+      "description": "Integration copy exists but no specific platform is named."
+    },
+    {
+      "id": "LP-SPC-012",
+      "category": "specificity",
+      "name": "No named deliverables",
+      "weight": 5,
+      "description": "Outputs are called results, insights, content, or solutions without exact form."
+    },
+    {
+      "id": "LP-SPC-013",
+      "category": "specificity",
+      "name": "No comparison",
+      "weight": 3,
+      "description": "Page does not contrast product workflow with the current alternative."
+    },
+    {
+      "id": "LP-SPC-014",
+      "category": "specificity",
+      "name": "No limitation",
+      "weight": 3,
+      "description": "Page does not state what the product cannot or does not do."
+    },
+    {
+      "id": "LP-SPC-015",
+      "category": "specificity",
+      "name": "No prerequisites",
+      "weight": 3,
+      "description": "Page does not mention required account, data, device, skill, or setup."
+    },
+    {
+      "id": "LP-SPC-016",
+      "category": "specificity",
+      "name": "No timing detail",
+      "weight": 4,
+      "description": "Claims speed but gives no actual expected duration."
+    },
+    {
+      "id": "LP-SPC-017",
+      "category": "specificity",
+      "name": "No pricing detail",
+      "weight": 4,
+      "description": "Pricing language exists but essential billing behavior is omitted."
+    },
+    {
+      "id": "LP-SPC-018",
+      "category": "localization",
+      "name": "No geographic context",
+      "weight": 4,
+      "description": "Local service does not name supported cities, countries, or availability."
+    },
+    {
+      "id": "LP-SPC-019",
+      "category": "specificity",
+      "name": "No eligibility context",
+      "weight": 4,
+      "description": "Product with access conditions does not explain eligibility."
+    },
+    {
+      "id": "LP-SPC-020",
+      "category": "specificity",
+      "name": "High abstract-to-concrete ratio",
+      "weight": 4,
+      "description": "Abstract nouns significantly outnumber concrete domain nouns."
+    },
+    {
+      "id": "LP-REP-001",
+      "category": "consistency",
+      "name": "Repeated sentence openings",
+      "weight": 3,
+      "description": "Three or more paragraphs begin with the same word or phrase."
+    },
+    {
+      "id": "LP-REP-002",
+      "category": "consistency",
+      "name": "Repeated With construction",
+      "weight": 3,
+      "description": "Multiple descriptions begin with With [product/feature]..."
+    },
+    {
+      "id": "LP-REP-003",
+      "category": "consistency",
+      "name": "Repeated Whether construction",
+      "weight": 3,
+      "description": "Two or more sections use Whether you..."
+    },
+    {
+      "id": "LP-REP-004",
+      "category": "consistency",
+      "name": "Repeated From-to construction",
+      "weight": 3,
+      "description": "Appears in multiple sections."
+    },
+    {
+      "id": "LP-REP-005",
+      "category": "consistency",
+      "name": "Repeated Designed to construction",
+      "weight": 3,
+      "description": "Appears in several feature descriptions."
+    },
+    {
+      "id": "LP-REP-006",
+      "category": "consistency",
+      "name": "Repeated Built for construction",
+      "weight": 3,
+      "description": "Appears in hero, features, pricing, or footer."
+    },
+    {
+      "id": "LP-REP-007",
+      "category": "consistency",
+      "name": "Repeated So you can ending",
+      "weight": 4,
+      "description": "Several descriptions end with the same benefit clause."
+    },
+    {
+      "id": "LP-REP-008",
+      "category": "consistency",
+      "name": "Repeated three-item lists",
+      "weight": 3,
+      "description": "Page repeatedly uses exactly three comma-separated benefits."
+    },
+    {
+      "id": "LP-REP-009",
+      "category": "consistency",
+      "name": "Similar paragraph lengths",
+      "weight": 3,
+      "description": "Most feature descriptions fall within a narrow word-count range."
+    },
+    {
+      "id": "LP-REP-010",
+      "category": "consistency",
+      "name": "Similar sentence counts",
+      "weight": 2,
+      "description": "Every card uses exactly one or two sentences."
+    },
+    {
+      "id": "LP-REP-011",
+      "category": "consistency",
+      "name": "Identical punctuation rhythm",
+      "weight": 3,
+      "description": "Sibling cards share the same punctuation structure."
+    },
+    {
+      "id": "LP-REP-012",
+      "category": "consistency",
+      "name": "Repeated em dash",
+      "weight": 2,
+      "description": "Multiple section descriptions use identical claim-explanation form."
+    },
+    {
+      "id": "LP-REP-013",
+      "category": "consistency",
+      "name": "Repeated colon headings",
+      "weight": 2,
+      "description": "Several headings use Feature: Benefit construction."
+    },
+    {
+      "id": "LP-REP-014",
+      "category": "consistency",
+      "name": "Vocabulary recycling",
+      "weight": 3,
+      "description": "Same promotional terms repeat across many sections."
+    },
+    {
+      "id": "LP-REP-015",
+      "category": "consistency",
+      "name": "Benefit recycling",
+      "weight": 4,
+      "description": "Speed, ease, growth, and productivity claims recur without new detail."
+    },
+    {
+      "id": "LP-REP-016",
+      "category": "consistency",
+      "name": "CTA recycling",
+      "weight": 2,
+      "description": "Generic CTA phrases repeat in every major section."
+    },
+    {
+      "id": "LP-REP-017",
+      "category": "consistency",
+      "name": "Repeated section ending",
+      "weight": 3,
+      "description": "Multiple sections close with a positive future-oriented sentence."
+    },
+    {
+      "id": "LP-REP-018",
+      "category": "consistency",
+      "name": "Section-template similarity",
+      "weight": 4,
+      "description": "Text structure across sections is highly parallel."
+    },
+    {
+      "id": "LP-REP-019",
+      "category": "consistency",
+      "name": "Testimonial-copy similarity",
+      "weight": 5,
+      "description": "Quotes have high semantic or stylistic similarity."
+    },
+    {
+      "id": "LP-REP-020",
+      "category": "consistency",
+      "name": "FAQ-answer similarity",
+      "weight": 4,
+      "description": "Answers repeat the same reassurance formula."
+    },
+    {
+      "id": "LP-LEX-001",
+      "category": "brand_voice",
+      "name": "Promotional cliche density",
+      "weight": 4,
+      "description": "Multiple landing-page cliche words appear with low concrete-information density."
+    },
+    {
+      "id": "LP-CLM-001",
+      "category": "claim",
+      "name": "Percentage improvement without support",
+      "weight": 5,
+      "description": "Percentage improvement lacks baseline, sample, timeframe, or source."
+    },
+    {
+      "id": "LP-CLM-002",
+      "category": "claim",
+      "name": "Speed multiplier without support",
+      "weight": 5,
+      "description": "Speed multiplier lacks compared process, start/end conditions, or methodology."
+    },
+    {
+      "id": "LP-CLM-003",
+      "category": "claim",
+      "name": "User count without support",
+      "weight": 4,
+      "description": "User count lacks exact count or range, date, or verification source."
+    },
+    {
+      "id": "LP-CLM-004",
+      "category": "claim",
+      "name": "Time saved without support",
+      "weight": 5,
+      "description": "Time saved lacks user group, workflow, or measured period."
+    },
+    {
+      "id": "LP-CLM-005",
+      "category": "claim",
+      "name": "Cost saved without support",
+      "weight": 5,
+      "description": "Cost saved lacks original cost, new cost, or assumptions."
+    },
+    {
+      "id": "LP-CLM-006",
+      "category": "claim",
+      "name": "Security claim without support",
+      "weight": 5,
+      "description": "Security claim lacks named controls, standard, certification, or policy."
+    },
+    {
+      "id": "LP-CLM-007",
+      "category": "claim",
+      "name": "Compliance claim without support",
+      "weight": 5,
+      "description": "Compliance claim lacks named framework, jurisdiction, or status."
+    },
+    {
+      "id": "LP-CLM-008",
+      "category": "claim",
+      "name": "Customer trust claim without support",
+      "weight": 4,
+      "description": "Customer trust claim lacks linked customer, review platform, or case study."
+    },
+    {
+      "id": "LP-CLM-009",
+      "category": "claim",
+      "name": "Market leadership without support",
+      "weight": 5,
+      "description": "Market leadership lacks named category, source, report, or award."
+    },
+    {
+      "id": "LP-CLM-010",
+      "category": "claim",
+      "name": "AI accuracy without support",
+      "weight": 5,
+      "description": "AI accuracy claim lacks dataset, benchmark, metric, or limitation."
+    },
+    {
+      "id": "LP-CLM-011",
+      "category": "claim",
+      "name": "Sustainability claim without support",
+      "weight": 5,
+      "description": "Sustainability claim lacks calculation method, scope, or data source."
+    },
+    {
+      "id": "LP-CLM-012",
+      "category": "claim",
+      "name": "Availability claim without support",
+      "weight": 4,
+      "description": "Availability claim lacks supported geography, device, plan, or rollout status."
+    },
+    {
+      "id": "LP-CLM-013",
+      "category": "claim",
+      "name": "Unlimited claim without support",
+      "weight": 5,
+      "description": "Unlimited claim lacks fair-use limits, exclusions, or throttling rules."
+    },
+    {
+      "id": "LP-CLM-014",
+      "category": "claim",
+      "name": "Guaranteed outcome without support",
+      "weight": 5,
+      "description": "Guaranteed outcome lacks eligibility, conditions, or refund/guarantee terms."
+    },
+    {
+      "id": "LP-CLM-015",
+      "category": "claim",
+      "name": "Real-time claim without support",
+      "weight": 4,
+      "description": "Real-time claim lacks actual update interval and data source."
+    },
+    {
+      "id": "LP-CON-001",
+      "category": "contradiction",
+      "name": "Coming soon + large user base",
+      "weight": 5,
+      "description": "Page states not launched while claiming thousands of users."
+    },
+    {
+      "id": "LP-CON-002",
+      "category": "contradiction",
+      "name": "Free + payment requirement",
+      "weight": 5,
+      "description": "Hero says free but pricing or signup requires payment."
+    },
+    {
+      "id": "LP-CON-003",
+      "category": "contradiction",
+      "name": "No credit card + card requirement",
+      "weight": 5,
+      "description": "Copy contradicts checkout flow or pricing detail."
+    },
+    {
+      "id": "LP-CON-004",
+      "category": "contradiction",
+      "name": "Unlimited + listed limit",
+      "weight": 5,
+      "description": "Same feature is described as unlimited and capped."
+    },
+    {
+      "id": "LP-CON-005",
+      "category": "contradiction",
+      "name": "Instant + delayed delivery",
+      "weight": 5,
+      "description": "Hero claims instant output while FAQ states manual review or waiting period."
+    },
+    {
+      "id": "LP-CON-006",
+      "category": "contradiction",
+      "name": "Global + limited geography",
+      "weight": 5,
+      "description": "Copy says worldwide but availability is local."
+    },
+    {
+      "id": "LP-CON-007",
+      "category": "contradiction",
+      "name": "No setup + onboarding requirements",
+      "weight": 4,
+      "description": "Product requires integrations, configuration, or data upload."
+    },
+    {
+      "id": "LP-CON-008",
+      "category": "contradiction",
+      "name": "Fully automated + human service",
+      "weight": 4,
+      "description": "Page claims automation but process relies on manual support."
+    },
+    {
+      "id": "LP-CON-009",
+      "category": "contradiction",
+      "name": "Secure + missing policy",
+      "weight": 4,
+      "description": "Strong security claim with no privacy or security documentation."
+    },
+    {
+      "id": "LP-CON-010",
+      "category": "contradiction",
+      "name": "All-in-one + external dependencies",
+      "weight": 3,
+      "description": "Product requires many external tools for core functionality."
+    },
+    {
+      "id": "LP-CON-011",
+      "category": "contradiction",
+      "name": "Beginner-friendly + technical prerequisites",
+      "weight": 4,
+      "description": "Copy hides required expertise."
+    },
+    {
+      "id": "LP-CON-012",
+      "category": "contradiction",
+      "name": "Cancel anytime + annual lock-in",
+      "weight": 5,
+      "description": "Pricing terms contradict cancellation language."
+    },
+    {
+      "id": "LP-CON-013",
+      "category": "contradiction",
+      "name": "One-click + multi-step process",
+      "weight": 4,
+      "description": "Marketing copy contradicts actual workflow."
+    },
+    {
+      "id": "LP-CON-014",
+      "category": "contradiction",
+      "name": "Personalization + no user data",
+      "weight": 4,
+      "description": "Product claims personalization but collects no relevant signals."
+    },
+    {
+      "id": "LP-CON-015",
+      "category": "contradiction",
+      "name": "Real-time + static data",
+      "weight": 4,
+      "description": "Product representation or documentation indicates batch updates."
+    }
+  ]
+}

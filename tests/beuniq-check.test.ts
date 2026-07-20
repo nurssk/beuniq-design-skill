@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const checker = path.join(repoRoot, "skills/beuniq-design/scripts/beuniq-check.ts");
+const claudeSkill = path.join(repoRoot, ".claude/skills/beuniq-design");
+const claudeChecker = path.join(claudeSkill, "scripts/beuniq-check.ts");
 
 function runCheck(root: string, extra: string[] = []) {
   try {
@@ -80,7 +82,31 @@ assert.ok(visualRules.some((rule: { id: string }) => rule.id === "tiny-touch-tar
 const duplicateIds = sloppyResult.report.findings.filter((finding: { ruleId: string }) => finding.ruleId === "oversized-radius");
 assert.equal(duplicateIds.length, 0, "legacy radius rule should not double-count when catalog CRD rules fire");
 
+const claudeSkillMarkdown = readFileSync(path.join(claudeSkill, "SKILL.md"), "utf8");
+assert.match(claudeSkillMarkdown, /^---\n[\s\S]*description:/);
+assert.match(claudeSkillMarkdown, /\$\{CLAUDE_SKILL_DIR\}\/scripts\/beuniq-check\.ts/);
+assert.match(claudeSkillMarkdown, /allowed-tools:/);
+
+const claudeResult = (() => {
+  try {
+    const stdout = execFileSync("npx", ["tsx", claudeChecker, "--root", clean, "--format", "json"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"]
+    });
+    return { status: 0, report: JSON.parse(stdout) };
+  } catch (error) {
+    const err = error as { status?: number; stdout?: Buffer | string };
+    const stdout = Buffer.isBuffer(err.stdout) ? err.stdout.toString("utf8") : String(err.stdout ?? "");
+    return { status: err.status ?? 1, report: JSON.parse(stdout) };
+  }
+})();
+assert.equal(claudeResult.status, 0);
+assert.equal(claudeResult.report.passed, true);
+assert.equal(claudeResult.report.catalogCoverage.aiSlopRules, 325);
+
 const checkerSource = readFileSync(checker, "utf8");
-assert.doesNotMatch(checkerSource, /\bfetch\s*\(|https?:\/\/|GoogleGenAI|openai|anthropic|gemini/i);
+const claudeCheckerSource = readFileSync(claudeChecker, "utf8");
+assert.doesNotMatch(`${checkerSource}\n${claudeCheckerSource}`, /\bfetch\s*\(|https?:\/\/|GoogleGenAI|openai|anthropic|gemini/i);
 
 console.log("PASS beuniq-check fixtures, fix loop, stable evidence, and no-network constraints.");
