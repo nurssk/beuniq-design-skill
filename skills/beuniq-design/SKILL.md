@@ -1,27 +1,44 @@
 ---
 name: beuniq-design
-description: Rule-based frontend design, taste, motion-craft, and landing-copy audit with targeted cleanup for detecting generic AI-generated UI patterns without AI APIs. Use when Codex is asked to make a React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, improve taste, review motion craft, run an AI-slop/design-quality check, enforce BeUniq design criteria, or iterate until AI slop is at or below 20. For any requested UI change, polish, redesign, cleanup, or fix pass, the first response must ask the BeUniq Design Intake questions and wait for the user's answers before editing or running fixes.
+description: Rule-based frontend design, taste, motion-craft, landing-copy audit, and project-context workflow with targeted cleanup for detecting generic AI-generated UI patterns without AI APIs. Use when Codex is asked to make a React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, improve taste, review motion craft, run an AI-slop/design-quality check, initialize PRODUCT.md/DESIGN.md design context, enforce BeUniq design criteria, or iterate until AI slop is at or below 20. For UI change, polish, redesign, cleanup, or fix passes, first read existing PRODUCT.md/DESIGN.md; if either is missing, ask BeUniq Design Intake and wait before editing or running fixes.
 ---
 
 # BeUniq Design
 
 ## Overview
 
-Use BeUniq to statically inspect frontend source code for AI-slop, landing-copy slop, taste/motion-craft, and design-quality signals, apply targeted fixes, and re-check until the project passes. The workflow is code-only and must not call AI APIs, screenshot services, browser automation, telemetry endpoints, or external network services.
+Use BeUniq to statically inspect frontend source code for AI-slop, landing-copy slop, taste/motion-craft, and design-quality signals, apply targeted fixes, and re-check until the project passes. BeUniq also keeps project design direction in `PRODUCT.md` and `DESIGN.md` so agents do not repeatedly ask the same style questions. The workflow is code-only and must not call AI APIs, screenshot services, browser automation, telemetry endpoints, or external network services.
 
 ## Workflow
 
-1. If the task asks to change, polish, fix, redesign, or make the UI pass BeUniq, the first response must be the Design Intake questions. Stop after asking and wait for the user's answers. Do not run the checker, edit files, or choose defaults until the user answers, unless the user explicitly says to choose for them. Skip intake only when the user explicitly asks for audit/report only, CI usage, or no questions.
-2. Read `references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
-3. Run the checker from the target frontend repo:
+1. If the task asks to change, polish, fix, redesign, or make the UI pass BeUniq, first check whether the target repo has both `PRODUCT.md` and `DESIGN.md`. If both exist, read them and use them as constraints. If either is missing, the first visible response must be the Design Intake questions. Stop after asking and wait for the user's answers unless the user explicitly says to choose defaults.
+2. After the user answers intake, create `PRODUCT.md` and `DESIGN.md` in the target repo before making UI edits. Use `scripts/beuniq-init.ts` when practical, then fill missing sections from the user's answers. Do not overwrite existing context files unless the user explicitly asks.
+3. Skip intake only when the user explicitly asks for audit/report only, CI usage, or no questions. For audit/report-only usage, still let the checker report whether project context exists.
+4. Read `references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
+5. Run the checker from the target frontend repo:
 
 ```bash
 npx --yes tsx /path/to/beuniq-design/scripts/beuniq-check.ts --root . --format markdown
 ```
 
-4. Treat `aiSlop <= 20`, `copySlop <= 20`, and `tasteScore <= 20` as passing unless the user gives a different threshold.
-5. If the project fails, make targeted code changes only for reported findings and the user's intake answers. Preserve product meaning, content semantics, data fetching, routing, state management, component boundaries, accessibility intent, and existing design-system tokens.
-6. Re-run the checker after each fix pass. Continue until the score passes or the remaining findings are marked visual-only/human-judgment.
+6. Treat `aiSlop <= 20`, `copySlop <= 20`, and `tasteScore <= 20` as passing unless the user gives a different threshold.
+7. If the project fails, make targeted code changes only for reported findings and the saved project context. Preserve product meaning, content semantics, data fetching, routing, state management, component boundaries, accessibility intent, and existing design-system tokens.
+8. Re-run the checker after each fix pass. Continue until the score passes or the remaining findings are marked visual-only/human-judgment.
+
+## Project Context
+
+`PRODUCT.md` is the strategy file: product, audience, primary design goal, voice/copy rules, references, constraints, and do-not-change items.
+
+`DESIGN.md` is the visual direction file: theme, style direction, color direction, density, typography, motion, components, BeUniq rule priorities, and visual review needs.
+
+Useful commands:
+
+```bash
+npx --yes tsx /path/to/beuniq-design/scripts/beuniq-init.ts --root . --check
+npx --yes tsx /path/to/beuniq-design/scripts/beuniq-init.ts --root . --product "..." --audience "..." --goal "..." --theme "..." --style "..." --colors "..." --density "..." --motion "..."
+```
+
+If context files already exist, read them instead of asking repeated intake questions. If only one file exists, ask only for the missing information and create only the missing file.
 
 ## Design Intake
 
@@ -40,16 +57,18 @@ Optional when relevant:
 - Motion taste: no motion, crisp functional motion, springy/native, or expressive brand motion?
 - References: ask for 1-3 product/site references if the user mentions a visual benchmark or the current repo has no clear brand direction.
 
-After the intake, summarize the chosen direction in one sentence and use it as a constraint for all fixes. Example: "Direction: light, dense SaaS dashboard, neutral palette with one blue accent, built for expert operators; prioritize clarity and speed over decorative delight."
+After the intake, create or update the missing project-context file(s), summarize the chosen direction in one sentence, and use it as a constraint for all fixes. Example: "Direction: light, dense SaaS dashboard, neutral palette with one blue accent, built for expert operators; prioritize clarity and speed over decorative delight."
 
 ## Scripts
 
-- `scripts/beuniq-check.ts`: deterministic scanner, scorer, Markdown/JSON reporter, and conservative `--fix` mode.
+- `scripts/beuniq-init.ts`: deterministic creator/checker for `PRODUCT.md` and `DESIGN.md` project-context files.
+- `scripts/beuniq-check.ts`: deterministic scanner, scorer, Markdown/JSON reporter, context-aware finding annotations, and conservative `--fix` mode.
 - `scripts/beuniq-report.ts`: report writer for CI artifacts and saved audits.
 
 Useful commands:
 
 ```bash
+npx --yes tsx /path/to/beuniq-design/scripts/beuniq-init.ts --root . --check
 npx --yes tsx /path/to/beuniq-design/scripts/beuniq-check.ts --root . --format markdown
 npx --yes tsx /path/to/beuniq-design/scripts/beuniq-check.ts --root . --format json
 npx --yes tsx /path/to/beuniq-design/scripts/beuniq-check.ts --root . --fix --format markdown

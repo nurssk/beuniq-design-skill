@@ -1,6 +1,6 @@
 # BeUniq Design Skill
 
-BeUniq is a rule-based Codex/Claude skill for detecting and reducing generic AI-generated UI patterns in frontend code. It does not call AI APIs, vision models, browser automation, telemetry endpoints, or external services.
+BeUniq is a rule-based Codex/Claude skill for detecting and reducing generic AI-generated UI patterns in frontend code. It also gives agents a persistent project-context workflow through `PRODUCT.md` and `DESIGN.md`, so design direction does not disappear after one chat. It does not call AI APIs, vision models, browser automation, telemetry endpoints, or external services.
 
 The skill is designed for React, Next.js, Vite, static HTML, CSS, SCSS, and Tailwind-heavy projects. It statically inspects source code, visible copy, class names, inline styles, and CSS declarations, then scores design AI slop, landing-copy slop, and taste from `0` to `100`. A project passes when `AI slop <= 20`, `Copy slop <= 20`, and `Taste <= 20`.
 
@@ -50,11 +50,41 @@ For local development in this repository:
 
 ```bash
 npm install
+npm run beuniq:init -- --root ./tests/fixtures/clean --check
 npm run beuniq:check -- --root ./tests/fixtures/sloppy --format markdown
 npm test
 ```
 
 ## Usage
+
+### First Run: `beuniq init`
+
+Before asking an agent to redesign, polish, or fix a frontend, initialize project context:
+
+```bash
+npm run beuniq:init -- --root /path/to/frontend \
+  --product "Source-level design review for frontend teams" \
+  --audience "Frontend engineers and product teams" \
+  --goal "clarity and speed" \
+  --theme "light" \
+  --style "minimal/productive" \
+  --colors "neutral with one blue accent" \
+  --density "dashboard-dense" \
+  --motion "crisp functional motion"
+```
+
+This creates:
+
+- `PRODUCT.md`: product, audience, design goal, voice/copy rules, references, constraints, and do-not-change items.
+- `DESIGN.md`: theme, style direction, color direction, density, typography, motion, component preferences, BeUniq rule priorities, and visual review needs.
+
+Check whether a project is ready:
+
+```bash
+npm run beuniq:init -- --root /path/to/frontend --check
+```
+
+`beuniq init` never overwrites existing context files unless you pass `--force`.
 
 ### Design Intake
 
@@ -66,7 +96,9 @@ When asked to change, polish, fix, redesign, or make a UI pass BeUniq, the skill
 - color direction: keep current, neutral, monochrome, vibrant accent, specific brand colors, or colors to avoid
 - density and audience: dashboard-dense, marketing spacious, mobile-first, desktop workflow, expert users, or broad consumer
 
-The agent skips intake only for audit/report-only usage, CI usage, or when explicitly told not to ask questions.
+The agent stores these answers in `PRODUCT.md` and `DESIGN.md`. On future runs, it reads those files instead of asking the same questions again. The agent skips intake only for audit/report-only usage, CI usage, or when explicitly told not to ask questions.
+
+### Check And Fix
 
 Audit a project:
 
@@ -87,6 +119,8 @@ npm run beuniq:check -- --root /path/to/frontend --fix --format markdown
 ```
 
 The fixer only changes obvious code-level signals such as oversized radius utilities, pill overload, decorative gradients, glow shadows, glass blur, dramatic shadows, over-padding, and uppercase tracking. It does not redesign layouts, rewrite business logic, rename components, alter data fetching, or call external APIs.
+
+`beuniq check` includes a `projectContext` block in JSON and Markdown reports. If `DESIGN.md` asks for a restrained/productive direction, findings such as glow, gradient, glass, and decorative motion are annotated as context conflicts so agents prioritize them during targeted fixes.
 
 ## Scoring Model
 

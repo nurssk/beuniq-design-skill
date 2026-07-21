@@ -1,4 +1,4 @@
 interface:
   display_name: "BeUniq"
-  short_description: "Rule-based AI-slop, copy, taste, and motion-craft checker for frontend code."
-  default_prompt: "Use BeUniq to audit this frontend code for AI-slop, copy slop, taste, and motion craft, then apply targeted fixes until it passes."
+  short_description: "Rule-based frontend design context, AI-slop, copy, taste, and motion-craft checker."
+  default_prompt: "Use BeUniq to initialize PRODUCT.md/DESIGN.md if needed, audit this frontend for AI-slop, copy slop, taste, and motion craft, then apply targeted fixes until it passes."

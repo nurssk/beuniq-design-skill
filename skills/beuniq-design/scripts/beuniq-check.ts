@@ -33,6 +33,29 @@ type Finding = {
   line: number;
   evidence: string;
   recommendation: string;
+  contextConflict?: string;
+};
+
+type ProjectContext = {
+  product: {
+    path: string;
+    exists: boolean;
+    loaded: boolean;
+    product?: string;
+    audience?: string;
+    primaryDesignGoal?: string;
+  };
+  design: {
+    path: string;
+    exists: boolean;
+    loaded: boolean;
+    theme?: string;
+    styleDirection?: string;
+    colorDirection?: string;
+    density?: string;
+    motion?: string;
+  };
+  warnings: string[];
 };
 
 type CategoryScore = {
@@ -71,6 +94,7 @@ type Report = {
   copySlopScore: number;
   tasteScore: number;
   designQualityScore: number;
+  projectContext: ProjectContext;
   scannedFiles: number;
   catalogCoverage: {
     aiSlopRules: number;
@@ -495,9 +519,45 @@ const TASTE_CODE_PATTERNS: Array<[string, RegExp]> = [
   ["TASTE-PLT-003", /\b(?:confetti|sparkles|celebration|fireworks|magic|animate-bounce)\b/i]
 ];
 
+const RESTRAINT_CONFLICT_RULES = new Set([
+  "CLR-001",
+  "CLR-002",
+  "CLR-003",
+  "CLR-004",
+  "CLR-008",
+  "CLR-017",
+  "CRD-010",
+  "FX-004",
+  "FX-005",
+  "FX-007",
+  "gradient-overuse",
+  "gradient-text",
+  "glow-heavy-ui",
+  "glassmorphism-default",
+  "dramatic-shadows"
+]);
+
+const MOTION_CONFLICT_RULES = new Set([
+  "MOT-001",
+  "MOT-003",
+  "MOT-005",
+  "MOT-006",
+  "MOT-012",
+  "MOT-016",
+  "MOT-020",
+  "TASTE-MOT-001",
+  "TASTE-MOT-002",
+  "TASTE-MOT-003",
+  "TASTE-MOT-004",
+  "TASTE-MOT-005",
+  "TASTE-A11Y-001",
+  "TASTE-A11Y-002"
+]);
+
 export async function runBeUniqCheck(options: Options): Promise<Report> {
   const root = path.resolve(options.root);
   const catalog = await loadCatalogBundle();
+  const projectContext = await loadProjectContext(root);
   const files = await collectFrontendFiles(root);
   const findings: Finding[] = [];
   const fixedFiles: string[] = [];
@@ -516,6 +576,7 @@ export async function runBeUniqCheck(options: Options): Promise<Report> {
     scannedSource.push(source);
     findings.push(...scanSource(root, file, source, catalog));
   }
+  applyProjectContextConflicts(findings, projectContext);
   const allSource = scannedSource.join("\n");
 
   const aiScore = scoreWeighted(
@@ -566,6 +627,7 @@ export async function runBeUniqCheck(options: Options): Promise<Report> {
     copySlopScore,
     tasteScore: taste,
     designQualityScore,
+    projectContext,
     scannedFiles: files.length,
     catalogCoverage: {
       aiSlopRules: catalog.ai.length,
@@ -602,6 +664,10 @@ export function formatMarkdown(report: Report): string {
   lines.push(`- Copy slop: ${report.copySlopScore}/100`);
   lines.push(`- Taste: ${report.tasteScore}/100`);
   lines.push(`- Design quality: ${report.designQualityScore}/100`);
+  lines.push(`- Project context: PRODUCT.md ${report.projectContext.product.loaded ? "loaded" : "missing"}, DESIGN.md ${report.projectContext.design.loaded ? "loaded" : "missing"}`);
+  if (report.projectContext.design.styleDirection) lines.push(`- Style direction: ${report.projectContext.design.styleDirection}`);
+  if (report.projectContext.design.colorDirection) lines.push(`- Color direction: ${report.projectContext.design.colorDirection}`);
+  if (report.projectContext.design.motion) lines.push(`- Motion: ${report.projectContext.design.motion}`);
   lines.push(`- Threshold: <= ${report.threshold}`);
   lines.push(`- Catalog: ${report.catalogCoverage.aiSlopRules} AI/design + ${report.catalogCoverage.landingCopyRules} landing-copy + ${report.catalogCoverage.tasteRules} taste + ${report.catalogCoverage.legacyRules} legacy rules`);
   lines.push(`- Code-detected catalog rules in this no-AI mode: ${report.catalogCoverage.codeDetectedCatalogRules}`);
@@ -624,6 +690,7 @@ export function formatMarkdown(report: Report): string {
       const contribution = finding.countedContribution === undefined ? "" : ` (${finding.countedContribution} pts)`;
       lines.push(`- [${finding.severity}] \`${finding.ruleId}\` ${finding.title}${contribution}`);
       lines.push(`  ${finding.file}:${finding.line} - ${finding.evidence}`);
+      if (finding.contextConflict) lines.push(`  Context: ${finding.contextConflict}`);
       lines.push(`  Fix: ${finding.recommendation}`);
     }
   }
@@ -693,6 +760,91 @@ async function loadCatalogBundle(): Promise<CatalogBundle> {
 async function readCatalog(fileName: string): Promise<CatalogRule[]> {
   const raw = await fs.readFile(path.join(REFERENCES_DIR, fileName), "utf8");
   return JSON.parse(raw).rules as CatalogRule[];
+}
+
+async function loadProjectContext(root: string): Promise<ProjectContext> {
+  const productPath = path.join(root, "PRODUCT.md");
+  const designPath = path.join(root, "DESIGN.md");
+  const [productSource, designSource] = await Promise.all([readOptional(productPath), readOptional(designPath)]);
+  const warnings: string[] = [];
+  if (!productSource) warnings.push("PRODUCT.md is missing; run beuniq init before design changes.");
+  if (!designSource) warnings.push("DESIGN.md is missing; run beuniq init before design changes.");
+
+  return {
+    product: {
+      path: productPath,
+      exists: productSource !== undefined,
+      loaded: productSource !== undefined,
+      product: productSource ? extractSection(productSource, "Product") : undefined,
+      audience: productSource ? extractSection(productSource, "Audience") : undefined,
+      primaryDesignGoal: productSource ? extractSection(productSource, "Primary Design Goal") : undefined
+    },
+    design: {
+      path: designPath,
+      exists: designSource !== undefined,
+      loaded: designSource !== undefined,
+      theme: designSource ? extractSection(designSource, "Theme") : undefined,
+      styleDirection: designSource ? extractSection(designSource, "Style Direction") : undefined,
+      colorDirection: designSource ? extractSection(designSource, "Color Direction") : undefined,
+      density: designSource ? extractSection(designSource, "Density") : undefined,
+      motion: designSource ? extractSection(designSource, "Motion") : undefined
+    },
+    warnings
+  };
+}
+
+async function readOptional(filePath: string): Promise<string | undefined> {
+  try {
+    return await fs.readFile(filePath, "utf8");
+  } catch (error) {
+    if (isNotFound(error)) return undefined;
+    throw error;
+  }
+}
+
+function extractSection(source: string, heading: string): string | undefined {
+  const lines = source.split(/\r?\n/);
+  const headingPattern = /^#{1,2}\s+(.+?)\s*$/;
+  const start = lines.findIndex((line) => headingPattern.exec(line)?.[1]?.toLowerCase() === heading.toLowerCase());
+  if (start === -1) return undefined;
+  const body: string[] = [];
+  for (let index = start + 1; index < lines.length; index += 1) {
+    if (headingPattern.test(lines[index])) break;
+    body.push(lines[index]);
+  }
+  const value = body.join("\n").trim();
+  if (!value || value === "TBD") return undefined;
+  return value.replace(/\s+/g, " ").slice(0, 220);
+}
+
+function applyProjectContextConflicts(findings: Finding[], context: ProjectContext) {
+  const designText = [
+    context.design.styleDirection,
+    context.design.colorDirection,
+    context.design.density,
+    context.design.motion,
+    context.product.primaryDesignGoal
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (!designText) return;
+  const wantsRestraint = /\b(minimal|productive|linear|vercel|neutral|monochrome|calm|clarity|speed|technical|expert|dense|no motion|functional)\b/i.test(designText);
+  const wantsLowMotion = /\b(no motion|crisp functional|functional motion|calm|speed|productive|expert)\b/i.test(designText);
+
+  for (const finding of findings) {
+    if (wantsRestraint && RESTRAINT_CONFLICT_RULES.has(finding.ruleId)) {
+      finding.contextConflict = "Project context asks for a restrained/productive direction, so decorative effects should be treated as higher-priority cleanup.";
+    }
+    if (wantsLowMotion && MOTION_CONFLICT_RULES.has(finding.ruleId)) {
+      finding.contextConflict = "Project context favors restrained functional motion, so this motion finding should be fixed before decorative polish.";
+    }
+  }
+}
+
+function isNotFound(error: unknown): boolean {
+  return Boolean(error && typeof error === "object" && "code" in error && (error as { code?: string }).code === "ENOENT");
 }
 
 function scanSource(root: string, file: string, source: string, catalog: CatalogBundle): Finding[] {

@@ -23,6 +23,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "beuniq:init": "tsx skills/beuniq-design/scripts/beuniq-init.ts",
     "beuniq:check": "tsx skills/beuniq-design/scripts/beuniq-check.ts",
     "beuniq:report": "tsx skills/beuniq-design/scripts/beuniq-report.ts",
     "test": "tsx tests/beuniq-check.test.ts",
