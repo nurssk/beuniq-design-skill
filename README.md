@@ -56,6 +56,18 @@ npm test
 
 ## Usage
 
+### Design Intake
+
+When asked to change, polish, fix, redesign, or make a UI pass BeUniq, the skill first asks a compact design intake before editing:
+
+- theme: light, dark, system/adaptive, or keep current
+- style direction: minimal/productive, editorial, Apple-like native, Linear/Vercel-like SaaS, playful, premium/luxury, brutalist, or another reference
+- design goal: trust, clarity, conversion, speed, calm, delight, technical credibility, or another outcome
+- color direction: keep current, neutral, monochrome, vibrant accent, specific brand colors, or colors to avoid
+- density and audience: dashboard-dense, marketing spacious, mobile-first, desktop workflow, expert users, or broad consumer
+
+The agent skips intake only for audit/report-only usage, CI usage, or when explicitly told not to ask questions.
+
 Audit a project:
 
 ```bash
@@ -104,4 +116,3 @@ Keep the project deterministic and local-first:
 ## License
 
 MIT.
-# beuniq-design-skill

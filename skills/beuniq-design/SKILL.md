@@ -11,16 +11,36 @@ Use BeUniq to statically inspect frontend source code for AI-slop, landing-copy 
 
 ## Workflow
 
-1. Read `references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
-2. Run the checker from the target frontend repo:
+1. If the task asks to change, polish, fix, redesign, or make the UI pass BeUniq, run the Design Intake before editing. Skip intake only when the user explicitly asks for audit/report only, CI usage, or no questions.
+2. Read `references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
+3. Run the checker from the target frontend repo:
 
 ```bash
 npx --yes tsx /path/to/beuniq-design/scripts/beuniq-check.ts --root . --format markdown
 ```
 
-3. Treat `aiSlop <= 20`, `copySlop <= 20`, and `tasteScore <= 20` as passing unless the user gives a different threshold.
-4. If the project fails, make targeted code changes only for reported findings. Preserve product meaning, content semantics, data fetching, routing, state management, component boundaries, accessibility intent, and existing design-system tokens.
-5. Re-run the checker after each fix pass. Continue until the score passes or the remaining findings are marked visual-only/human-judgment.
+4. Treat `aiSlop <= 20`, `copySlop <= 20`, and `tasteScore <= 20` as passing unless the user gives a different threshold.
+5. If the project fails, make targeted code changes only for reported findings and the user's intake answers. Preserve product meaning, content semantics, data fetching, routing, state management, component boundaries, accessibility intent, and existing design-system tokens.
+6. Re-run the checker after each fix pass. Continue until the score passes or the remaining findings are marked visual-only/human-judgment.
+
+## Design Intake
+
+Before making design changes, ask a compact set of questions. Do not ask more than six. If the user already answered some of them, do not repeat those questions. If the user does not answer or asks you to choose, pick conservative defaults that match the existing product.
+
+Required questions:
+
+1. **Theme:** light, dark, system/adaptive, or keep current?
+2. **Style direction:** minimal/productive, editorial, Apple-like native, Linear/Vercel-like SaaS, playful, premium/luxury, brutalist, or another reference?
+3. **Design goal:** trust, clarity, conversion, speed, calm, delight, technical credibility, or another outcome?
+4. **Color direction:** keep current palette, neutral, monochrome, vibrant accent, specific brand colors, or avoid certain colors?
+5. **Density and audience:** dashboard-dense, marketing spacious, mobile-first, desktop workflow, expert users, or broad consumer?
+
+Optional when relevant:
+
+- Motion taste: no motion, crisp functional motion, springy/native, or expressive brand motion?
+- References: ask for 1-3 product/site references if the user mentions a visual benchmark or the current repo has no clear brand direction.
+
+After the intake, summarize the chosen direction in one sentence and use it as a constraint for all fixes. Example: "Direction: light, dense SaaS dashboard, neutral palette with one blue accent, built for expert operators; prioritize clarity and speed over decorative delight."
 
 ## Scripts
 
