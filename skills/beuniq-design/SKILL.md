@@ -1,6 +1,6 @@
 ---
 name: beuniq-design
-description: Rule-based frontend design, taste, motion-craft, and landing-copy audit with targeted cleanup for detecting generic AI-generated UI patterns without AI APIs. Use when Codex is asked to make a React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, improve taste, review motion craft, run an AI-slop/design-quality check, enforce BeUniq design criteria, or iterate until AI slop is at or below 20.
+description: Rule-based frontend design, taste, motion-craft, and landing-copy audit with targeted cleanup for detecting generic AI-generated UI patterns without AI APIs. Use when Codex is asked to make a React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, improve taste, review motion craft, run an AI-slop/design-quality check, enforce BeUniq design criteria, or iterate until AI slop is at or below 20. For any requested UI change, polish, redesign, cleanup, or fix pass, the first response must ask the BeUniq Design Intake questions and wait for the user's answers before editing or running fixes.
 ---
 
 # BeUniq Design
@@ -11,7 +11,7 @@ Use BeUniq to statically inspect frontend source code for AI-slop, landing-copy 
 
 ## Workflow
 
-1. If the task asks to change, polish, fix, redesign, or make the UI pass BeUniq, run the Design Intake before editing. Skip intake only when the user explicitly asks for audit/report only, CI usage, or no questions.
+1. If the task asks to change, polish, fix, redesign, or make the UI pass BeUniq, the first response must be the Design Intake questions. Stop after asking and wait for the user's answers. Do not run the checker, edit files, or choose defaults until the user answers, unless the user explicitly says to choose for them. Skip intake only when the user explicitly asks for audit/report only, CI usage, or no questions.
 2. Read `references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
 3. Run the checker from the target frontend repo:
 
@@ -25,7 +25,7 @@ npx --yes tsx /path/to/beuniq-design/scripts/beuniq-check.ts --root . --format m
 
 ## Design Intake
 
-Before making design changes, ask a compact set of questions. Do not ask more than six. If the user already answered some of them, do not repeat those questions. If the user does not answer or asks you to choose, pick conservative defaults that match the existing product.
+Before making design changes, ask a compact set of questions as the first visible response. Do not ask more than six. If the user already answered some of them, do not repeat those questions. If the user asks you to choose, pick conservative defaults that match the existing product.
 
 Required questions:
 
