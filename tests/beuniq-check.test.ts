@@ -31,6 +31,7 @@ const tailwindHeavy = path.join(repoRoot, "tests/fixtures/tailwind-heavy");
 const cssModule = path.join(repoRoot, "tests/fixtures/css-module");
 const dashboard = path.join(repoRoot, "tests/fixtures/dashboard");
 const copyOnly = path.join(repoRoot, "tests/fixtures/copy-only");
+const tasteMotion = path.join(repoRoot, "tests/fixtures/taste-motion");
 
 const sloppyResult = runCheck(sloppy);
 assert.equal(sloppyResult.status, 1);
@@ -63,17 +64,29 @@ assert.ok(copyOnlyResult.report.copySlopScore > 20);
 assert.ok(copyOnlyResult.report.findings.some((finding: { ruleId: string }) => finding.ruleId === "LP-LEX-001"));
 assert.ok(copyOnlyResult.report.scoring.copySlop.activeCategories >= 3);
 
+const tasteResult = runCheck(tasteMotion);
+assert.equal(tasteResult.status, 1);
+assert.equal(tasteResult.report.passed, false);
+assert.ok(tasteResult.report.aiSlopScore <= 20);
+assert.ok(tasteResult.report.copySlopScore <= 20);
+assert.ok(tasteResult.report.tasteScore > 20);
+assert.ok(tasteResult.report.findings.some((finding: { ruleId: string }) => finding.ruleId === "TASTE-MOT-001"));
+assert.ok(tasteResult.report.findings.some((finding: { ruleId: string }) => finding.ruleId === "TASTE-PHY-001"));
+assert.ok(tasteResult.report.scoring.taste.activeCategories >= 3);
+
 for (const fixture of [clean, tailwindHeavy, cssModule, dashboard]) {
   const result = runCheck(fixture);
   assert.equal(result.status, 0, `${fixture} should pass`);
   assert.equal(result.report.passed, true);
   assert.ok(result.report.aiSlopScore <= 20);
+  assert.ok(result.report.tasteScore <= 20);
 }
 
 const cleanReport = runCheck(clean).report;
 assert.equal(cleanReport.catalogCoverage.aiSlopRules, 325);
 assert.equal(cleanReport.catalogCoverage.landingCopyRules, 301);
 assert.equal(cleanReport.catalogCoverage.legacyRules, 74);
+assert.ok(cleanReport.catalogCoverage.tasteRules >= 18);
 assert.ok(cleanReport.catalogCoverage.codeDetectedCatalogRules > 100);
 assert.ok(cleanReport.catalogCoverage.legacyCodeRules > 10);
 const visualRules = cleanReport.skippedRuleExamples;

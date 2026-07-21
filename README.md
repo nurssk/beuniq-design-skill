@@ -2,13 +2,14 @@
 
 BeUniq is a rule-based Codex/Claude skill for detecting and reducing generic AI-generated UI patterns in frontend code. It does not call AI APIs, vision models, browser automation, telemetry endpoints, or external services.
 
-The skill is designed for React, Next.js, Vite, static HTML, CSS, SCSS, and Tailwind-heavy projects. It statically inspects source code, visible copy, class names, inline styles, and CSS declarations, then scores design AI slop and landing-copy slop from `0` to `100`. A project passes when both `AI slop <= 20` and `Copy slop <= 20`.
+The skill is designed for React, Next.js, Vite, static HTML, CSS, SCSS, and Tailwind-heavy projects. It statically inspects source code, visible copy, class names, inline styles, and CSS declarations, then scores design AI slop, landing-copy slop, and taste from `0` to `100`. A project passes when `AI slop <= 20`, `Copy slop <= 20`, and `Taste <= 20`.
 
 The bundled reference catalog is derived from SwipeUI's BeUniq rulebase:
 
 - 325 weighted AI/design slop rules from `aiSlopCatalog.ts`
 - 301 landing-page copy rules from `landingCopyCatalog.ts`
 - 74 legacy Uncodixify/design-quality rules from `uncodixifyRules.ts`
+- 18 code-detectable taste/motion-craft rules adapted from Emil Kowalski's MIT-licensed design-engineering skills
 
 Because v1 is code-only, the checker hard-fails only rules that can be detected reliably from source text. Rules that require rendered DOM, screenshots, computed styles, metadata context, semantic judgment, or human review remain available as reference-only catalog entries.
 
@@ -77,13 +78,18 @@ The fixer only changes obvious code-level signals such as oversized radius utili
 
 ## Scoring Model
 
-BeUniq reports three dimensions:
+BeUniq reports four dimensions:
 
 - `aiSlop`: taste and pattern signals that make UI feel generated, such as huge rounded cards, gradient text, glow-heavy surfaces, generic premium copy, centered-stack defaults, and repetitive equal cards.
 - `copySlop`: generic landing-page writing signals, such as vague transformation claims, generic CTAs, unsupported social proof, vague pricing language, fake testimonial patterns, repeated sentence structures, and promotional cliche density.
+- `taste`: motion and craft signals, such as `transition-all`, `ease-in` UI motion, slow everyday transitions, `scale(0)` entrances, wrong popover origins, layout-property animation, missing reduced-motion handling, ungated hover motion, weak press feedback, and over-stacked glass.
 - `designQuality`: correctness and accessibility issues detectable from code, such as missing image alt text or unlabeled icon buttons.
 
 Only code-detectable rules affect the v1 pass/fail result. Visual-only checks are listed as skipped because they need rendered screenshots, computed styles, or human judgment.
+
+## Taste Sources
+
+The taste layer is adapted from Emil Kowalski's public [skills repository](https://github.com/emilkowalski/skills/tree/main/skills), especially `emil-design-eng`, `apple-design`, `animation-vocabulary`, and `review-animations`. Those materials are MIT licensed; BeUniq converts a compact subset of the principles into deterministic source-code checks.
 
 ## Contributing
 

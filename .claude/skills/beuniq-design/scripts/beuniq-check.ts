@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 type Severity = "low" | "medium" | "high";
-type Axis = "aiSlop" | "copySlop" | "designQuality";
+type Axis = "aiSlop" | "copySlop" | "taste" | "designQuality";
 type DetectionMode = "code" | "visual-only";
 type Confidence = "low" | "medium" | "high";
 
@@ -69,18 +69,21 @@ type Report = {
   passed: boolean;
   aiSlopScore: number;
   copySlopScore: number;
+  tasteScore: number;
   designQualityScore: number;
   scannedFiles: number;
   catalogCoverage: {
     aiSlopRules: number;
     landingCopyRules: number;
     legacyRules: number;
+    tasteRules: number;
     codeDetectedCatalogRules: number;
     legacyCodeRules: number;
   };
   scoring: {
     aiSlop: WeightedScore;
     copySlop: WeightedScore;
+    taste: WeightedScore;
   };
   findings: Finding[];
   skippedRuleCount: number;
@@ -197,6 +200,17 @@ const LP_CATEGORY_CAPS: Record<string, number> = {
   contradiction: 14
 };
 
+const TASTE_CATEGORY_CAPS: Record<string, number> = {
+  motionPurpose: 14,
+  motionTiming: 16,
+  physicality: 14,
+  performance: 16,
+  interactionFeedback: 12,
+  accessibility: 12,
+  typographyCraft: 10,
+  platformRestraint: 12
+};
+
 const AI_COMPOUND_RULES = [
   { id: "CMP-001", name: "Generic AI SaaS hero", weight: 8, members: ["LAY-001", "TYP-001", "UI-001", "CLR-003", "AST-001"] },
   { id: "CMP-002", name: "Generic AI startup landing page", weight: 9, members: ["DOM-010", "LAY-010", "LAY-014", "LAY-015", "LAY-016"] },
@@ -221,6 +235,34 @@ const LP_COMPOUND_RULES = [
   { id: "LP-CMP-008", name: "Generic FAQ stack", weight: 9, members: ["LP-FAQ-002", "LP-FAQ-003", "LP-FAQ-004", "LP-FAQ-011", "LP-FAQ-020"] },
   { id: "LP-CMP-009", name: "Low-specificity landing page", weight: 15, members: ["LP-SPC-001", "LP-SPC-002", "LP-SPC-003", "LP-SPC-004", "LP-SPC-005"] },
   { id: "LP-CMP-010", name: "Generic launch-page copy", weight: 8, members: ["LP-BDG-008", "LP-HERO-013", "LP-SUB-004", "LP-CTA-019", "LP-END-001"] }
+];
+
+const TASTE_COMPOUND_RULES = [
+  { id: "TASTE-CMP-001", name: "Sluggish generic UI motion", weight: 8, members: ["TASTE-MOT-001", "TASTE-MOT-002", "TASTE-MOT-003", "TASTE-PERF-001"] },
+  { id: "TASTE-CMP-002", name: "Physically incorrect popover motion", weight: 7, members: ["TASTE-PHY-001", "TASTE-PHY-002", "TASTE-MOT-002"] },
+  { id: "TASTE-CMP-003", name: "Decorative motion without restraint", weight: 7, members: ["TASTE-MOT-004", "TASTE-MOT-005", "TASTE-A11Y-001"] },
+  { id: "TASTE-CMP-004", name: "Low-craft interaction feedback", weight: 6, members: ["TASTE-FBK-001", "TASTE-FBK-002", "TASTE-MOT-001"] }
+];
+
+const TASTE_RULES: Rule[] = [
+  rule("TASTE-MOT-001", "Unbounded transition-all motion", "high", "taste", "motionTiming", "Animate explicit properties only, usually transform and opacity."),
+  rule("TASTE-MOT-002", "Ease-in UI motion", "high", "taste", "motionTiming", "Use ease-out for entering/responding UI; ease-in delays the moment users watch."),
+  rule("TASTE-MOT-003", "Slow everyday UI animation", "high", "taste", "motionTiming", "Keep ordinary UI motion under 300ms unless it is a modal, drawer, or explanatory moment."),
+  rule("TASTE-MOT-004", "High-frequency decorative motion", "medium", "taste", "motionPurpose", "Remove or drastically reduce motion users see many times per day."),
+  rule("TASTE-MOT-005", "Idle float or pulse as decoration", "medium", "taste", "motionPurpose", "Delete ambient float/pulse unless it communicates state or a rare brand moment."),
+  rule("TASTE-PHY-001", "Scale from zero", "high", "taste", "physicality", "Start from scale(0.9-0.97) plus opacity; nothing should appear from scale(0)."),
+  rule("TASTE-PHY-002", "Trigger-anchored surface uses center origin", "medium", "taste", "physicality", "Popover/dropdown/tooltip surfaces should scale from their trigger; modals may stay centered."),
+  rule("TASTE-PERF-001", "Layout property animation", "high", "taste", "performance", "Move motion to transform or opacity so it stays compositor-friendly."),
+  rule("TASTE-PERF-002", "Keyframes for rapidly triggered UI", "medium", "taste", "performance", "Prefer interruptible transitions, WAAPI, or springs for toasts, toggles, and rapidly repeated UI."),
+  rule("TASTE-A11Y-001", "Movement without reduced-motion fallback", "high", "taste", "accessibility", "Add prefers-reduced-motion handling that drops large movement while preserving useful feedback."),
+  rule("TASTE-A11Y-002", "Ungated hover motion", "medium", "taste", "accessibility", "Gate hover motion behind @media (hover: hover) and (pointer: fine)."),
+  rule("TASTE-FBK-001", "Pressable element lacks active feedback", "low", "taste", "interactionFeedback", "Add subtle pointer-down feedback such as active:scale-[0.97] when appropriate."),
+  rule("TASTE-FBK-002", "Delayed press feedback", "medium", "taste", "interactionFeedback", "Show feedback on pointer-down/active state, not only after click completes."),
+  rule("TASTE-TYP-001", "Decorative tracking overuse", "medium", "taste", "typographyCraft", "Use tracking intentionally by size; avoid blanket wide tracking for UI labels."),
+  rule("TASTE-TYP-002", "Fixed text sizing that resists user settings", "low", "taste", "typographyCraft", "Prefer rem/clamp/system scale so layout respects user text size."),
+  rule("TASTE-PLT-001", "Over-stacked translucent materials", "medium", "taste", "platformRestraint", "Use translucent material sparingly; do not stack glass on glass where legibility collapses."),
+  rule("TASTE-PLT-002", "Hard divider under floating chrome", "low", "taste", "platformRestraint", "Prefer contextual separation only where floating UI overlaps content."),
+  rule("TASTE-PLT-003", "Generic delight instead of craft", "medium", "taste", "platformRestraint", "Remove confetti, sparkles, bounce, or celebration patterns that are not earned by the product moment.")
 ];
 
 const AI_NEGATIVE_SIGNALS = [
@@ -279,7 +321,7 @@ const RULES: Rule[] = [
   rule("mobile-viewport-height-risk", "Mobile viewport height risk", "medium", "designQuality", "visual-validation", "Verify mobile rendering for viewport clipping.", "visual-only")
 ];
 
-const RULE_BY_ID = new Map(RULES.map((entry) => [entry.id, entry]));
+const RULE_BY_ID = new Map([...RULES, ...TASTE_RULES].map((entry) => [entry.id, entry]));
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REFERENCES_DIR = path.resolve(SCRIPT_DIR, "../references/catalogs");
 
@@ -433,6 +475,26 @@ const LP_CODE_PATTERNS: Array<[string, RegExp]> = [
   ["LP-LEX-001", /\b(?:transform|reimagine|redefine|revolutionize|elevate|unlock|empower|supercharge|streamline|seamless|effortless|powerful|game-changing)\b/i]
 ];
 
+const TASTE_CODE_PATTERNS: Array<[string, RegExp]> = [
+  ["TASTE-MOT-001", /\btransition-all\b|transition\s*:\s*all\b/i],
+  ["TASTE-MOT-002", /\bease-in\b|transition-timing-function\s*:\s*ease-in\b/i],
+  ["TASTE-MOT-003", /\bduration-(?:[4-9]\d\d|[1-9]\d{3,})\b|(?:transition-duration|animation-duration)\s*:\s*(?:[4-9]\d\d|[1-9]\d{3,})ms/i],
+  ["TASTE-MOT-004", /\b(?:command|shortcut|palette|combobox|search)\b[^"'\n]{0,160}\b(?:animate|transition|duration-|ease-)/i],
+  ["TASTE-MOT-005", /\b(?:animate-(?:pulse|float|bounce|spin)|animation\s*:[^;\n]*(?:pulse|float|bounce|spin))\b/i],
+  ["TASTE-PHY-001", /\bscale-0\b|scale\(0\)|transform\s*:[^;\n]*scale\(0\)/i],
+  ["TASTE-PHY-002", /\b(?:popover|dropdown|tooltip|menu|select)\b[^"'\n]{0,180}\b(?:origin-center|transform-origin\s*:\s*center)\b/i],
+  ["TASTE-PERF-001", /\b(?:transition|animate|animation)[^"'\n]{0,160}\b(?:width|height|top|left|right|bottom|margin|padding|border-radius)\b|transition-property\s*:[^;\n]*(?:width|height|top|left|right|bottom|margin|padding)/i],
+  ["TASTE-PERF-002", /@keyframes\s+(?:toast|toggle|switch|popover|dropdown|tooltip|modal|drawer)|animation\s*:[^;\n]*(?:toast|toggle|switch|popover|dropdown|tooltip)/i],
+  ["TASTE-A11Y-001", /\b(?:animate-|animation|transition|whileInView|motion\.)\b(?![\s\S]{0,300}prefers-reduced-motion)/i],
+  ["TASTE-A11Y-002", /\bhover:(?:scale|translate|rotate|animate)|:hover\s*{[^}]*transform/i],
+  ["TASTE-FBK-002", /\bonClick\b[^"'\n]{0,180}\b(?:setTimeout|delay|duration-[4-9]\d\d|transition)\b/i],
+  ["TASTE-TYP-001", /\btracking-(?:wide|wider|widest|\[[^\]]+\])\b|letter-spacing\s*:\s*(?:0\.0[5-9]|0\.[1-9]|\d)em/i],
+  ["TASTE-TYP-002", /font-size\s*:\s*\d+px|text-\[\d+px\]|line-height\s*:\s*\d+px/i],
+  ["TASTE-PLT-001", /\b(?:backdrop-blur|backdrop-filter)\b[^"'\n]{0,180}\b(?:backdrop-blur|bg-white\/[1-7]0|bg-black\/[1-7]0)\b/i],
+  ["TASTE-PLT-002", /\b(?:sticky|fixed)\b[^"'\n]{0,160}\bborder-b\b|\b(?:header|toolbar|nav)\b[^"'\n]{0,160}\bborder-bottom\s*:/i],
+  ["TASTE-PLT-003", /\b(?:confetti|sparkles|celebration|fireworks|magic|animate-bounce)\b/i]
+];
+
 export async function runBeUniqCheck(options: Options): Promise<Report> {
   const root = path.resolve(options.root);
   const catalog = await loadCatalogBundle();
@@ -470,14 +532,23 @@ export async function runBeUniqCheck(options: Options): Promise<Report> {
     detectNegativeSignalIds(allSource, LP_NEGATIVE_SIGNALS),
     LP_NEGATIVE_SIGNALS
   );
+  const tasteScore = scoreWeighted(
+    findings.filter((finding) => finding.axis === "taste"),
+    TASTE_CATEGORY_CAPS,
+    TASTE_COMPOUND_RULES,
+    [],
+    []
+  );
   applyContributions(findings, aiScore, "aiSlop");
   applyContributions(findings, copyScore, "copySlop");
+  applyContributions(findings, tasteScore, "taste");
   const aiSlopScore = aiScore.score;
   const copySlopScore = copyScore.score;
+  const taste = tasteScore.score;
   const designQualityPenalty = scoreDesignQuality(findings.filter((finding) => finding.axis === "designQuality"));
   const designQualityScore = Math.max(0, 100 - designQualityPenalty);
   const codeDetectedCatalogIds = new Set([...AI_CODE_PATTERNS, ...LP_CODE_PATTERNS].map(([id]) => id));
-  const legacyCodeIds = new Set(RULES.filter((entry) => entry.mode === "code").map((entry) => entry.id));
+  const legacyCodeIds = new Set([...RULES, ...TASTE_RULES].filter((entry) => entry.mode === "code").map((entry) => entry.id));
   const skippedExamples = [...catalog.ai, ...catalog.lp]
     .filter((entry) => !codeDetectedCatalogIds.has(entry.id))
     .slice(0, 12)
@@ -490,21 +561,24 @@ export async function runBeUniqCheck(options: Options): Promise<Report> {
   return {
     root,
     threshold: options.threshold,
-    passed: aiSlopScore <= options.threshold && copySlopScore <= options.threshold,
+    passed: aiSlopScore <= options.threshold && copySlopScore <= options.threshold && taste <= options.threshold,
     aiSlopScore,
     copySlopScore,
+    tasteScore: taste,
     designQualityScore,
     scannedFiles: files.length,
     catalogCoverage: {
       aiSlopRules: catalog.ai.length,
       landingCopyRules: catalog.lp.length,
       legacyRules: catalog.legacy.length,
+      tasteRules: TASTE_RULES.length,
       codeDetectedCatalogRules: codeDetectedCatalogIds.size,
       legacyCodeRules: legacyCodeIds.size
     },
     scoring: {
       aiSlop: aiScore,
-      copySlop: copyScore
+      copySlop: copyScore,
+      taste: tasteScore
     },
     findings: sortFindings(findings),
     skippedRuleCount: catalog.ai.length + catalog.lp.length - codeDetectedCatalogIds.size,
@@ -526,13 +600,15 @@ export function formatMarkdown(report: Report): string {
   lines.push(`- Scanned files: ${report.scannedFiles}`);
   lines.push(`- AI slop: ${report.aiSlopScore}/100`);
   lines.push(`- Copy slop: ${report.copySlopScore}/100`);
+  lines.push(`- Taste: ${report.tasteScore}/100`);
   lines.push(`- Design quality: ${report.designQualityScore}/100`);
   lines.push(`- Threshold: <= ${report.threshold}`);
-  lines.push(`- Catalog: ${report.catalogCoverage.aiSlopRules} AI/design + ${report.catalogCoverage.landingCopyRules} landing-copy + ${report.catalogCoverage.legacyRules} legacy rules`);
+  lines.push(`- Catalog: ${report.catalogCoverage.aiSlopRules} AI/design + ${report.catalogCoverage.landingCopyRules} landing-copy + ${report.catalogCoverage.tasteRules} taste + ${report.catalogCoverage.legacyRules} legacy rules`);
   lines.push(`- Code-detected catalog rules in this no-AI mode: ${report.catalogCoverage.codeDetectedCatalogRules}`);
   lines.push(`- Legacy local rules: ${report.catalogCoverage.legacyCodeRules}`);
   lines.push(`- AI scoring: ${report.scoring.aiSlop.activeCategories} active categories, compound bonus ${report.scoring.aiSlop.compoundBonus}, negative adjustment ${report.scoring.aiSlop.negativeAdjustment}`);
   lines.push(`- Copy scoring: ${report.scoring.copySlop.activeCategories} active categories, compound bonus ${report.scoring.copySlop.compoundBonus}, negative adjustment ${report.scoring.copySlop.negativeAdjustment}`);
+  lines.push(`- Taste scoring: ${report.scoring.taste.activeCategories} active categories, compound bonus ${report.scoring.taste.compoundBonus}`);
   lines.push(`- Status: ${report.passed ? "PASS" : "FAIL"}`);
   if (report.fixedFiles) {
     lines.push(`- Fixed files: ${report.fixedFiles.length ? report.fixedFiles.map((file) => `\`${file}\``).join(", ") : "none"}`);
@@ -632,6 +708,9 @@ function scanSource(root: string, file: string, source: string, catalog: Catalog
     for (const [ruleId, pattern] of LP_CODE_PATTERNS) {
       detectCatalogLine(findings, catalog, relativeFile, lineNumber, line, ruleId, pattern);
     }
+    for (const [ruleId, pattern] of TASTE_CODE_PATTERNS) {
+      detectLine(findings, relativeFile, lineNumber, line, ruleId, pattern);
+    }
     detectLine(findings, relativeFile, lineNumber, line, "oversized-radius", /\brounded-(?:2xl|3xl|\[2[0-9]px\]|\[3[0-9]px\])\b|border-radius\s*:\s*(?:2[0-9]|3[0-9])px/i);
     detectLine(findings, relativeFile, lineNumber, line, "pill-overload", /\brounded-full\b|border-radius\s*:\s*999(?:9)?px/i);
     detectLine(findings, relativeFile, lineNumber, line, "gradient-overuse", /\bbg-gradient-|linear-gradient|radial-gradient/i);
@@ -652,6 +731,7 @@ function scanSource(root: string, file: string, source: string, catalog: Catalog
 
   detectCenteredStack(findings, relativeFile, source);
   detectRepetitiveCards(findings, relativeFile, lines);
+  detectTasteAggregates(findings, relativeFile, source);
   detectAggregateCatalogRules(findings, catalog, relativeFile, source);
   return dedupeFindings(findings);
 }
@@ -814,6 +894,26 @@ function detectAggregateCatalogRules(
       recommendation: ruleEntry.recommendation ?? `Reduce repeated ${ruleEntry.name ?? ruleId} pattern.`
     });
   }
+}
+
+function detectTasteAggregates(findings: Finding[], file: string, source: string) {
+  const pressableCount = (source.match(/<button\b|role=["']button["']|<a\b[^>]*\b(?:href|onClick)=/g) ?? []).length;
+  const hasActiveFeedback = /\bactive:(?:scale|translate|opacity)|:active\s*{[^}]*(?:transform|opacity)|onPointerDown|onMouseDown/.test(source);
+  if (pressableCount < 3 || hasActiveFeedback) return;
+
+  const firstPressableIndex = source.search(/<button\b|role=["']button["']|<a\b[^>]*\b(?:href|onClick)=/);
+  const ruleEntry = getRule("TASTE-FBK-001");
+  findings.push({
+    ruleId: ruleEntry.id,
+    title: ruleEntry.title,
+    severity: ruleEntry.severity,
+    axis: ruleEntry.axis,
+    group: ruleEntry.group,
+    file,
+    line: lineForIndex(source, firstPressableIndex),
+    evidence: `${pressableCount} pressable elements found without code-detectable active/pointer-down feedback.`,
+    recommendation: ruleEntry.recommendation
+  });
 }
 
 function applySafeFixes(source: string): string {

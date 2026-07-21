@@ -10,6 +10,8 @@ Full machine-readable catalogs are included in:
 - `references/catalogs/landing-copy-rules.json` — 301 SwipeUI landing-copy rules.
 - `references/catalogs/uncodixify-rules.json` — 74 legacy Uncodixify/design-quality rules.
 
+Taste and motion-craft rules are summarized in `references/taste.md`. They are adapted from Emil Kowalski's MIT-licensed design-engineering skills and converted into BeUniq code-only checks.
+
 ## AI-Slop Rules
 
 | id | severity | mode | Detectable signals | Targeted direction |
@@ -41,6 +43,21 @@ Full machine-readable catalogs are included in:
 | `weak-primary-action` | medium | visual-only | primary CTA lacks visual priority | Verify rendered hierarchy. |
 | `mobile-viewport-height-risk` | medium | visual-only | fixed viewport heroes causing mobile clipping | Verify mobile rendering. |
 
+## Taste Rules
+
+Taste rules are deterministic code-level checks for motion craft, physicality, interaction feedback, performance, accessibility, typography, and platform restraint. They are reported as the separate `tasteScore` dimension and participate in pass/fail with the same default threshold: `tasteScore <= 20`.
+
+Examples:
+
+- `TASTE-MOT-001`: `transition-all` or `transition: all`.
+- `TASTE-MOT-002`: `ease-in` on ordinary UI motion.
+- `TASTE-MOT-003`: UI durations above 300ms.
+- `TASTE-PHY-001`: `scale(0)` or `scale-0` entrances.
+- `TASTE-PHY-002`: popover/dropdown/tooltip surfaces using center origin.
+- `TASTE-PERF-001`: animation of layout properties such as width, height, top, left, margin, or padding.
+- `TASTE-A11Y-001`: movement without `prefers-reduced-motion`.
+- `TASTE-A11Y-002`: hover motion without fine-pointer gating.
+
 ## Scoring Notes
 
-The checker caps repeated hits in the same group so one repeated style cannot dominate the entire score. AI-slop and design-quality are separate dimensions. `aiSlop` controls pass/fail; `designQuality` is reported so fixes are not mixed with taste-only signals.
+The checker caps repeated hits in the same group so one repeated style cannot dominate the entire score. `aiSlop`, `copySlop`, and `tasteScore` control pass/fail. `designQuality` is reported separately so accessibility/correctness fixes are not mixed with taste-only signals.

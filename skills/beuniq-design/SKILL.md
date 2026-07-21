@@ -1,24 +1,24 @@
 ---
 name: beuniq-design
-description: Rule-based frontend design audit and targeted cleanup for detecting generic AI-generated UI patterns without AI APIs. Use when Codex is asked to make a React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, run an AI-slop/design-quality check, enforce BeUniq design criteria, or iterate until AI slop is at or below 20.
+description: Rule-based frontend design, taste, motion-craft, and landing-copy audit with targeted cleanup for detecting generic AI-generated UI patterns without AI APIs. Use when Codex is asked to make a React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, improve taste, review motion craft, run an AI-slop/design-quality check, enforce BeUniq design criteria, or iterate until AI slop is at or below 20.
 ---
 
 # BeUniq Design
 
 ## Overview
 
-Use BeUniq to statically inspect frontend source code for AI-slop, landing-copy slop, and design-quality signals, apply targeted fixes, and re-check until the project passes. The workflow is code-only and must not call AI APIs, screenshot services, browser automation, telemetry endpoints, or external network services.
+Use BeUniq to statically inspect frontend source code for AI-slop, landing-copy slop, taste/motion-craft, and design-quality signals, apply targeted fixes, and re-check until the project passes. The workflow is code-only and must not call AI APIs, screenshot services, browser automation, telemetry endpoints, or external network services.
 
 ## Workflow
 
-1. Read `references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid.
+1. Read `references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
 2. Run the checker from the target frontend repo:
 
 ```bash
 npx --yes tsx /path/to/beuniq-design/scripts/beuniq-check.ts --root . --format markdown
 ```
 
-3. Treat `aiSlop <= 20` and `copySlop <= 20` as passing unless the user gives a different threshold.
+3. Treat `aiSlop <= 20`, `copySlop <= 20`, and `tasteScore <= 20` as passing unless the user gives a different threshold.
 4. If the project fails, make targeted code changes only for reported findings. Preserve product meaning, content semantics, data fetching, routing, state management, component boundaries, accessibility intent, and existing design-system tokens.
 5. Re-run the checker after each fix pass. Continue until the score passes or the remaining findings are marked visual-only/human-judgment.
 
@@ -62,6 +62,7 @@ Every audit should report:
 - pass/fail
 - AI-slop score
 - copy-slop score
+- taste score
 - design-quality score
 - stable rule ids
 - severity
@@ -72,4 +73,4 @@ Every audit should report:
 
 ## Limitations
 
-The bundled catalogs include the full SwipeUI-derived rulebase: 325 AI/design rules, 301 landing-copy rules, and 74 legacy Uncodixify rules. Code-only checks cannot prove rendered spacing, contrast, actual visual hierarchy, viewport behavior, animation feel, cross-page contradictions, testimonial authenticity, or screenshot-level polish. Keep those as skipped semantic/visual notes unless the user provides a separate visual review workflow.
+The bundled catalogs include the full SwipeUI-derived rulebase: 325 AI/design rules, 301 landing-copy rules, 74 legacy Uncodixify rules, and 18 code-detectable taste/motion-craft rules adapted from Emil Kowalski's MIT-licensed design-engineering skills. Code-only checks cannot prove rendered spacing, contrast, actual visual hierarchy, viewport behavior, animation feel, cross-page contradictions, testimonial authenticity, or screenshot-level polish. Keep those as skipped semantic/visual notes unless the user provides a separate visual review workflow.
