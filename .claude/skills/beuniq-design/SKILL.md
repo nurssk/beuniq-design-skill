@@ -1,6 +1,6 @@
 ---
 name: BeUniq Design
-description: Rule-based frontend design, taste, motion-craft, landing-copy audit, component-style selection, and project-context workflow for reducing generic AI-generated UI patterns without AI APIs. Use when asked to make React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, choose a design/component style from an existing component collection, improve taste, review motion craft, initialize PRODUCT.md/DESIGN.md design context, run a BeUniq AI-slop/design-quality check, or iterate until aiSlop, copySlop, and tasteScore are at or below 20. For UI change, polish, redesign, cleanup, or fix passes, first read existing PRODUCT.md/DESIGN.md; if either is missing, ask BeUniq Design Intake and wait before editing or running fixes.
+description: Rule-based frontend design, taste, motion-craft, landing-copy audit, concrete component/block pattern selection, and project-context workflow for reducing generic AI-generated UI patterns without AI APIs. Use when asked to make React, Next.js, Vite, HTML, CSS, SCSS, or Tailwind UI feel less AI-generated, choose concrete UI examples for buttons, fields, cards, modals, header, hero, pricing, how-it-works, text animation, or scroll behavior, improve taste, review motion craft, initialize PRODUCT.md/DESIGN.md design context, run a BeUniq AI-slop/design-quality check, or iterate until aiSlop, copySlop, and tasteScore are at or below 20. For UI change, polish, redesign, cleanup, or fix passes, first read existing PRODUCT.md/DESIGN.md and Selected Style Profile; if missing, ask BeUniq Design Intake/style-profile/component-pattern choice and wait before editing or running fixes.
 allowed-tools:
   - Read
   - Grep
@@ -18,38 +18,40 @@ Use BeUniq to statically inspect frontend source code for AI-slop, landing-copy 
 
 ## Workflow
 
-1. If the task asks to change, polish, fix, redesign, or make the UI pass BeUniq, first check whether the target repo has both `PRODUCT.md` and `DESIGN.md`. If both exist, read them and use them as constraints. If either is missing, the first visible response must be the Design Intake questions. Stop after asking and wait for the user's answers unless the user explicitly says to choose defaults.
-2. After the user answers intake, inspect the target repo's existing component collection when present: `components/`, `src/components/`, `app/components/`, `components/ui/`, `src/ui/`, `stories/`, Storybook files, token/theme files, or a path/reference the user provided.
-3. Choose one coherent component style profile from that collection before editing UI: overall composition, button shape/size/elevation/variants, field treatment, card treatment, modal/dialog treatment, layout blocks, and reusable screen templates. Prefer existing components and tokens over inventing new primitives.
-4. Create `PRODUCT.md` and `DESIGN.md` in the target repo before making UI edits. Use `${CLAUDE_SKILL_DIR}/scripts/beuniq-init.ts` when practical, then fill missing sections from the user's answers and the selected component style profile. Do not overwrite existing context files unless the user explicitly asks.
-5. Skip intake only when the user explicitly asks for audit/report only, CI usage, or no questions. For audit/report-only usage, still let the checker report whether project context exists.
-6. Read `${CLAUDE_SKILL_DIR}/references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `${CLAUDE_SKILL_DIR}/references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
-7. Run the checker from the target frontend repo:
+1. If the task asks to change, polish, fix, redesign, or make the UI pass BeUniq, first check whether the target repo has `PRODUCT.md`, `DESIGN.md`, and a non-TBD `Selected Style Profile` section in `DESIGN.md`. If all exist, read them and use them as constraints.
+2. If `PRODUCT.md`, `DESIGN.md`, or `Selected Style Profile` is missing, the first visible response must ask the BeUniq Design Intake plus the Style Profile Choice. Stop after asking and wait for the user's answers unless the user explicitly says to choose defaults. Do not run the checker, inspect components, or edit files before this answer.
+3. Read `${CLAUDE_SKILL_DIR}/references/style-profiles.md` before presenting base profile options or explaining a profile. Read `${CLAUDE_SKILL_DIR}/references/component-patterns.md` before asking about component/block examples. The choice must be one of: BeUniq base profile, existing component collection, or custom/reference, plus concrete pattern choices for relevant components and sections.
+4. After the user answers intake, inspect the target repo's existing component collection when present: `components/`, `src/components/`, `app/components/`, `components/ui/`, `src/ui/`, `stories/`, Storybook files, token/theme files, or a path/reference the user provided.
+5. Choose one coherent component style profile from the user's selected source before editing UI: overall composition, button shape/size/elevation/variants, field treatment, card treatment, modal/dialog treatment, header, hero, pricing, how-it-works, scroll behavior, layout blocks, and reusable screen templates. Use `text-no-animation` by default; do not offer text animation choices unless the user explicitly asks for animation. Prefer existing components and tokens over inventing new primitives.
+6. Create `PRODUCT.md` and `DESIGN.md` in the target repo before making UI edits. Use `${CLAUDE_SKILL_DIR}/scripts/beuniq-init.ts` when practical, then fill missing sections from the user's answers and the selected component style profile. Do not overwrite existing context files unless the user explicitly asks.
+7. Skip intake only when the user explicitly asks for audit/report only, CI usage, or no questions. For audit/report-only usage, still let the checker report whether project context exists.
+8. Read `${CLAUDE_SKILL_DIR}/references/rules.md` when the task involves explaining rule meaning, changing thresholds, adding rules, or deciding whether a finding is valid. Read `${CLAUDE_SKILL_DIR}/references/taste.md` when a finding concerns motion craft, interaction feedback, typography craft, platform restraint, or "taste".
+9. Run the checker from the target frontend repo:
 
 ```bash
 npx --yes tsx ${CLAUDE_SKILL_DIR}/scripts/beuniq-check.ts --root . --format markdown
 ```
 
-8. Treat `aiSlop <= 20`, `copySlop <= 20`, and `tasteScore <= 20` as passing unless the user gives a different threshold.
-9. If the project fails, make targeted code changes only for reported findings and the saved project context. Preserve product meaning, content semantics, data fetching, routing, state management, component boundaries, accessibility intent, and existing design-system tokens.
-10. Re-run the checker after each fix pass. Continue until the score passes or the remaining findings are visual-only/human-judgment.
+10. Treat `aiSlop <= 20`, `copySlop <= 20`, and `tasteScore <= 20` as passing unless the user gives a different threshold.
+11. If the project fails, make targeted code changes only for reported findings and the saved project context. Preserve product meaning, content semantics, data fetching, routing, state management, component boundaries, accessibility intent, and existing design-system tokens.
+12. Re-run the checker after each fix pass. Continue until the score passes or the remaining findings are visual-only/human-judgment.
 
 ## Project Context
 
 `PRODUCT.md` is the strategy file: product, audience, primary design goal, voice/copy rules, references, constraints, and do-not-change items.
 
-`DESIGN.md` is the visual direction file: theme, style direction, color direction, density, typography, motion, design-system source, components, button style, field style, card style, modal style, layout/screen patterns, BeUniq rule priorities, and visual review needs.
+`DESIGN.md` is the visual direction file: theme, style direction, color direction, density, typography, motion, selected style profile, profile source, custom overrides, design-system source, components, button style, field style, card style, modal style, header style, hero style, pricing style, how-it-works style, text animation style, scroll style, layout/screen patterns, BeUniq rule priorities, and visual review needs.
 
 Useful commands:
 
 ```bash
 npx --yes tsx ${CLAUDE_SKILL_DIR}/scripts/beuniq-init.ts --root . --check
-npx --yes tsx ${CLAUDE_SKILL_DIR}/scripts/beuniq-init.ts --root . --product "..." --audience "..." --goal "..." --theme "..." --style "..." --colors "..." --density "..." --motion "..." --component-library "components/ui" --button-style "..." --field-style "..." --card-style "..." --modal-style "..."
+npx --yes tsx ${CLAUDE_SKILL_DIR}/scripts/beuniq-init.ts --root . --product "..." --audience "..." --goal "..." --theme "..." --style "..." --colors "..." --density "..." --motion "..." --selected-style-profile "beuniq-minimal-productive" --profile-source "beuniq-base" --component-library "components/ui" --button-style "button-compact-solid" --field-style "field-solid-bordered" --card-style "card-quiet-panel" --modal-style "modal-task-dialog" --header-style "header-product-app" --hero-style "hero-product-demo" --pricing-style "pricing-three-tier-saas" --how-it-works-style "steps-linear-3" --text-animation-style "text-no-animation" --scroll-style "scroll-native"
 ```
 
 If context files already exist, read them instead of asking repeated intake questions. If only one file exists, ask only for the missing information and create only the missing file.
 
-If a component collection exists but `DESIGN.md` does not name a component style profile, inspect the collection first and update `DESIGN.md` with the selected profile before applying fixes. The selected profile is the source of truth for future agent work.
+If a component collection exists but `DESIGN.md` does not name a component style profile, ask the Style Profile Choice first. Do not silently inspect and choose. The selected profile is the source of truth for future agent work.
 
 ## Design Intake
 
@@ -64,12 +66,35 @@ Required questions:
 5. **Density and audience:** dashboard-dense, marketing spacious, mobile-first, desktop workflow, expert users, or broad consumer?
 6. **Component source:** where is the component collection or design system: `components/ui`, `src/components`, Storybook, Figma, package/library name, or keep current?
 
+Style Profile Choice:
+
+Ask this as part of the first response whenever `Selected Style Profile` is missing:
+
+1. **BeUniq base:** choose one of `beuniq-minimal-productive`, `beuniq-linear-saas`, `beuniq-apple-native`, `beuniq-editorial`, `beuniq-premium`, or `beuniq-playful`.
+2. **Existing collection:** use the target repo's component collection as the source, then inspect it and derive the button/field/card/modal/layout profile.
+3. **Custom:** the user provides a reference, brand rules, or a custom description; record it in `Custom Overrides`.
+
+Concrete Pattern Choice:
+
+Do not ask only "which library?". Present concrete examples from `${CLAUDE_SKILL_DIR}/references/component-patterns.md`, filtered to the user's product type and detected dependencies. Include only relevant categories, but for landing/product pages ask at least:
+
+1. **Buttons:** `button-compact-solid`, `button-soft-native`, `button-editorial-link`, `button-premium-border`, or `button-playful-accent`.
+2. **Fields/cards/modals:** concrete field, card, and modal patterns when the page has forms, panels, checkout/pricing, dialogs, or app UI.
+3. **Header:** `header-product-app`, `header-marketing-minimal`, `header-docs-developer`, or `header-mobile-sheet`.
+4. **Hero:** `hero-product-demo`, `hero-dashboard-first`, `hero-editorial-split-rhythm`, `hero-premium-trust`, or `hero-playful-interactive`.
+5. **Pricing:** `pricing-two-tier`, `pricing-three-tier-saas`, `pricing-usage-based`, or `pricing-enterprise-contact`.
+6. **How it works:** `steps-linear-3`, `process-timeline`, `interactive-demo-flow`, or `technical-pipeline`.
+7. **Text animation:** set `text-no-animation` by default. Do not ask this as a choice unless the user explicitly requests animated text.
+8. **Scroll:** default to `scroll-native`; only offer `scroll-snap-sections`, `scroll-progress-docs`, `scroll-parallax-subtle`, or `smooth-scroll-library` if the task is a presentation/long-form page and the user wants scroll behavior.
+
+If the repo uses shadcn/radix, MUI, Ant Design, Chakra, Mantine, NextUI/HeroUI, Bootstrap, DaisyUI, custom CSS, or a motion stack, map these concrete patterns onto the existing library primitives instead of replacing the library.
+
 Optional when relevant:
 
-- Motion taste: no motion, crisp functional motion, springy/native, or expressive brand motion?
-- References: ask for 1-3 product/site references if the user mentions a visual benchmark or the current repo has no clear brand direction.
+- Motion taste: default to no motion. Ask only when the user explicitly requests motion or animation.
+- References: ask for 1-3 product/site references if the user chooses `custom`, mentions a visual benchmark, or the current repo has no clear brand direction.
 
-After the intake, inspect the component source and choose the component style profile yourself unless the user explicitly chooses it. Record the selected button, field, card, modal, layout, and screen-template direction in `DESIGN.md`. Then summarize the chosen direction in one sentence and use it as a constraint for all fixes. Example: "Direction: light, dense SaaS dashboard, neutral palette with one blue accent, compact squared buttons, solid bordered fields, quiet cards, and functional modals for expert operators."
+After the intake, inspect the component source and choose the component/block pattern set yourself only if the user asked you to choose defaults. Otherwise wait for the user to choose. Always record `Text Animation Style: text-no-animation` and `Motion: no motion` unless the user explicitly requests motion. Record the selected button, field, card, modal, header, hero, pricing, how-it-works, scroll, layout, and screen-template direction in `DESIGN.md`. Then summarize the chosen direction in one sentence and use it as a constraint for all fixes. Example: "Direction: light, dense SaaS dashboard, neutral palette with one blue accent, button-compact-solid, field-solid-bordered, card-quiet-panel, modal-task-dialog, header-product-app, hero-dashboard-first, text-no-animation, and scroll-native."
 
 ## Scripts
 

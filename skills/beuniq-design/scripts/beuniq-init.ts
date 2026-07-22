@@ -36,12 +36,21 @@ const FIELD_FLAGS = new Set([
   "density",
   "typography",
   "motion",
+  "selected-style-profile",
+  "profile-source",
+  "custom-overrides",
   "component-library",
   "components",
   "button-style",
   "field-style",
   "card-style",
   "modal-style",
+  "header-style",
+  "hero-style",
+  "pricing-style",
+  "how-it-works-style",
+  "text-animation-style",
+  "scroll-style",
   "layout-patterns",
   "screen-templates",
   "rule-priorities",
@@ -192,6 +201,18 @@ ${value(fields.typography)}
 
 ${value(fields.motion)}
 
+## Selected Style Profile
+
+${value(fields["selected-style-profile"])}
+
+## Profile Source
+
+${value(fields["profile-source"])}
+
+## Custom Overrides
+
+${value(fields["custom-overrides"])}
+
 ## Design System Source
 
 ${value(fields["component-library"])}
@@ -215,6 +236,30 @@ ${value(fields["card-style"])}
 ## Modal Style
 
 ${value(fields["modal-style"])}
+
+## Header Style
+
+${value(fields["header-style"])}
+
+## Hero Style
+
+${value(fields["hero-style"])}
+
+## Pricing Style
+
+${value(fields["pricing-style"])}
+
+## How It Works Style
+
+${value(fields["how-it-works-style"])}
+
+## Text Animation Style
+
+${value(fields["text-animation-style"])}
+
+## Scroll Style
+
+${value(fields["scroll-style"])}
 
 ## Layout And Screen Patterns
 
@@ -273,7 +318,7 @@ function printHelpAndExit(): never {
   console.log(`Usage: beuniq-init --root <frontend> [--check] [--force] [--format json|markdown]
 
 Creates PRODUCT.md and DESIGN.md project-context files for BeUniq design work.
-Pass intake answers with flags such as --product, --audience, --goal, --theme, --style, --colors, --density, --motion, --component-library, --button-style, --field-style, --card-style, and --modal-style.`);
+Pass intake answers with flags such as --product, --audience, --goal, --theme, --style, --colors, --density, --motion, --selected-style-profile, --profile-source, --custom-overrides, --component-library, --button-style, --field-style, --card-style, --modal-style, --header-style, --hero-style, --pricing-style, --how-it-works-style, --text-animation-style, and --scroll-style.`);
   process.exit(0);
 }
 

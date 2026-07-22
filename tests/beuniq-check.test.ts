@@ -82,7 +82,11 @@ try {
     "--density",
     "dashboard-dense",
     "--motion",
-    "crisp functional motion",
+    "no motion",
+    "--selected-style-profile",
+    "beuniq-minimal-productive",
+    "--profile-source",
+    "beuniq-base",
     "--component-library",
     "components/ui",
     "--button-style",
@@ -93,6 +97,18 @@ try {
     "quiet bordered cards without glow",
     "--modal-style",
     "functional dialogs with direct actions",
+    "--header-style",
+    "header-product-app",
+    "--hero-style",
+    "hero-dashboard-first",
+    "--pricing-style",
+    "pricing-three-tier-saas",
+    "--how-it-works-style",
+    "steps-linear-3",
+    "--text-animation-style",
+    "text-no-animation",
+    "--scroll-style",
+    "scroll-native",
     "--layout-patterns",
     "dense dashboard screens with clear side navigation",
     "--screen-templates",
@@ -108,9 +124,17 @@ try {
   assert.equal(contextualResult.report.projectContext.product.loaded, true);
   assert.equal(contextualResult.report.projectContext.design.loaded, true);
   assert.equal(contextualResult.report.projectContext.design.styleDirection, "minimal/productive");
+  assert.equal(contextualResult.report.projectContext.design.selectedStyleProfile, "beuniq-minimal-productive");
+  assert.equal(contextualResult.report.projectContext.design.profileSource, "beuniq-base");
   assert.equal(contextualResult.report.projectContext.design.designSystemSource, "components/ui");
   assert.match(contextualResult.report.projectContext.design.buttonStyle, /compact squared buttons/);
   assert.match(contextualResult.report.projectContext.design.cardStyle, /quiet bordered cards/);
+  assert.equal(contextualResult.report.projectContext.design.headerStyle, "header-product-app");
+  assert.equal(contextualResult.report.projectContext.design.heroStyle, "hero-dashboard-first");
+  assert.equal(contextualResult.report.projectContext.design.pricingStyle, "pricing-three-tier-saas");
+  assert.equal(contextualResult.report.projectContext.design.howItWorksStyle, "steps-linear-3");
+  assert.equal(contextualResult.report.projectContext.design.textAnimationStyle, "text-no-animation");
+  assert.equal(contextualResult.report.projectContext.design.scrollStyle, "scroll-native");
   assert.ok(contextualResult.report.findings.some((finding: { contextConflict?: string }) => finding.contextConflict));
 
   const productBefore = readFileSync(path.join(tmp, "PRODUCT.md"), "utf8");
@@ -138,6 +162,22 @@ try {
   assert.equal(missingContext.report.hasDesign, false);
 } finally {
   rmSync(missingContextTmp, { recursive: true, force: true });
+}
+
+const missingProfileTmp = mkdtempSync(path.join(tmpdir(), "beuniq-profile-missing-"));
+try {
+  cpSync(clean, missingProfileTmp, { recursive: true });
+  const initWithoutProfile = runInit(missingProfileTmp, ["--theme", "light", "--style", "minimal/productive"]);
+  assert.equal(initWithoutProfile.status, 0);
+  const missingProfileReport = runCheck(missingProfileTmp).report;
+  assert.equal(missingProfileReport.projectContext.design.loaded, true);
+  assert.ok(
+    missingProfileReport.projectContext.warnings.some((warning: string) =>
+      warning.includes("Selected Style Profile")
+    )
+  );
+} finally {
+  rmSync(missingProfileTmp, { recursive: true, force: true });
 }
 
 const copyOnlyResult = runCheck(copyOnly);
@@ -182,6 +222,8 @@ assert.equal(duplicateIds.length, 0, "legacy radius rule should not double-count
 const claudeSkillMarkdown = readFileSync(path.join(claudeSkill, "SKILL.md"), "utf8");
 assert.match(claudeSkillMarkdown, /^---\n[\s\S]*description:/);
 assert.match(claudeSkillMarkdown, /\$\{CLAUDE_SKILL_DIR\}\/scripts\/beuniq-check\.ts/);
+assert.match(claudeSkillMarkdown, /Selected Style Profile/);
+assert.match(claudeSkillMarkdown, /component-patterns\.md/);
 assert.match(claudeSkillMarkdown, /allowed-tools:/);
 
 const claudeResult = (() => {

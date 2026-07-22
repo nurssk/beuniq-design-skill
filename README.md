@@ -70,18 +70,26 @@ npm run beuniq:init -- --root /path/to/frontend \
   --style "minimal/productive" \
   --colors "neutral with one blue accent" \
   --density "dashboard-dense" \
-  --motion "crisp functional motion" \
+  --motion "no motion" \
+  --selected-style-profile "beuniq-minimal-productive" \
+  --profile-source "beuniq-base" \
   --component-library "components/ui" \
   --button-style "compact squared buttons with solid primary and quiet secondary variants" \
   --field-style "solid bordered fields with clear focus and error states" \
   --card-style "quiet bordered cards without glow" \
-  --modal-style "functional dialogs with direct actions"
+  --modal-style "functional dialogs with direct actions" \
+  --header-style "header-product-app" \
+  --hero-style "hero-product-demo" \
+  --pricing-style "pricing-three-tier-saas" \
+  --how-it-works-style "steps-linear-3" \
+  --text-animation-style "text-no-animation" \
+  --scroll-style "scroll-native"
 ```
 
 This creates:
 
 - `PRODUCT.md`: product, audience, design goal, voice/copy rules, references, constraints, and do-not-change items.
-- `DESIGN.md`: theme, style direction, color direction, density, typography, motion, component library source, button/field/card/modal style decisions, reusable layout patterns, screen templates, BeUniq rule priorities, and visual review needs.
+- `DESIGN.md`: theme, style direction, color direction, density, typography, motion, selected style profile, profile source, custom overrides, component library source, concrete button/field/card/modal/header/hero/pricing/how-it-works/text-animation/scroll decisions, reusable layout patterns, screen templates, BeUniq rule priorities, and visual review needs.
 
 Check whether a project is ready:
 
@@ -102,7 +110,15 @@ When asked to change, polish, fix, redesign, or make a UI pass BeUniq, the skill
 - density and audience: dashboard-dense, marketing spacious, mobile-first, desktop workflow, expert users, or broad consumer
 - component source: `components/ui`, `src/components`, Storybook, Figma, package/library name, or keep current
 
-The agent stores these answers in `PRODUCT.md` and `DESIGN.md`. If you already have a component collection, the agent should inspect it after intake, choose a coherent component style profile, and record the selected button, field, card, modal, layout, and screen-template direction in `DESIGN.md`. On future runs, it reads those files instead of asking the same questions again. The agent skips intake only for audit/report-only usage, CI usage, or when explicitly told not to ask questions.
+The first response must also ask for a style-profile source and concrete pattern choices when `DESIGN.md` has no `Selected Style Profile`:
+
+- BeUniq base: `beuniq-minimal-productive`, `beuniq-linear-saas`, `beuniq-apple-native`, `beuniq-editorial`, `beuniq-premium`, or `beuniq-playful`
+- Existing collection: derive the profile from your component collection
+- Custom: use your reference, brand rules, or written direction
+
+It should show concrete examples from `references/component-patterns.md`, such as `button-compact-solid`, `header-product-app`, `hero-product-demo`, `pricing-three-tier-saas`, `steps-linear-3`, `text-no-animation`, and `scroll-native`. `text-no-animation`, `no motion`, and `scroll-native` are the defaults; the agent should not offer animation choices unless the user explicitly asks for animation. It should map those choices onto the detected library family, such as shadcn/radix, Headless UI, MUI, Ant Design, Chakra, Mantine, NextUI/HeroUI, Bootstrap, DaisyUI, custom CSS, or the existing motion stack.
+
+The agent stores these answers in `PRODUCT.md` and `DESIGN.md`. If you already have a component collection, the agent should inspect it after intake, choose a coherent component style profile from the selected source, and record the selected button, field, card, modal, header, hero, pricing, how-it-works, text-animation, scroll, layout, and screen-template direction in `DESIGN.md`. On future runs, it reads those files instead of asking the same questions again. The agent skips intake only for audit/report-only usage, CI usage, or when explicitly told not to ask questions.
 
 ### Check And Fix
 
