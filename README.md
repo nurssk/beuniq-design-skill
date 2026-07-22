@@ -70,13 +70,18 @@ npm run beuniq:init -- --root /path/to/frontend \
   --style "minimal/productive" \
   --colors "neutral with one blue accent" \
   --density "dashboard-dense" \
-  --motion "crisp functional motion"
+  --motion "crisp functional motion" \
+  --component-library "components/ui" \
+  --button-style "compact squared buttons with solid primary and quiet secondary variants" \
+  --field-style "solid bordered fields with clear focus and error states" \
+  --card-style "quiet bordered cards without glow" \
+  --modal-style "functional dialogs with direct actions"
 ```
 
 This creates:
 
 - `PRODUCT.md`: product, audience, design goal, voice/copy rules, references, constraints, and do-not-change items.
-- `DESIGN.md`: theme, style direction, color direction, density, typography, motion, component preferences, BeUniq rule priorities, and visual review needs.
+- `DESIGN.md`: theme, style direction, color direction, density, typography, motion, component library source, button/field/card/modal style decisions, reusable layout patterns, screen templates, BeUniq rule priorities, and visual review needs.
 
 Check whether a project is ready:
 
@@ -95,8 +100,9 @@ When asked to change, polish, fix, redesign, or make a UI pass BeUniq, the skill
 - design goal: trust, clarity, conversion, speed, calm, delight, technical credibility, or another outcome
 - color direction: keep current, neutral, monochrome, vibrant accent, specific brand colors, or colors to avoid
 - density and audience: dashboard-dense, marketing spacious, mobile-first, desktop workflow, expert users, or broad consumer
+- component source: `components/ui`, `src/components`, Storybook, Figma, package/library name, or keep current
 
-The agent stores these answers in `PRODUCT.md` and `DESIGN.md`. On future runs, it reads those files instead of asking the same questions again. The agent skips intake only for audit/report-only usage, CI usage, or when explicitly told not to ask questions.
+The agent stores these answers in `PRODUCT.md` and `DESIGN.md`. If you already have a component collection, the agent should inspect it after intake, choose a coherent component style profile, and record the selected button, field, card, modal, layout, and screen-template direction in `DESIGN.md`. On future runs, it reads those files instead of asking the same questions again. The agent skips intake only for audit/report-only usage, CI usage, or when explicitly told not to ask questions.
 
 ### Check And Fix
 
@@ -120,7 +126,7 @@ npm run beuniq:check -- --root /path/to/frontend --fix --format markdown
 
 The fixer only changes obvious code-level signals such as oversized radius utilities, pill overload, decorative gradients, glow shadows, glass blur, dramatic shadows, over-padding, and uppercase tracking. It does not redesign layouts, rewrite business logic, rename components, alter data fetching, or call external APIs.
 
-`beuniq check` includes a `projectContext` block in JSON and Markdown reports. If `DESIGN.md` asks for a restrained/productive direction, findings such as glow, gradient, glass, and decorative motion are annotated as context conflicts so agents prioritize them during targeted fixes.
+`beuniq check` includes a `projectContext` block in JSON and Markdown reports. Reports include the loaded design-system source and component style decisions when present. If `DESIGN.md` asks for a restrained/productive direction, findings such as glow, gradient, glass, and decorative motion are annotated as context conflicts so agents prioritize them during targeted fixes.
 
 ## Scoring Model
 

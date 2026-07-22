@@ -82,7 +82,21 @@ try {
     "--density",
     "dashboard-dense",
     "--motion",
-    "crisp functional motion"
+    "crisp functional motion",
+    "--component-library",
+    "components/ui",
+    "--button-style",
+    "compact squared buttons with solid primary and quiet secondary variants",
+    "--field-style",
+    "solid bordered fields",
+    "--card-style",
+    "quiet bordered cards without glow",
+    "--modal-style",
+    "functional dialogs with direct actions",
+    "--layout-patterns",
+    "dense dashboard screens with clear side navigation",
+    "--screen-templates",
+    "settings, dashboard, and detail screens"
   ]);
   assert.equal(initResult.status, 0);
   assert.deepEqual(initResult.report.created, ["PRODUCT.md", "DESIGN.md"]);
@@ -94,6 +108,9 @@ try {
   assert.equal(contextualResult.report.projectContext.product.loaded, true);
   assert.equal(contextualResult.report.projectContext.design.loaded, true);
   assert.equal(contextualResult.report.projectContext.design.styleDirection, "minimal/productive");
+  assert.equal(contextualResult.report.projectContext.design.designSystemSource, "components/ui");
+  assert.match(contextualResult.report.projectContext.design.buttonStyle, /compact squared buttons/);
+  assert.match(contextualResult.report.projectContext.design.cardStyle, /quiet bordered cards/);
   assert.ok(contextualResult.report.findings.some((finding: { contextConflict?: string }) => finding.contextConflict));
 
   const productBefore = readFileSync(path.join(tmp, "PRODUCT.md"), "utf8");

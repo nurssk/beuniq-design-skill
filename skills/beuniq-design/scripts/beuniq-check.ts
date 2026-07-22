@@ -54,6 +54,14 @@ type ProjectContext = {
     colorDirection?: string;
     density?: string;
     motion?: string;
+    designSystemSource?: string;
+    components?: string;
+    buttonStyle?: string;
+    fieldStyle?: string;
+    cardStyle?: string;
+    modalStyle?: string;
+    layoutAndScreenPatterns?: string;
+    screenTemplates?: string;
   };
   warnings: string[];
 };
@@ -668,6 +676,9 @@ export function formatMarkdown(report: Report): string {
   if (report.projectContext.design.styleDirection) lines.push(`- Style direction: ${report.projectContext.design.styleDirection}`);
   if (report.projectContext.design.colorDirection) lines.push(`- Color direction: ${report.projectContext.design.colorDirection}`);
   if (report.projectContext.design.motion) lines.push(`- Motion: ${report.projectContext.design.motion}`);
+  if (report.projectContext.design.designSystemSource) lines.push(`- Design system source: ${report.projectContext.design.designSystemSource}`);
+  if (report.projectContext.design.buttonStyle) lines.push(`- Button style: ${report.projectContext.design.buttonStyle}`);
+  if (report.projectContext.design.cardStyle) lines.push(`- Card style: ${report.projectContext.design.cardStyle}`);
   lines.push(`- Threshold: <= ${report.threshold}`);
   lines.push(`- Catalog: ${report.catalogCoverage.aiSlopRules} AI/design + ${report.catalogCoverage.landingCopyRules} landing-copy + ${report.catalogCoverage.tasteRules} taste + ${report.catalogCoverage.legacyRules} legacy rules`);
   lines.push(`- Code-detected catalog rules in this no-AI mode: ${report.catalogCoverage.codeDetectedCatalogRules}`);
@@ -787,7 +798,15 @@ async function loadProjectContext(root: string): Promise<ProjectContext> {
       styleDirection: designSource ? extractSection(designSource, "Style Direction") : undefined,
       colorDirection: designSource ? extractSection(designSource, "Color Direction") : undefined,
       density: designSource ? extractSection(designSource, "Density") : undefined,
-      motion: designSource ? extractSection(designSource, "Motion") : undefined
+      motion: designSource ? extractSection(designSource, "Motion") : undefined,
+      designSystemSource: designSource ? extractSection(designSource, "Design System Source") : undefined,
+      components: designSource ? extractSection(designSource, "Components") : undefined,
+      buttonStyle: designSource ? extractSection(designSource, "Button Style") : undefined,
+      fieldStyle: designSource ? extractSection(designSource, "Field Style") : undefined,
+      cardStyle: designSource ? extractSection(designSource, "Card Style") : undefined,
+      modalStyle: designSource ? extractSection(designSource, "Modal Style") : undefined,
+      layoutAndScreenPatterns: designSource ? extractSection(designSource, "Layout And Screen Patterns") : undefined,
+      screenTemplates: designSource ? extractSection(designSource, "Screen Templates") : undefined
     },
     warnings
   };
@@ -823,6 +842,13 @@ function applyProjectContextConflicts(findings: Finding[], context: ProjectConte
     context.design.colorDirection,
     context.design.density,
     context.design.motion,
+    context.design.designSystemSource,
+    context.design.components,
+    context.design.buttonStyle,
+    context.design.fieldStyle,
+    context.design.cardStyle,
+    context.design.modalStyle,
+    context.design.layoutAndScreenPatterns,
     context.product.primaryDesignGoal
   ]
     .filter(Boolean)

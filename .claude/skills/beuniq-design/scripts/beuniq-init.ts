@@ -36,7 +36,14 @@ const FIELD_FLAGS = new Set([
   "density",
   "typography",
   "motion",
+  "component-library",
   "components",
+  "button-style",
+  "field-style",
+  "card-style",
+  "modal-style",
+  "layout-patterns",
+  "screen-templates",
   "rule-priorities",
   "visual-review-needed"
 ]);
@@ -185,9 +192,37 @@ ${value(fields.typography)}
 
 ${value(fields.motion)}
 
+## Design System Source
+
+${value(fields["component-library"])}
+
 ## Components
 
 ${value(fields.components)}
+
+## Button Style
+
+${value(fields["button-style"])}
+
+## Field Style
+
+${value(fields["field-style"])}
+
+## Card Style
+
+${value(fields["card-style"])}
+
+## Modal Style
+
+${value(fields["modal-style"])}
+
+## Layout And Screen Patterns
+
+${value(fields["layout-patterns"])}
+
+## Screen Templates
+
+${value(fields["screen-templates"])}
 
 ## BeUniq Rule Priorities
 
@@ -238,7 +273,7 @@ function printHelpAndExit(): never {
   console.log(`Usage: beuniq-init --root <frontend> [--check] [--force] [--format json|markdown]
 
 Creates PRODUCT.md and DESIGN.md project-context files for BeUniq design work.
-Pass intake answers with flags such as --product, --audience, --goal, --theme, --style, --colors, --density, and --motion.`);
+Pass intake answers with flags such as --product, --audience, --goal, --theme, --style, --colors, --density, --motion, --component-library, --button-style, --field-style, --card-style, and --modal-style.`);
   process.exit(0);
 }
 
