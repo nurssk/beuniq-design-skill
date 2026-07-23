@@ -56,6 +56,8 @@ type ProjectContext = {
     motion?: string;
     selectedStyleProfile?: string;
     profileSource?: string;
+    companyStyleCategory?: string;
+    companyStyleReference?: string;
     customOverrides?: string;
     designSystemSource?: string;
     components?: string;
@@ -687,6 +689,8 @@ export function formatMarkdown(report: Report): string {
   if (report.projectContext.design.motion) lines.push(`- Motion: ${report.projectContext.design.motion}`);
   if (report.projectContext.design.selectedStyleProfile) lines.push(`- Selected style profile: ${report.projectContext.design.selectedStyleProfile}`);
   if (report.projectContext.design.profileSource) lines.push(`- Profile source: ${report.projectContext.design.profileSource}`);
+  if (report.projectContext.design.companyStyleCategory) lines.push(`- Company style category: ${report.projectContext.design.companyStyleCategory}`);
+  if (report.projectContext.design.companyStyleReference) lines.push(`- Company style reference: ${report.projectContext.design.companyStyleReference}`);
   if (report.projectContext.design.designSystemSource) lines.push(`- Design system source: ${report.projectContext.design.designSystemSource}`);
   if (report.projectContext.design.buttonStyle) lines.push(`- Button style: ${report.projectContext.design.buttonStyle}`);
   if (report.projectContext.design.cardStyle) lines.push(`- Card style: ${report.projectContext.design.cardStyle}`);
@@ -819,6 +823,8 @@ async function loadProjectContext(root: string): Promise<ProjectContext> {
       motion: designSource ? extractSection(designSource, "Motion") : undefined,
       selectedStyleProfile: designSource ? extractSection(designSource, "Selected Style Profile") : undefined,
       profileSource: designSource ? extractSection(designSource, "Profile Source") : undefined,
+      companyStyleCategory: designSource ? extractSection(designSource, "Company Style Category") : undefined,
+      companyStyleReference: designSource ? extractSection(designSource, "Company Style Reference") : undefined,
       customOverrides: designSource ? extractSection(designSource, "Custom Overrides") : undefined,
       designSystemSource: designSource ? extractSection(designSource, "Design System Source") : undefined,
       components: designSource ? extractSection(designSource, "Components") : undefined,
@@ -871,6 +877,8 @@ function applyProjectContextConflicts(findings: Finding[], context: ProjectConte
     context.design.motion,
     context.design.selectedStyleProfile,
     context.design.profileSource,
+    context.design.companyStyleCategory,
+    context.design.companyStyleReference,
     context.design.customOverrides,
     context.design.designSystemSource,
     context.design.components,

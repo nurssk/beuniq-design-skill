@@ -87,6 +87,10 @@ try {
     "beuniq-minimal-productive",
     "--profile-source",
     "beuniq-base",
+    "--company-style-category",
+    "productivity-saas",
+    "--company-style-reference",
+    "Linear",
     "--component-library",
     "components/ui",
     "--button-style",
@@ -126,6 +130,8 @@ try {
   assert.equal(contextualResult.report.projectContext.design.styleDirection, "minimal/productive");
   assert.equal(contextualResult.report.projectContext.design.selectedStyleProfile, "beuniq-minimal-productive");
   assert.equal(contextualResult.report.projectContext.design.profileSource, "beuniq-base");
+  assert.equal(contextualResult.report.projectContext.design.companyStyleCategory, "productivity-saas");
+  assert.equal(contextualResult.report.projectContext.design.companyStyleReference, "Linear");
   assert.equal(contextualResult.report.projectContext.design.designSystemSource, "components/ui");
   assert.match(contextualResult.report.projectContext.design.buttonStyle, /compact squared buttons/);
   assert.match(contextualResult.report.projectContext.design.cardStyle, /quiet bordered cards/);
@@ -223,8 +229,22 @@ const claudeSkillMarkdown = readFileSync(path.join(claudeSkill, "SKILL.md"), "ut
 assert.match(claudeSkillMarkdown, /^---\n[\s\S]*description:/);
 assert.match(claudeSkillMarkdown, /\$\{CLAUDE_SKILL_DIR\}\/scripts\/beuniq-check\.ts/);
 assert.match(claudeSkillMarkdown, /Selected Style Profile/);
+assert.match(claudeSkillMarkdown, /company-style-references\.md/);
 assert.match(claudeSkillMarkdown, /component-patterns\.md/);
 assert.match(claudeSkillMarkdown, /allowed-tools:/);
+
+const openaiCompanyReferences = readFileSync(
+  path.join(repoRoot, "skills/beuniq-design/references/company-style-references.md"),
+  "utf8"
+);
+const claudeCompanyReferences = readFileSync(
+  path.join(claudeSkill, "references/company-style-references.md"),
+  "utf8"
+);
+assert.match(openaiCompanyReferences, /AI and LLM platforms/);
+assert.match(openaiCompanyReferences, /Nothing from this list/);
+assert.match(claudeCompanyReferences, /AI and LLM platforms/);
+assert.match(claudeCompanyReferences, /Nothing from this list/);
 
 const claudeResult = (() => {
   try {
