@@ -901,12 +901,12 @@ function applyTechnologyContextWarnings(
   if (!context.design.loaded) return;
   if (profile.shouldAskComponentStyle && !context.design.designSystemSource) {
     context.warnings.push(
-      `Detected ${profile.componentLibraries.join(", ")}; ask the user which component style to derive from the existing shadcn/Radix/Tailwind primitives before design changes.`
+      `Detected ${profile.componentLibraries.join(", ")}; include shadcn/Radix/Tailwind component-style options when asking the user before design changes.`
     );
   }
   if (profile.shouldAskMotionStyle && !context.design.motionStyle) {
     context.warnings.push(
-      `Detected ${profile.motionLibraries.join(", ")}; ask the user which motion style to use before animation changes.`
+      `Detected ${profile.motionLibraries.join(", ")}; include Framer Motion/motion style options when asking the user before animation changes.`
     );
   }
 }
@@ -923,6 +923,12 @@ async function loadProjectContext(root: string): Promise<ProjectContext> {
   }
   if (designSource && !extractSection(designSource, "Company Style Reference")) {
     warnings.push("DESIGN.md is missing Company Style Reference; ask the user to choose a company-style category, then a company or nothing from this list before design changes.");
+  }
+  if (designSource && !extractSection(designSource, "Design System Source")) {
+    warnings.push("DESIGN.md is missing Design System Source/component style; ask the user to choose existing components, shadcn/Radix variants when detected, BeUniq base patterns, custom overrides, or nothing from this list before design changes.");
+  }
+  if (designSource && !extractSection(designSource, "Motion Style")) {
+    warnings.push("DESIGN.md is missing Motion Style; ask the user to choose motion-none, functional microinteractions, native sheets, product reveal, subtle scroll motion, or nothing from this list before design changes.");
   }
 
   return {

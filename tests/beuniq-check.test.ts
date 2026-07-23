@@ -217,6 +217,16 @@ try {
       warning.includes("Company Style Reference")
     )
   );
+  assert.ok(
+    missingCompanyReferenceReport.projectContext.warnings.some((warning: string) =>
+      warning.includes("Design System Source")
+    )
+  );
+  assert.ok(
+    missingCompanyReferenceReport.projectContext.warnings.some((warning: string) =>
+      warning.includes("Motion Style")
+    )
+  );
 } finally {
   rmSync(missingCompanyReferenceTmp, { recursive: true, force: true });
 }
