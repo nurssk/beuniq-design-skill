@@ -54,6 +54,8 @@ type ProjectContext = {
     colorDirection?: string;
     density?: string;
     motion?: string;
+    motionLibrary?: string;
+    motionStyle?: string;
     selectedStyleProfile?: string;
     profileSource?: string;
     companyStyleCategory?: string;
@@ -75,6 +77,14 @@ type ProjectContext = {
     screenTemplates?: string;
   };
   warnings: string[];
+};
+
+type TechnologyProfile = {
+  componentLibraries: string[];
+  motionLibraries: string[];
+  signals: string[];
+  shouldAskComponentStyle: boolean;
+  shouldAskMotionStyle: boolean;
 };
 
 type CategoryScore = {
@@ -114,6 +124,7 @@ type Report = {
   tasteScore: number;
   designQualityScore: number;
   projectContext: ProjectContext;
+  technologyProfile: TechnologyProfile;
   scannedFiles: number;
   catalogCoverage: {
     aiSlopRules: number;
@@ -578,6 +589,7 @@ export async function runBeUniqCheck(options: Options): Promise<Report> {
   const catalog = await loadCatalogBundle();
   const projectContext = await loadProjectContext(root);
   const files = await collectFrontendFiles(root);
+  const technologyProfile = await detectTechnologyProfile(root, files);
   const findings: Finding[] = [];
   const fixedFiles: string[] = [];
   const scannedSource: string[] = [];
@@ -595,6 +607,7 @@ export async function runBeUniqCheck(options: Options): Promise<Report> {
     scannedSource.push(source);
     findings.push(...scanSource(root, file, source, catalog));
   }
+  applyTechnologyContextWarnings(projectContext, technologyProfile);
   applyProjectContextConflicts(findings, projectContext);
   const allSource = scannedSource.join("\n");
 
@@ -647,6 +660,7 @@ export async function runBeUniqCheck(options: Options): Promise<Report> {
     tasteScore: taste,
     designQualityScore,
     projectContext,
+    technologyProfile,
     scannedFiles: files.length,
     catalogCoverage: {
       aiSlopRules: catalog.ai.length,
@@ -684,9 +698,14 @@ export function formatMarkdown(report: Report): string {
   lines.push(`- Taste: ${report.tasteScore}/100`);
   lines.push(`- Design quality: ${report.designQualityScore}/100`);
   lines.push(`- Project context: PRODUCT.md ${report.projectContext.product.loaded ? "loaded" : "missing"}, DESIGN.md ${report.projectContext.design.loaded ? "loaded" : "missing"}`);
+  lines.push(`- Component libraries: ${report.technologyProfile.componentLibraries.length ? report.technologyProfile.componentLibraries.join(", ") : "none detected"}`);
+  lines.push(`- Motion libraries: ${report.technologyProfile.motionLibraries.length ? report.technologyProfile.motionLibraries.join(", ") : "none detected"}`);
+  if (report.technologyProfile.signals.length) lines.push(`- Technology signals: ${report.technologyProfile.signals.slice(0, 8).join("; ")}`);
   if (report.projectContext.design.styleDirection) lines.push(`- Style direction: ${report.projectContext.design.styleDirection}`);
   if (report.projectContext.design.colorDirection) lines.push(`- Color direction: ${report.projectContext.design.colorDirection}`);
   if (report.projectContext.design.motion) lines.push(`- Motion: ${report.projectContext.design.motion}`);
+  if (report.projectContext.design.motionLibrary) lines.push(`- Motion library: ${report.projectContext.design.motionLibrary}`);
+  if (report.projectContext.design.motionStyle) lines.push(`- Motion style: ${report.projectContext.design.motionStyle}`);
   if (report.projectContext.design.selectedStyleProfile) lines.push(`- Selected style profile: ${report.projectContext.design.selectedStyleProfile}`);
   if (report.projectContext.design.profileSource) lines.push(`- Profile source: ${report.projectContext.design.profileSource}`);
   if (report.projectContext.design.companyStyleCategory) lines.push(`- Company style category: ${report.projectContext.design.companyStyleCategory}`);
@@ -792,6 +811,106 @@ async function readCatalog(fileName: string): Promise<CatalogRule[]> {
   return JSON.parse(raw).rules as CatalogRule[];
 }
 
+async function detectTechnologyProfile(root: string, files: string[]): Promise<TechnologyProfile> {
+  const packageNames = await readPackageNames(root);
+  const componentLibraries = new Set<string>();
+  const motionLibraries = new Set<string>();
+  const signals: string[] = [];
+
+  const hasPackage = (name: string) => packageNames.has(name);
+  const hasPackagePrefix = (prefix: string) =>
+    [...packageNames].some((name) => name === prefix || name.startsWith(prefix));
+
+  if (
+    hasPackagePrefix("@radix-ui/") ||
+    hasPackage("class-variance-authority") ||
+    hasPackage("tailwind-merge") ||
+    (await exists(path.join(root, "components.json"))) ||
+    (await exists(path.join(root, "components/ui"))) ||
+    (await exists(path.join(root, "src/components/ui")))
+  ) {
+    componentLibraries.add("shadcn/radix/tailwind");
+    signals.push("shadcn/radix signals from dependencies, components.json, or components/ui");
+  }
+  if (hasPackage("tailwindcss")) {
+    componentLibraries.add("tailwind");
+    signals.push("tailwindcss dependency");
+  }
+  if (hasPackagePrefix("@mui/")) componentLibraries.add("material");
+  if (hasPackage("antd")) componentLibraries.add("antd");
+  if (hasPackagePrefix("@chakra-ui/")) componentLibraries.add("chakra");
+  if (hasPackagePrefix("@mantine/")) componentLibraries.add("mantine");
+  if (hasPackagePrefix("@nextui-org/") || hasPackagePrefix("@heroui/")) componentLibraries.add("nextui/heroui");
+
+  const sourceHints = await readSmallSourceHints(files);
+  if (/from\s+["']framer-motion["']|require\(["']framer-motion["']\)/.test(sourceHints) || hasPackage("framer-motion")) {
+    motionLibraries.add("framer-motion");
+    signals.push("Framer Motion dependency or import");
+  }
+  if (/from\s+["']motion(?:\/react)?["']|require\(["']motion["']\)/.test(sourceHints) || hasPackage("motion")) {
+    motionLibraries.add("motion");
+    signals.push("Motion dependency or import");
+  }
+  if (hasPackage("gsap")) motionLibraries.add("gsap");
+  if (hasPackage("react-spring") || hasPackagePrefix("@react-spring/")) motionLibraries.add("react-spring");
+  if (hasPackage("lenis") || hasPackage("@studio-freight/lenis")) motionLibraries.add("lenis");
+
+  return {
+    componentLibraries: [...componentLibraries],
+    motionLibraries: [...motionLibraries],
+    signals,
+    shouldAskComponentStyle: componentLibraries.size > 0,
+    shouldAskMotionStyle: motionLibraries.size > 0
+  };
+}
+
+async function readPackageNames(root: string): Promise<Set<string>> {
+  const source = await readOptional(path.join(root, "package.json"));
+  if (!source) return new Set();
+  try {
+    const parsed = JSON.parse(source) as {
+      dependencies?: Record<string, string>;
+      devDependencies?: Record<string, string>;
+      peerDependencies?: Record<string, string>;
+    };
+    return new Set([
+      ...Object.keys(parsed.dependencies ?? {}),
+      ...Object.keys(parsed.devDependencies ?? {}),
+      ...Object.keys(parsed.peerDependencies ?? {})
+    ]);
+  } catch {
+    return new Set();
+  }
+}
+
+async function readSmallSourceHints(files: string[]): Promise<string> {
+  const chunks: string[] = [];
+  for (const file of files.slice(0, 80)) {
+    if (!/\.(tsx?|jsx?)$/.test(file)) continue;
+    const source = await fs.readFile(file, "utf8");
+    const matches = source.match(/(?:import|require)\s*(?:[\s\S]{0,160}?\sfrom\s*)?["'][^"']+["']/g);
+    if (matches?.length) chunks.push(...matches.slice(0, 12));
+  }
+  return chunks.join("\n");
+}
+
+function applyTechnologyContextWarnings(
+  context: ProjectContext,
+  profile: TechnologyProfile
+) {
+  if (!context.design.loaded) return;
+  if (profile.shouldAskComponentStyle && !context.design.designSystemSource) {
+    context.warnings.push(
+      `Detected ${profile.componentLibraries.join(", ")}; ask the user which component style to derive from the existing shadcn/Radix/Tailwind primitives before design changes.`
+    );
+  }
+  if (profile.shouldAskMotionStyle && !context.design.motionStyle) {
+    context.warnings.push(
+      `Detected ${profile.motionLibraries.join(", ")}; ask the user which motion style to use before animation changes.`
+    );
+  }
+}
+
 async function loadProjectContext(root: string): Promise<ProjectContext> {
   const productPath = path.join(root, "PRODUCT.md");
   const designPath = path.join(root, "DESIGN.md");
@@ -824,6 +943,8 @@ async function loadProjectContext(root: string): Promise<ProjectContext> {
       colorDirection: designSource ? extractSection(designSource, "Color Direction") : undefined,
       density: designSource ? extractSection(designSource, "Density") : undefined,
       motion: designSource ? extractSection(designSource, "Motion") : undefined,
+      motionLibrary: designSource ? extractSection(designSource, "Motion Library") : undefined,
+      motionStyle: designSource ? extractSection(designSource, "Motion Style") : undefined,
       selectedStyleProfile: designSource ? extractSection(designSource, "Selected Style Profile") : undefined,
       profileSource: designSource ? extractSection(designSource, "Profile Source") : undefined,
       companyStyleCategory: designSource ? extractSection(designSource, "Company Style Category") : undefined,
@@ -857,6 +978,15 @@ async function readOptional(filePath: string): Promise<string | undefined> {
   }
 }
 
+async function exists(filePath: string): Promise<boolean> {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function extractSection(source: string, heading: string): string | undefined {
   const lines = source.split(/\r?\n/);
   const headingPattern = /^#{1,2}\s+(.+?)\s*$/;
@@ -878,6 +1008,8 @@ function applyProjectContextConflicts(findings: Finding[], context: ProjectConte
     context.design.colorDirection,
     context.design.density,
     context.design.motion,
+    context.design.motionLibrary,
+    context.design.motionStyle,
     context.design.selectedStyleProfile,
     context.design.profileSource,
     context.design.companyStyleCategory,

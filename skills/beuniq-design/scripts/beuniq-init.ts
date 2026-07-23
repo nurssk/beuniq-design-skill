@@ -36,6 +36,8 @@ const FIELD_FLAGS = new Set([
   "density",
   "typography",
   "motion",
+  "motion-library",
+  "motion-style",
   "selected-style-profile",
   "profile-source",
   "company-style-category",
@@ -203,6 +205,14 @@ ${value(fields.typography)}
 
 ${value(fields.motion)}
 
+## Motion Library
+
+${value(fields["motion-library"])}
+
+## Motion Style
+
+${value(fields["motion-style"])}
+
 ## Selected Style Profile
 
 ${value(fields["selected-style-profile"])}
@@ -328,7 +338,7 @@ function printHelpAndExit(): never {
   console.log(`Usage: beuniq-init --root <frontend> [--check] [--force] [--format json|markdown]
 
 Creates PRODUCT.md and DESIGN.md project-context files for BeUniq design work.
-Pass intake answers with flags such as --product, --audience, --goal, --theme, --style, --colors, --density, --motion, --selected-style-profile, --profile-source, --company-style-category, --company-style-reference, --custom-overrides, --component-library, --button-style, --field-style, --card-style, --modal-style, --header-style, --hero-style, --pricing-style, --how-it-works-style, --text-animation-style, and --scroll-style.`);
+Pass intake answers with flags such as --product, --audience, --goal, --theme, --style, --colors, --density, --motion, --motion-library, --motion-style, --selected-style-profile, --profile-source, --company-style-category, --company-style-reference, --custom-overrides, --component-library, --button-style, --field-style, --card-style, --modal-style, --header-style, --hero-style, --pricing-style, --how-it-works-style, --text-animation-style, and --scroll-style.`);
   process.exit(0);
 }
 

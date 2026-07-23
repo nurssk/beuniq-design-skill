@@ -19,6 +19,19 @@ Inspect `package.json`, imports, component folders, Storybook stories, and token
 
 Do not suggest installing a new UI library unless the user explicitly asks. If no library is detected, use custom CSS/Tailwind primitives with the selected BeUniq profile.
 
+## Shadcn/Radix Component Source Choices
+
+Use these when shadcn/Radix/Tailwind is detected. Ask the user to choose one before editing when `DESIGN.md` does not already record component styles.
+
+- **shadcn-existing-variants:** preserve current `components/ui` APIs and variants; derive style from existing `button.tsx`, `card.tsx`, `dialog.tsx`, `input.tsx`, `sheet.tsx`, and token classes.
+- **shadcn-beuniq-compact:** map BeUniq dense/productive patterns onto shadcn primitives; 8px radius, compact spacing, clear focus-visible rings, quiet bordered cards.
+- **shadcn-native-soft:** map Apple/native profile onto shadcn; grouped controls, 10-12px radius, calm surfaces, sheet-first mobile overlays.
+- **shadcn-editorial-minimal:** reduce chrome; use text links, asymmetric blocks, minimal cards, and restrained CTAs.
+- **shadcn-premium-restrained:** high-trust shadcn treatment with deliberate spacing, low elevation, explicit form labels, restrained contrast.
+- **nothing-from-this-list:** record component source as `none`; continue with conservative existing styles.
+
+Always inspect component implementation before editing. Preserve Radix accessibility behavior, `asChild`, variant APIs, `cn()` helpers, focus-visible states, disabled/loading states, and existing token names.
+
 ## Button Patterns
 
 - **button-compact-solid:** 36-40px height, 8px radius, solid primary, subtle secondary, no glow. Use for dashboards and dense SaaS.
@@ -99,6 +112,19 @@ Avoid "Sign up, customize, launch" boilerplate unless those are actually the pro
 - **text-no-animation:** required default for dashboards, forms, pricing, docs, expert tools, landing pages, and product pages.
 
 Do not offer text animation choices during intake unless the user explicitly asks for animation. Avoid typewriter loops, infinite word rotators, scramble text, animated gradients, and animation on essential reading.
+
+## Motion Style Patterns
+
+Use these when `framer-motion`, `motion`, `gsap`, `react-spring`, or `lenis` is detected. Ask before adding or changing animation when `DESIGN.md` does not already record `Motion Style`.
+
+- **motion-none:** no new animation; keep native CSS state feedback only.
+- **motion-functional-microinteractions:** use installed motion library only for state feedback, disclosure, hover/press, and small transitions under 250ms.
+- **motion-native-sheets:** sheets/dialogs/drawers use transform+opacity, trigger-aware origins where relevant, reduced-motion fallback, and fast exit.
+- **motion-product-reveal:** restrained product-demo reveal for marketing/product pages; no loops, no text rotators, no animation on core reading.
+- **motion-scroll-subtle:** one restrained scroll-linked reveal/progress behavior only when already supported and reduced-motion safe.
+- **nothing-from-this-list:** record `Motion Style: none`; continue with no-motion defaults.
+
+For Framer Motion specifically, prefer explicit `initial/animate/exit` transform+opacity values, short durations, `layout` only when it improves continuity, `AnimatePresence` only for real enter/exit states, and `useReducedMotion` or CSS `prefers-reduced-motion` for movement fallbacks.
 
 ## Scroll Patterns
 

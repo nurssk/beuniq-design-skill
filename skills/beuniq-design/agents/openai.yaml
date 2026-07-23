@@ -1,4 +1,4 @@
 interface:
   display_name: "BeUniq"
-  short_description: "Rule-based frontend design context, company/style selection, AI-slop, copy, taste, and motion checker."
-  default_prompt: "Use BeUniq to initialize PRODUCT.md/DESIGN.md if needed, ask for a company-style category and reference or nothing from this list, choose a component style profile, audit for AI-slop, copy slop, taste, and motion craft, then apply targeted fixes until it passes."
+  short_description: "Rule-based frontend design context, company, shadcn component, motion selection, and AI-slop checker."
+  default_prompt: "Use BeUniq to initialize PRODUCT.md/DESIGN.md if needed, scan for shadcn/Radix/Tailwind and Framer Motion, ask for missing company, component, and motion style choices, audit for AI-slop, copy slop, taste, and motion craft, then apply targeted fixes until it passes."

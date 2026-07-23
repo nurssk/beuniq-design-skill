@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { cpSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -83,6 +83,10 @@ try {
     "dashboard-dense",
     "--motion",
     "no motion",
+    "--motion-library",
+    "framer-motion",
+    "--motion-style",
+    "motion-functional-microinteractions",
     "--selected-style-profile",
     "beuniq-minimal-productive",
     "--profile-source",
@@ -128,6 +132,8 @@ try {
   assert.equal(contextualResult.report.projectContext.product.loaded, true);
   assert.equal(contextualResult.report.projectContext.design.loaded, true);
   assert.equal(contextualResult.report.projectContext.design.styleDirection, "minimal/productive");
+  assert.equal(contextualResult.report.projectContext.design.motionLibrary, "framer-motion");
+  assert.equal(contextualResult.report.projectContext.design.motionStyle, "motion-functional-microinteractions");
   assert.equal(contextualResult.report.projectContext.design.selectedStyleProfile, "beuniq-minimal-productive");
   assert.equal(contextualResult.report.projectContext.design.profileSource, "beuniq-base");
   assert.equal(contextualResult.report.projectContext.design.companyStyleCategory, "productivity-saas");
@@ -215,6 +221,72 @@ try {
   rmSync(missingCompanyReferenceTmp, { recursive: true, force: true });
 }
 
+const technologyProfileTmp = mkdtempSync(path.join(tmpdir(), "beuniq-tech-profile-"));
+try {
+  writeFileSync(
+    path.join(technologyProfileTmp, "package.json"),
+    JSON.stringify(
+      {
+        dependencies: {
+          "@radix-ui/react-dialog": "^1.0.0",
+          "class-variance-authority": "^0.7.0",
+          "tailwind-merge": "^2.0.0",
+          "framer-motion": "^11.0.0"
+        },
+        devDependencies: {
+          tailwindcss: "^3.4.0"
+        }
+      },
+      null,
+      2
+    )
+  );
+  writeFileSync(path.join(technologyProfileTmp, "components.json"), "{}\n");
+  mkdirSync(path.join(technologyProfileTmp, "components/ui"), { recursive: true });
+  writeFileSync(path.join(technologyProfileTmp, "components/ui/button.tsx"), "export function Button() { return null; }\n");
+  writeFileSync(
+    path.join(technologyProfileTmp, "App.tsx"),
+    `import { motion } from "framer-motion";
+
+export function App() {
+  return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>Hello</motion.div>;
+}
+`
+  );
+  const initTech = runInit(technologyProfileTmp, [
+    "--theme",
+    "light",
+    "--style",
+    "minimal/productive",
+    "--selected-style-profile",
+    "beuniq-minimal-productive",
+    "--profile-source",
+    "beuniq-base",
+    "--company-style-category",
+    "nothing-from-this-list",
+    "--company-style-reference",
+    "none"
+  ]);
+  assert.equal(initTech.status, 0);
+  const techReport = runCheck(technologyProfileTmp).report;
+  assert.ok(techReport.technologyProfile.componentLibraries.includes("shadcn/radix/tailwind"));
+  assert.ok(techReport.technologyProfile.motionLibraries.includes("framer-motion"));
+  assert.equal(techReport.technologyProfile.shouldAskComponentStyle, true);
+  assert.equal(techReport.technologyProfile.shouldAskMotionStyle, true);
+  assert.ok(
+    techReport.projectContext.warnings.some((warning: string) =>
+      warning.includes("component style")
+    )
+  );
+  assert.ok(
+    techReport.projectContext.warnings.some((warning: string) =>
+      warning.includes("motion style")
+    )
+  );
+} finally {
+  rmSync(technologyProfileTmp, { recursive: true, force: true });
+}
+
 const copyOnlyResult = runCheck(copyOnly);
 assert.equal(copyOnlyResult.status, 1);
 assert.equal(copyOnlyResult.report.passed, false);
@@ -259,6 +331,8 @@ assert.match(claudeSkillMarkdown, /^---\n[\s\S]*description:/);
 assert.match(claudeSkillMarkdown, /\$\{CLAUDE_SKILL_DIR\}\/scripts\/beuniq-check\.ts/);
 assert.match(claudeSkillMarkdown, /Selected Style Profile/);
 assert.match(claudeSkillMarkdown, /Company Style Reference/);
+assert.match(claudeSkillMarkdown, /Shadcn Component Style Choice|Shadcn\/Radix component style/);
+assert.match(claudeSkillMarkdown, /Framer Motion style/);
 assert.match(claudeSkillMarkdown, /company-style-references\.md/);
 assert.match(claudeSkillMarkdown, /component-patterns\.md/);
 assert.match(claudeSkillMarkdown, /allowed-tools:/);
