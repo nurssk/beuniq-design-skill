@@ -802,6 +802,9 @@ async function loadProjectContext(root: string): Promise<ProjectContext> {
   if (designSource && !extractSection(designSource, "Selected Style Profile")) {
     warnings.push("DESIGN.md is missing Selected Style Profile; ask the user to choose BeUniq base, component collection, or custom before design changes.");
   }
+  if (designSource && !extractSection(designSource, "Company Style Reference")) {
+    warnings.push("DESIGN.md is missing Company Style Reference; ask the user to choose a company-style category, then a company or nothing from this list before design changes.");
+  }
 
   return {
     product: {

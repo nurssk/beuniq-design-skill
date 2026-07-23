@@ -186,6 +186,35 @@ try {
   rmSync(missingProfileTmp, { recursive: true, force: true });
 }
 
+const missingCompanyReferenceTmp = mkdtempSync(path.join(tmpdir(), "beuniq-company-reference-missing-"));
+try {
+  cpSync(clean, missingCompanyReferenceTmp, { recursive: true });
+  const initWithoutCompanyReference = runInit(missingCompanyReferenceTmp, [
+    "--theme",
+    "light",
+    "--style",
+    "minimal/productive",
+    "--selected-style-profile",
+    "beuniq-minimal-productive",
+    "--profile-source",
+    "beuniq-base"
+  ]);
+  assert.equal(initWithoutCompanyReference.status, 0);
+  const missingCompanyReferenceReport = runCheck(missingCompanyReferenceTmp).report;
+  assert.equal(missingCompanyReferenceReport.projectContext.design.loaded, true);
+  assert.equal(
+    missingCompanyReferenceReport.projectContext.design.selectedStyleProfile,
+    "beuniq-minimal-productive"
+  );
+  assert.ok(
+    missingCompanyReferenceReport.projectContext.warnings.some((warning: string) =>
+      warning.includes("Company Style Reference")
+    )
+  );
+} finally {
+  rmSync(missingCompanyReferenceTmp, { recursive: true, force: true });
+}
+
 const copyOnlyResult = runCheck(copyOnly);
 assert.equal(copyOnlyResult.status, 1);
 assert.equal(copyOnlyResult.report.passed, false);
@@ -229,6 +258,7 @@ const claudeSkillMarkdown = readFileSync(path.join(claudeSkill, "SKILL.md"), "ut
 assert.match(claudeSkillMarkdown, /^---\n[\s\S]*description:/);
 assert.match(claudeSkillMarkdown, /\$\{CLAUDE_SKILL_DIR\}\/scripts\/beuniq-check\.ts/);
 assert.match(claudeSkillMarkdown, /Selected Style Profile/);
+assert.match(claudeSkillMarkdown, /Company Style Reference/);
 assert.match(claudeSkillMarkdown, /company-style-references\.md/);
 assert.match(claudeSkillMarkdown, /component-patterns\.md/);
 assert.match(claudeSkillMarkdown, /allowed-tools:/);
